@@ -1,26 +1,38 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <LeftPart />
+    <CenterPart />
+    <RightPart />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import LeftPart from './components/organisms/LeftPart.vue';
+import CenterPart from './components/organisms/CenterPart.vue';
+import RightPart from './components/organisms/RightPart.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    LeftPart,
+    CenterPart,
+    RightPart
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  div {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+  }
+
+div > :first-child, div > :last-child {
+  flex: 1;
+}
+
+div > :nth-child(2) {
+  flex: 2;
 }
 </style>
