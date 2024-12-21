@@ -1,25 +1,23 @@
-<template>
-  <div>
-    <LeftPart />
-    <CenterPart />
-    <RightPart />
-  </div>
-</template>
-
-<script>
+<script setup>
+import { ref } from 'vue';
 import LeftPart from './components/organisms/LeftPart.vue';
 import CenterPart from './components/organisms/CenterPart.vue';
 import RightPart from './components/organisms/RightPart.vue';
 
-export default {
-  name: 'App',
-  components: {
-    LeftPart,
-    CenterPart,
-    RightPart
-  }
+const selectedImgUrl = ref(null);
+
+function selectedImageUrl(selectedImageUrl) {
+  selectedImgUrl.value = selectedImageUrl;
 }
 </script>
+
+<template>
+  <div>
+    <LeftPart />
+    <CenterPart :selectedImageUrl="selectedImgUrl"/>
+    <RightPart @update:selectNewImage="selectedImageUrl"/>
+  </div>
+</template>
 
 <style>
   div {

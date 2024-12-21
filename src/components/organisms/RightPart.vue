@@ -1,24 +1,22 @@
-<script>
-import { defineComponent } from 'vue';
- 
-export default defineComponent({
-    setup() {
+<script setup>
+import { ref, defineEmits } from "vue";
+import images from "../../constants/images.json"
+const selectedImageUrl = ref(images[0].id);
+const emit = defineEmits(['update:selectNewImage']);
 
-    },
-})
+function selectImage(imageUrl) {
+  selectedImageUrl.value = imageUrl;
+  emit('update:selectNewImage', selectedImageUrl);
+}
+
 </script>
 
 <template>
     <div class="right-part">
       <div id="imagesContainer">
-        <!-- {imagesUrl.map((url, index) => (
-          <SelectImage
-            src={url}
-            onImageClick={() => selectImage(index)}
-            selected={selectedImageIndex === index}
-            index={index}
-          />
-        ))} -->
+        <li v-for="image in images" :key="image.id">
+          <img :src=image.url @click="selectImage(image.url)">
+        </li>
       </div>
     </div>
 </template>
@@ -27,6 +25,10 @@ export default defineComponent({
 @import '../../constants/style/constants.scss';
 
 $space-around-images: 15px;
+
+li {
+  all: unset;
+}
 
 .right-part {
     display: flex;

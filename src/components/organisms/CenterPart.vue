@@ -1,27 +1,22 @@
-<script>
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-    setup() {
-
-    },
-})
+<script setup>
+import { defineProps } from 'vue';
+const p = defineProps(['selectedImageUrl'])
+console.log("selected image:", p.selectedImageUrl)
 </script>
 
 <template>
     <div class="center-part">
-        <main>
-            <span id="wrapper">
-                <button>Generate</button>
-                <span id="img-wrapper">
-                    <img id="imgRef" alt="this should show cute possums">
-                    <span className="added-text">{addedText}</span>
-                </span>
-                <button>Download</button>
-            </span>
-        </main>
+      <main>
+        <span id="wrapper">
+          <button>Generate</button>
+          <span id="img-wrapper">
+            <img :src="selectedImageUrl.value" alt="this should show cute possums">
+          </span>
+          <button>Download</button>
+        </span>
+      </main>
     </div>
-</template>
+  </template>
 
 <style lang="scss">
 main {
