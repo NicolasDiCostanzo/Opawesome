@@ -4,7 +4,7 @@ import LeftPart from './components/organisms/LeftPart.vue';
 import CenterPart from './components/organisms/CenterPart.vue';
 import RightPart from './components/organisms/RightPart.vue';
 
-const selectedImgUrl = ref(null);
+const selectedImgUrl = ref("");
 
 function selectedImageUrl(selectedImageUrl) {
   selectedImgUrl.value = selectedImageUrl;

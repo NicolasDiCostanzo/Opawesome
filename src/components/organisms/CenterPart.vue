@@ -10,7 +10,7 @@ console.log("selected image:", p.selectedImageUrl)
         <span id="wrapper">
           <button>Generate</button>
           <span id="img-wrapper">
-            <img :src="selectedImageUrl.value" alt="this should show cute possums">
+            <img class="main-picture" :src="selectedImageUrl.value" alt="this should show cute possums">
           </span>
           <button>Download</button>
         </span>
@@ -19,6 +19,8 @@ console.log("selected image:", p.selectedImageUrl)
   </template>
 
 <style lang="scss">
+@import '../../constants/style/constants.scss';
+
 main {
     display: flex;
     justify-content: center;
@@ -43,8 +45,10 @@ main {
     align-items: center;
 }
 
-img {
-    max-width: 100%;
-    max-height: 100%;
+.main-picture {
+    min-height: $center-image-min-size;
+    min-width: $center-image-min-size;
+    max-height: $center-image-max-size;
+    max-width: $center-image-max-size;
 }
 </style>
