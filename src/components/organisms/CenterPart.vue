@@ -1,7 +1,18 @@
 <script setup>
-import { defineProps } from 'vue';
-const p = defineProps(['selectedImageUrl'])
-console.log("selected image:", p.selectedImageUrl)
+import { defineProps, onMounted } from 'vue';
+import images from "../../constants/images.json"
+
+const props = defineProps({
+  selectedImageUrl: {
+    type: String,
+    Required: true,
+    default: images[0].url
+  }
+});
+
+onMounted(() => {
+  console.log("default: ", props.selectedImageUrl);
+});
 </script>
 
 <template>
@@ -10,7 +21,7 @@ console.log("selected image:", p.selectedImageUrl)
         <span id="wrapper">
           <button>Generate</button>
           <span id="img-wrapper">
-            <img class="main-picture" :src="selectedImageUrl.value" alt="this should show cute possums">
+            <img class="main-picture" :src="props.selectedImageUrl" alt="this should show cute possums">
           </span>
           <button>Download</button>
         </span>

@@ -1,14 +1,17 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import LeftPart from './components/organisms/LeftPart.vue';
 import CenterPart from './components/organisms/CenterPart.vue';
 import RightPart from './components/organisms/RightPart.vue';
 
-const selectedImgUrl = ref("");
+import images from "./constants/images.json"
+const selectedImgUrl = ref(images[0].url);
 
 function selectedImageUrl(selectedImageUrl) {
-  selectedImgUrl.value = selectedImageUrl;
+  selectedImgUrl.value = selectedImageUrl.value;
 }
+
+onMounted(() => selectedImgUrl.value = images[0].url);
 </script>
 
 <template>
