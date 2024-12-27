@@ -1,13 +1,11 @@
 <script setup>
 import { defineProps, onMounted, watch } from 'vue';
 import { Canvas, FabricImage, Textbox } from 'fabric';
-import images from "../../constants/images.json"
 
 const props = defineProps({
   selectedImageUrl: {
     type: String,
     Required: true,
-    default: images[0].url
   }
 });
 
@@ -17,7 +15,7 @@ onMounted(() => {
   canvas = new Canvas("canvas");
   loadImageToCanvas(props.selectedImageUrl);
   loadFontsAndAddTextbox();
-  console.log(canvas);
+  console.log("Canvas", canvas);
 });
 
 watch(props.selectedImageUrl, (newUrl) => {

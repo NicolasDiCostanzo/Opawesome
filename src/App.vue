@@ -5,13 +5,13 @@ import CenterPart from './components/organisms/CenterPart.vue';
 import RightPart from './components/organisms/RightPart.vue';
 
 import images from "./constants/images.json"
-const selectedImgUrl = ref(images[0].url);
+const selectedImgUrl = ref("");
 
 function selectedImageUrl(selectedImageUrl) {
   selectedImgUrl.value = selectedImageUrl.value;
 }
 
-onMounted(() => selectedImgUrl.value = images[0].url);
+onMounted(() => selectedImgUrl.value = images[2].url);
 </script>
 
 <template>
