@@ -1,29 +1,21 @@
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { LEFT_PART_TEXT } from '../../constants/texts';
 
-export default defineComponent({
-  setup() {
-    return {
-      className: 'left-part',
-      inputText: '',
-      handleAddClick() {
-        console.log('Add button clicked');
-      },
-    };
-  },
-});
+const handleAddClick = () => {
+  console.log('Add button clicked');
+};
 </script>
 
 <template>
   <div class="left-part">
     <span id="wrapper">
-      <input type="text" placeholder="Enter text" value={inputText}>
+      <p>{{ LEFT_PART_TEXT }}</p>
       <select>
         <option value="option1">Option 1</option>
         <option value="option2">Option 2</option>
         <option value="option3">Option 3</option>
       </select>
-      <button onClick={handleAddClick}>Add</button>
+      <button @click=handleAddClick()>Add</button>
     </span>
   </div>
 </template>
