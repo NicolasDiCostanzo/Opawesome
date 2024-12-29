@@ -41,14 +41,14 @@ li {
     overflow-y: auto;
     display: grid;
     justify-content: space-evenly;
-    grid-template-columns: repeat(2, #{$images-size});
+    grid-template-columns: repeat(2, #{$IMAGES_SIZE});
     gap: #{$space-around-images};
     padding: #{$space-around-images};
 }
 
 img {
-    max-width: #{$images-size};
-    max-height: #{$images-size};
+    max-width: #{$IMAGES_SIZE};
+    max-height: #{$IMAGES_SIZE};
 }
 
 img:hover {
