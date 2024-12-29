@@ -1,4 +1,5 @@
 import {CENTER_IMAGE_MAX_SIZE, CENTER_IMAGE_MIN_SIZE} from "../constants/constants"
+import { fabric } from 'fabric';
 
 /**
  * Calculate canvas dimensions according to the images aspect ratio and the min and max canvas size defined
@@ -29,4 +30,23 @@ export function resizeCanvas(imgWidth, imgHeight) {
         }
       }
     return { canvasWidth, canvasHeight};
+}
+
+export function loadImageToCanvas(url, canvas) {
+  fabric.Image.fromURL(url, (img) => {
+    console.log("Image loaded:", img);
+
+    const { canvasWidth, canvasHeight} = resizeCanvas(img.width, img.height)
+    canvas.setWidth(canvasWidth);
+    canvas.setHeight(canvasHeight);
+
+    canvas.clear();
+
+    const scaleX = canvasWidth / img.width;
+    const scaleY = canvasHeight / img.height;
+    canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
+      scaleX,
+      scaleY
+    });
+  });
 }

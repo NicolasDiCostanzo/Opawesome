@@ -1,7 +1,7 @@
 <script setup>
 import { defineProps, onMounted, watch } from 'vue';
 import { fabric } from 'fabric';
-import { resizeCanvas } from '@/helper/canvas-helper';
+import { loadImageToCanvas } from '@/helper/canvas-helper';
 const props = defineProps({
   selectedImageUrl: {
     type: String,
@@ -13,35 +13,15 @@ let canvas;
 
 onMounted(() => {
   canvas = new fabric.Canvas("canvas");
-  loadImageToCanvas(props.selectedImageUrl);
+  loadImageToCanvas(props.selectedImageUrl, canvas);
   loadFontsAndAddTextbox();
 });
 
 watch(() => props.selectedImageUrl, (newUrl) => {
-  loadImageToCanvas(newUrl);
+  loadImageToCanvas(newUrl, canvas);
+  loadFontsAndAddTextbox();
 });
 
-/**
- * Set the loaded image to the canvas' background
- */
- function loadImageToCanvas(url) {
-  fabric.Image.fromURL(url, (img) => {
-    console.log("Image loaded:", img);
-
-    const { canvasWidth, canvasHeight} = resizeCanvas(img.width, img.height)
-    canvas.setWidth(canvasWidth);
-    canvas.setHeight(canvasHeight);
-
-    canvas.clear();
-
-    const scaleX = canvasWidth / img.width;
-    const scaleY = canvasHeight / img.height;
-    canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
-      scaleX,
-      scaleY
-    });
-  });
-}
 
 function loadFontsAndAddTextbox() {
   const urlMap = {
@@ -69,7 +49,6 @@ function loadFontsAndAddTextbox() {
     });
 
     canvas.add(vtTextBox);
-    canvas.renderAll();
   });
 }
 </script>
