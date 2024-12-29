@@ -1,7 +1,7 @@
 <script setup>
 import { defineProps, onMounted, watch } from 'vue';
-import { Canvas, FabricImage, Textbox } from 'fabric';
-
+import { fabric } from 'fabric';
+import { resizeCanvas } from '@/helper/canvas-helper';
 const props = defineProps({
   selectedImageUrl: {
     type: String,
@@ -12,28 +12,30 @@ const props = defineProps({
 let canvas;
 
 onMounted(() => {
-  canvas = new Canvas("canvas");
+  canvas = new fabric.Canvas("canvas");
   loadImageToCanvas(props.selectedImageUrl);
   loadFontsAndAddTextbox();
-  console.log("Canvas", canvas);
 });
 
-watch(props.selectedImageUrl, (newUrl) => {
+watch(() => props.selectedImageUrl, (newUrl) => {
   loadImageToCanvas(newUrl);
-  console.log(canvas);
-})
+});
 
 /**
  * Set the loaded image to the canvas' background
  */
-function loadImageToCanvas(url) {
-  console.log(url);
-  FabricImage.fromURL(url, (img) => {
-    console.log("hello")
-    canvas.clear();
-    const scaleX= canvas.width / img.width;
-    const scaleY= canvas.height / img.height;
+ function loadImageToCanvas(url) {
+  fabric.Image.fromURL(url, (img) => {
+    console.log("Image loaded:", img);
 
+    const { canvasWidth, canvasHeight} = resizeCanvas(img.width, img.height)
+    canvas.setWidth(canvasWidth);
+    canvas.setHeight(canvasHeight);
+
+    canvas.clear();
+
+    const scaleX = canvasWidth / img.width;
+    const scaleY = canvasHeight / img.height;
     canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
       scaleX,
       scaleY
@@ -57,7 +59,7 @@ function loadFontsAndAddTextbox() {
   Promise.all([fontVT323.load()]).then(() => {
     document.fonts.add(fontVT323);
 
-    const vtTextBox = new Textbox('test ptn', {
+    const vtTextBox = new fabric.Textbox('test ptn', {
       left: 50,
       top: 50,
       width: 200,
@@ -68,7 +70,6 @@ function loadFontsAndAddTextbox() {
 
     canvas.add(vtTextBox);
     canvas.renderAll();
-    console.log(canvas);
   });
 }
 </script>
@@ -79,7 +80,7 @@ function loadFontsAndAddTextbox() {
         <span id="wrapper">
           <button>Generate</button>
           <span id="img-wrapper">
-            <img class="main-picture" :src="props.selectedImageUrl" alt="this should show cute possums">
+            <canvas id="canvas"></canvas>
           </span>
           <button>Download</button>
         </span>
@@ -115,9 +116,9 @@ main {
 }
 
 .main-picture {
-    min-height: $center-image-min-size;
-    min-width: $center-image-min-size;
-    max-height: $center-image-max-size;
-    max-width: $center-image-max-size;
+    min-height: $CENTER_IMAGE_MIN_SIZE;
+    min-width: $CENTER_IMAGE_MIN_SIZE;
+    max-height: $CENTER_IMAGE_MAX_SIZE;
+    max-width: $CENTER_IMAGE_MAX_SIZE;
 }
 </style>
