@@ -28,10 +28,7 @@ watch(() => props.selectedImageUrl, (newUrl) => {
     <div class="center-part">
       <main>
         <span id="wrapper">
-          <button>Generate</button>
-          <span id="img-wrapper">
             <canvas id="canvas"></canvas>
-          </span>
           <button>Download</button>
         </span>
       </main>
@@ -55,14 +52,6 @@ main {
     gap: 3rem;
     width: 80%;
     height: 80%;
-}
-
-#img-wrapper {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .main-picture {
