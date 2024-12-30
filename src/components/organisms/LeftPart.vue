@@ -1,8 +1,16 @@
 <script setup>
+import {defineProps } from "vue"
 import { LEFT_PART_TEXT } from '../../constants/texts';
+import { addTextFieldOnCanvas } from '@/helper/canvas-helper';
 
-const handleAddClick = () => {
-  console.log('Add button clicked');
+const props = defineProps(['canvas']);
+
+const addTextOnCanvas = () => {
+  if (props.canvas) {
+    addTextFieldOnCanvas(props.canvas);
+  } else {
+    console.error('Canvas not found');
+  }
 };
 </script>
 
@@ -15,7 +23,7 @@ const handleAddClick = () => {
         <option value="option2">Option 2</option>
         <option value="option3">Option 3</option>
       </select>
-      <button @click=handleAddClick()>Add</button>
+      <button @click=addTextOnCanvas()>Add</button>
     </span>
   </div>
 </template>

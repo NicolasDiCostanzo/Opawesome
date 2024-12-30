@@ -1,25 +1,23 @@
 <script setup>
-import { defineProps, onMounted, watch } from 'vue';
+import { defineProps, onMounted, watch, defineEmits, ref } from 'vue';
 import { fabric } from 'fabric';
-import { loadImageToCanvas, loadFontsAndAddTextbox } from '@/helper/canvas-helper';
-const props = defineProps({
-  selectedImageUrl: {
-    type: String,
-    Required: true,
-  }
-});
+import { loadImageToCanvas } from '@/helper/canvas-helper';
 
-let canvas;
+const props = defineProps(['selectedImageUrl']);
+
+
+const emit = defineEmits(['update:canvas']);
+const canvas = ref("hello");
+
 
 onMounted(() => {
-  canvas = new fabric.Canvas("canvas");
-  loadImageToCanvas(props.selectedImageUrl, canvas);
-  loadFontsAndAddTextbox(canvas);
+  canvas.value = new fabric.Canvas("canvas");
+  loadImageToCanvas(props.selectedImageUrl, canvas.value);
+  emit('update:canvas', canvas.value);
 });
 
 watch(() => props.selectedImageUrl, (newUrl) => {
-  loadImageToCanvas(newUrl, canvas);
-  loadFontsAndAddTextbox(canvas);
+  loadImageToCanvas(newUrl, canvas.value);
 });
 
 

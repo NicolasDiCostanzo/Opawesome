@@ -6,18 +6,25 @@ import RightPart from './components/organisms/RightPart.vue';
 
 import images from "./constants/images.json"
 const selectedImgUrl = ref("");
+let canvas;
 
 function selectedImageUrl(selectedImageUrl) {
   selectedImgUrl.value = selectedImageUrl.value;
 }
 
-onMounted(() => selectedImgUrl.value = images[2].url);
+function updateCanvas(newCanvas) {
+  canvas = newCanvas;
+}
+
+onMounted(() => {
+  selectedImgUrl.value = images[2].url;
+});
 </script>
 
 <template>
   <div>
-    <LeftPart />
-    <CenterPart :selectedImageUrl="selectedImgUrl"/>
+    <LeftPart :canvas="canvas"/>
+    <CenterPart :selectedImageUrl="selectedImgUrl" @update:canvas="updateCanvas"/>
     <RightPart @update:selectNewImage="selectedImageUrl"/>
   </div>
 </template>

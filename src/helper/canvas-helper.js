@@ -93,6 +93,20 @@ export function loadFontsAndAddTextbox(canvas) {
     canvas.add(vtTextBox, pacificoTextBox);
     canvas.renderAll();
   }).catch((error) => {
-    console.error("Error loading font:", error);
+    console.error("Error loading font: ", error);
   });
+}
+
+export function addTextFieldOnCanvas(canvas) {
+  const textBox = new fabric.Textbox('test ptn', {
+    left: 50,
+    top: 50,
+    width: 200,
+    fontSize: 60,
+    fontFamily: 'VT323',
+    fill: 'black'
+  });
+
+  canvas.add(textBox);
+  canvas.renderAll();
 }
