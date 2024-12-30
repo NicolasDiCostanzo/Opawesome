@@ -97,13 +97,14 @@ export function loadFontsAndAddTextbox(canvas) {
   });
 }
 
-export function addTextFieldOnCanvas(canvas) {
+export function addTextFieldOnCanvas(canvas, selectedFont) {
+  console.log(selectedFont);
   const textBox = new fabric.Textbox('test ptn', {
     left: 50,
     top: 50,
     width: 200,
     fontSize: 60,
-    fontFamily: 'VT323',
+    fontFamily: selectedFont,
     fill: 'black'
   });
 

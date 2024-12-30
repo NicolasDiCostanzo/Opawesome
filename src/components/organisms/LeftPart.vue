@@ -1,16 +1,15 @@
 <script setup>
-import {defineProps } from "vue"
+import {defineProps, ref } from "vue"
 import { LEFT_PART_TEXT } from '../../constants/texts';
+import fonts from '../../constants/fonts.json';
 import { addTextFieldOnCanvas } from '@/helper/canvas-helper';
 
 const props = defineProps(['canvas']);
+const selectedFont = ref(fonts[0].name);
 
 const addTextOnCanvas = () => {
-  if (props.canvas) {
-    addTextFieldOnCanvas(props.canvas);
-  } else {
-    console.error('Canvas not found');
-  }
+  if (!props.canvas) console.error('Canvas not found');
+  addTextFieldOnCanvas(props.canvas, selectedFont.value);
 };
 </script>
 
@@ -18,10 +17,8 @@ const addTextOnCanvas = () => {
   <div class="left-part">
     <span id="wrapper">
       <p>{{ LEFT_PART_TEXT }}</p>
-      <select>
-        <option value="option1">Option 1</option>
-        <option value="option2">Option 2</option>
-        <option value="option3">Option 3</option>
+      <select v-model="selectedFont" :style="{ fontFamily: selectedFont }">
+        <option v-for="font in fonts" :key="font.name" :value="font.name" :style="{ fontFamily: font.name }">{{ font.name }}</option>
       </select>
       <button @click=addTextOnCanvas()>Add</button>
     </span>

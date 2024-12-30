@@ -3,7 +3,7 @@ import { onMounted, ref } from 'vue';
 import LeftPart from './components/organisms/LeftPart.vue';
 import CenterPart from './components/organisms/CenterPart.vue';
 import RightPart from './components/organisms/RightPart.vue';
-
+import fonts from './constants/fonts.json';
 import images from "./constants/images.json"
 const selectedImgUrl = ref("");
 let canvas;
@@ -16,8 +16,19 @@ function updateCanvas(newCanvas) {
   canvas = newCanvas;
 }
 
-onMounted(() => {
+const loadFonts = async () => {
+  const fontPromises = fonts.map(font => {
+    const fontFace = new FontFace(font.name, `url(${font.url})`);
+    return fontFace.load().then(loadedFont => {
+      document.fonts.add(loadedFont);
+    });
+  });
+  await Promise.all(fontPromises);
+};
+
+onMounted(async () => {
   selectedImgUrl.value = images[2].url;
+  await loadFonts();
 });
 </script>
 
