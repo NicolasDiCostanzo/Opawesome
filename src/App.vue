@@ -7,6 +7,7 @@ import fonts from './constants/fonts.json';
 import images from "./constants/images.json"
 const selectedImgUrl = ref("");
 let canvas;
+const font = ref(fonts[0].name);
 
 function selectedImageUrl(selectedImageUrl) {
   selectedImgUrl.value = selectedImageUrl.value;
@@ -14,6 +15,10 @@ function selectedImageUrl(selectedImageUrl) {
 
 function updateCanvas(newCanvas) {
   canvas = newCanvas;
+}
+
+function updateFont(newFont) {
+  font.value = newFont;
 }
 
 const loadFonts = async () => {
@@ -34,8 +39,8 @@ onMounted(async () => {
 
 <template>
   <div>
-    <LeftPart :canvas="canvas"/>
-    <CenterPart :selectedImageUrl="selectedImgUrl" @update:canvas="updateCanvas"/>
+    <LeftPart :canvas="canvas" :font="font"/>
+    <CenterPart :selectedImageUrl="selectedImgUrl" @update:canvas="updateCanvas" @update:font="updateFont"/>
     <RightPart @update:selectNewImage="selectedImageUrl"/>
   </div>
 </template>

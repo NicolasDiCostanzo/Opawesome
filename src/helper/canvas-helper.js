@@ -98,7 +98,6 @@ export function loadFontsAndAddTextbox(canvas) {
 }
 
 export function addTextFieldOnCanvas(canvas, selectedFont) {
-  console.log(selectedFont);
   const textBox = new fabric.Textbox('test ptn', {
     left: 50,
     top: 50,

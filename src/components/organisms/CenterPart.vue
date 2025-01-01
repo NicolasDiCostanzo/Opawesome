@@ -4,24 +4,31 @@ import { fabric } from 'fabric';
 import { loadImageToCanvas } from '@/helper/canvas-helper';
 
 const props = defineProps(['selectedImageUrl']);
-
-
-const emit = defineEmits(['update:canvas']);
+const emit = defineEmits(['update:canvas', 'update:font']);
 const canvas = ref("hello");
 
+/**
+ * 'selection:created': fabricjs custom events for when a textbox is first selected
+ * 'selection:updated': fabricjs custom events for when the textbox selected changes
+ */
+const eventsToTriggerSelectedText = ['selection:created', 'selection:updated'];
 
 onMounted(() => {
   canvas.value = new fabric.Canvas("canvas");
   loadImageToCanvas(props.selectedImageUrl, canvas.value);
   emit('update:canvas', canvas.value);
+
+  eventsToTriggerSelectedText.forEach((event) => {
+    canvas.value.on(event, (e) => {
+    const selectedTextBox = e.selected[0];
+    emit('update:font', selectedTextBox.fontFamily);
+  });
+  });
 });
 
 watch(() => props.selectedImageUrl, (newUrl) => {
   loadImageToCanvas(newUrl, canvas.value);
 });
-
-
-
 </script>
 
 <template>
