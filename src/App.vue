@@ -39,8 +39,8 @@ onMounted(async () => {
 
 <template>
   <div>
-    <LeftPart :canvas="canvas" :font="font"/>
-    <CenterPart :selectedImageUrl="selectedImgUrl" @update:canvas="updateCanvas" @update:font="updateFont"/>
+    <LeftPart :canvas="canvas" :font="font" @update:font="updateFont"/>
+    <CenterPart :selectedImageUrl="selectedImgUrl" @update:canvas="updateCanvas" @update:font="updateFont" :font="font"/>
     <RightPart @update:selectNewImage="selectedImageUrl"/>
   </div>
 </template>

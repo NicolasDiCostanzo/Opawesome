@@ -3,7 +3,7 @@ import { defineProps, onMounted, watch, defineEmits, ref } from 'vue';
 import { fabric } from 'fabric';
 import { loadImageToCanvas } from '@/helper/canvas-helper';
 
-const props = defineProps(['selectedImageUrl']);
+const props = defineProps(['selectedImageUrl', 'font']);
 const emit = defineEmits(['update:canvas', 'update:font']);
 const canvas = ref("hello");
 
@@ -12,6 +12,7 @@ const canvas = ref("hello");
  * 'selection:updated': fabricjs custom events for when the textbox selected changes
  */
 const eventsToTriggerSelectedText = ['selection:created', 'selection:updated'];
+let selectedTextBox;
 
 onMounted(() => {
   canvas.value = new fabric.Canvas("canvas");
@@ -20,7 +21,7 @@ onMounted(() => {
 
   eventsToTriggerSelectedText.forEach((event) => {
     canvas.value.on(event, (e) => {
-    const selectedTextBox = e.selected[0];
+    selectedTextBox = e.selected[0];
     emit('update:font', selectedTextBox.fontFamily);
   });
   });
@@ -29,6 +30,12 @@ onMounted(() => {
 watch(() => props.selectedImageUrl, (newUrl) => {
   loadImageToCanvas(newUrl, canvas.value);
 });
+
+watch(() => props.font, (newFont) => {
+  if(!selectedTextBox) return;
+  selectedTextBox.fontFamily = newFont;
+  canvas.value.renderAll();
+})
 </script>
 
 <template>
