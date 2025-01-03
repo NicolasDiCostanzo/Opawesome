@@ -1,11 +1,11 @@
 <script setup>
-import { defineProps, onMounted, watch, defineEmits, ref } from 'vue';
+import { defineProps, onMounted, watch, defineEmits } from 'vue';
 import { fabric } from 'fabric';
 import { loadImageToCanvas } from '@/helper/canvas-helper';
 
 const props = defineProps(['selectedImageUrl', 'font']);
 const emit = defineEmits(['update:canvas', 'update:font']);
-const canvas = ref("hello");
+let canvas;
 
 /**
  * 'selection:created': fabricjs custom events for when a textbox is first selected
@@ -15,26 +15,26 @@ const eventsToTriggerSelectedText = ['selection:created', 'selection:updated'];
 let selectedTextBox;
 
 onMounted(() => {
-  canvas.value = new fabric.Canvas("canvas");
-  loadImageToCanvas(props.selectedImageUrl, canvas.value);
-  emit('update:canvas', canvas.value);
+  canvas = new fabric.Canvas("canvas");
+  loadImageToCanvas(props.selectedImageUrl, canvas);
+  emit('update:canvas', canvas);
 
   eventsToTriggerSelectedText.forEach((event) => {
-    canvas.value.on(event, (e) => {
-    selectedTextBox = e.selected[0];
-    emit('update:font', selectedTextBox.fontFamily);
-  });
+    canvas.on(event, (e) => {
+      selectedTextBox = e.selected[0];
+      emit('update:font', selectedTextBox.fontFamily);
+    });
   });
 });
 
 watch(() => props.selectedImageUrl, (newUrl) => {
-  loadImageToCanvas(newUrl, canvas.value);
+  loadImageToCanvas(newUrl, canvas);
 });
 
 watch(() => props.font, (newFont) => {
   if(!selectedTextBox) return;
   selectedTextBox.fontFamily = newFont;
-  canvas.value.renderAll();
+  canvas.renderAll();
 })
 </script>
 
