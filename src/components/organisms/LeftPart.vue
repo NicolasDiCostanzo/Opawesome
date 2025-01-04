@@ -1,8 +1,8 @@
 <script setup>
-import {defineProps, ref, watch } from "vue"
-import { LEFT_PART_TEXT } from '../../constants/texts';
-import fonts from '../../constants/fonts.json';
 import { addTextFieldOnCanvas } from '@/helper/canvas-helper';
+import { defineProps, ref, watch } from "vue";
+import fonts from '../../constants/fonts.json';
+import { LEFT_PART_TEXT } from '../../constants/texts';
 
 const props = defineProps(['canvas', 'font']);
 const emit = defineEmits(['update:font']);

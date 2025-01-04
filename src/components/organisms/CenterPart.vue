@@ -1,8 +1,8 @@
 <script setup>
-import { defineProps, onMounted, watch, defineEmits } from 'vue';
-import { fabric } from 'fabric';
 import { loadImageToCanvas } from '@/helper/canvas-helper';
 import FontsHelper from '@/helper/fonts-helper';
+import { fabric } from 'fabric';
+import { defineEmits, defineProps, onMounted, watch } from 'vue';
 
 const props = defineProps(['selectedImageUrl', 'font']);
 const emit = defineEmits(['update:canvas', 'update:font']);

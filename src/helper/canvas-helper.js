@@ -1,6 +1,6 @@
-import {CENTER_IMAGE_MAX_SIZE, CENTER_IMAGE_MIN_SIZE} from "../constants/constants"
-import FontHelper from "./fonts-helper"
 import { fabric } from 'fabric';
+import { CENTER_IMAGE_MAX_SIZE, CENTER_IMAGE_MIN_SIZE } from "../constants/constants";
+import FontHelper from "./fonts-helper";
 
 const fontHelper = new FontHelper();
 
@@ -39,13 +39,13 @@ export function loadImageToCanvas(url, canvas) {
   canvas.clear();
   
   fabric.Image.fromURL(url, (img) => {
-    const { canvasWidth, canvasHeight} = resizeCanvas(img.width, img.height)
+    const { canvasWidth, canvasHeight } = resizeCanvas(img.width, img.height);
     canvas.setWidth(canvasWidth);
     canvas.setHeight(canvasHeight);
 
-
     const scaleX = canvasWidth / img.width;
     const scaleY = canvasHeight / img.height;
+
     canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
       scaleX,
       scaleY
