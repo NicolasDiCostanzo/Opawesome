@@ -21,19 +21,8 @@ function updateFont(newFont) {
   font.value = newFont;
 }
 
-const loadFonts = async () => {
-  const fontPromises = fonts.map(font => {
-    const fontFace = new FontFace(font.name, `url(${font.url})`);
-    return fontFace.load().then(loadedFont => {
-      document.fonts.add(loadedFont);
-    });
-  });
-  await Promise.all(fontPromises);
-};
-
 onMounted(async () => {
   selectedImgUrl.value = images[0].url;
-  await loadFonts();
 });
 </script>
 
