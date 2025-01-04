@@ -32,7 +32,7 @@ const loadFonts = async () => {
 };
 
 onMounted(async () => {
-  selectedImgUrl.value = images[2].url;
+  selectedImgUrl.value = images[0].url;
   await loadFonts();
 });
 </script>
