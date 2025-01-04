@@ -1,5 +1,8 @@
 import {CENTER_IMAGE_MAX_SIZE, CENTER_IMAGE_MIN_SIZE} from "../constants/constants"
+import FontHelper from "./fonts-helper"
 import { fabric } from 'fabric';
+
+const fontHelper = new FontHelper();
 
 /**
  * Calculate canvas dimensions according to the images aspect ratio and the min and max canvas size defined
@@ -98,15 +101,8 @@ export function loadFontsAndAddTextbox(canvas) {
 }
 
 export function addTextFieldOnCanvas(canvas, selectedFont) {
-  const textBox = new fabric.Textbox('test ptn', {
-    left: 50,
-    top: 50,
-    width: 200,
-    fontSize: 60,
-    fontFamily: selectedFont,
-    fill: 'black'
-  });
-
+  const textBox = fontHelper.createTextBox(selectedFont);
   canvas.add(textBox);
+  canvas.setActiveObject(textBox);
   canvas.renderAll();
 }
