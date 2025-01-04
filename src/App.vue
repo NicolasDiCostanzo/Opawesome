@@ -1,16 +1,17 @@
 <script setup>
 import { onMounted, ref } from 'vue';
-import LeftPart from './components/organisms/LeftPart.vue';
 import CenterPart from './components/organisms/CenterPart.vue';
+import LeftPart from './components/organisms/LeftPart.vue';
 import RightPart from './components/organisms/RightPart.vue';
 import fonts from './constants/fonts.json';
-import images from "./constants/images.json"
-const selectedImgUrl = ref("");
+import images from './constants/images.json';
+
+const selectedImgUrl = ref('');
 let canvas;
 const font = ref(fonts[0].name);
 
-function selectedImageUrl(selectedImageUrl) {
-  selectedImgUrl.value = selectedImageUrl.value;
+function selectedImageUrl(newSelectedImageUrl) {
+  selectedImgUrl.value = newSelectedImageUrl.value;
 }
 
 function updateCanvas(newCanvas) {
@@ -41,11 +42,11 @@ onMounted(async () => {
     height: 100vh;
   }
 
-div > :first-child, div > :last-child {
-  flex: 1;
-}
+  div > :first-child, div > :last-child {
+    flex: 1;
+  }
 
-div > :nth-child(2) {
-  flex: 2;
-}
+  div > :nth-child(2) {
+    flex: 2;
+  }
 </style>

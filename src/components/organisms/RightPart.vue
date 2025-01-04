@@ -1,6 +1,7 @@
 <script setup>
-import { ref, defineEmits } from "vue";
-import images from "../../constants/images.json"
+import { defineEmits, ref } from 'vue';
+import images from '../../constants/images.json';
+
 const selectedImageUrl = ref(images[0].id);
 const emit = defineEmits(['update:selectNewImage']);
 

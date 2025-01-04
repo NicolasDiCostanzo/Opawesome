@@ -1,6 +1,6 @@
 <script setup>
-import { addTextFieldOnCanvas } from '@/helper/canvas-helper';
-import { defineProps, ref, watch } from "vue";
+import { defineProps, ref, watch } from 'vue';
+import { addTextFieldOnCanvas } from '../../helpers/canvas-helper';
 import fonts from '../../constants/fonts.json';
 import { LEFT_PART_TEXT } from '../../constants/texts';
 
@@ -14,7 +14,7 @@ watch(() => props.font, (newFont) => {
 
 watch(() => selectedFont, (newSelectedFont) => {
   emit('update:font', newSelectedFont);
-})
+});
 
 const addTextOnCanvas = () => {
   if (!props.canvas) console.error('Canvas not found');

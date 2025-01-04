@@ -1,8 +1,11 @@
 <script setup>
-import { loadImageToCanvas } from '@/helper/canvas-helper';
-import FontsHelper from '@/helper/fonts-helper';
 import { fabric } from 'fabric';
-import { defineEmits, defineProps, onMounted, watch } from 'vue';
+import {
+  defineEmits, defineProps, onMounted, watch,
+} from 'vue';
+import { DOWNLOAD_BUTTON_TEXT } from '../../constants/texts';
+import { loadImageToCanvas } from '../../helpers/canvas-helper';
+import FontsHelper from '../../helpers/fonts-helper';
 
 const props = defineProps(['selectedImageUrl', 'font']);
 const emit = defineEmits(['update:canvas', 'update:font']);
@@ -22,20 +25,20 @@ const selectionClearedEvent = 'selection:cleared';
 
 let selectedTextBox;
 onMounted(() => {
-  canvas = new fabric.Canvas("canvas");
+  canvas = new fabric.Canvas('canvas');
   loadImageToCanvas(props.selectedImageUrl, canvas);
   emit('update:canvas', canvas);
 
   eventsToTriggerSelectedText.forEach((event) => {
     canvas.on(event, (e) => {
-      selectedTextBox = e.selected[0];
+      [selectedTextBox] = e.selected;
       emit('update:font', selectedTextBox.fontFamily);
     });
   });
 
-    canvas.on(selectionClearedEvent, () => {
-      selectedTextBox = null;
-    });
+  canvas.on(selectionClearedEvent, () => {
+    selectedTextBox = null;
+  });
 });
 
 watch(() => props.selectedImageUrl, (newUrl) => {
@@ -43,11 +46,11 @@ watch(() => props.selectedImageUrl, (newUrl) => {
 });
 
 watch(() => props.font, (newFont) => {
-  if(!selectedTextBox) return;
+  if (!selectedTextBox) return;
   console.log('selected box', selectedTextBox);
   fontsHelper.setTextFont(selectedTextBox, newFont);
   canvas.renderAll();
-})
+});
 </script>
 
 <template>
@@ -55,7 +58,7 @@ watch(() => props.font, (newFont) => {
       <main>
         <span id="wrapper">
             <canvas id="canvas"></canvas>
-          <button>Download</button>
+          <button>{{ DOWNLOAD_BUTTON_TEXT }}</button>
         </span>
       </main>
     </div>
