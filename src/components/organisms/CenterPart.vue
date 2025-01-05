@@ -50,6 +50,18 @@ watch(() => props.font, (newFont) => {
   fontsHelper.setTextFont(selectedTextBox, newFont);
   canvas.renderAll();
 });
+
+function downloadCanvas() {
+  const dataURL = canvas.toDataURL({
+    format: 'jpeg',
+    quality: 1,
+  });
+
+  const link = document.createElement('a');
+  link.href = dataURL;
+  link.download = 'opawesome.png';
+  link.click();
+}
 </script>
 
 <template>
@@ -57,7 +69,7 @@ watch(() => props.font, (newFont) => {
       <main>
         <span id="wrapper">
             <canvas id="canvas"></canvas>
-          <button>{{ DOWNLOAD_BUTTON_TEXT }}</button>
+          <button @click="downloadCanvas">{{ DOWNLOAD_BUTTON_TEXT }}</button>
         </span>
       </main>
     </div>

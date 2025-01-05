@@ -50,7 +50,7 @@ export function loadImageToCanvas(url, canvas) {
       scaleX,
       scaleY,
     });
-  });
+  }, { crossOrigin: 'anonymous' });
 }
 
 export function addTextFieldOnCanvas(canvas, selectedFont) {
