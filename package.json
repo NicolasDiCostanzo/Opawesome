@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "eslint .",
-    "test": "vitest"
+    "test": "vitest",
+    "test:ci": "vitest run"
   },
   "dependencies": {
     "core-js": "^3.8.3",
