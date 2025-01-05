@@ -1,4 +1,6 @@
 import { fabric } from 'fabric';
+import colors from '../constants/colors';
+import { DEFAULT_TEXTBOX_TEXT } from '../constants/labels';
 
 export default class FontHeloper {
   setTextFont(textBox, selectedFont) {
@@ -25,7 +27,7 @@ export default class FontHeloper {
   }
 
   createTextBox(selectedFont) {
-    const textBox = new fabric.Textbox('this font', {
+    const textBox = new fabric.Textbox(DEFAULT_TEXTBOX_TEXT, {
       fontSize: 100,
       left: 50,
       top: 50,
@@ -80,8 +82,8 @@ export default class FontHeloper {
         y2: 1,
       },
       colorStops: [
-        { offset: 0, color: '#fdde00' },
-        { offset: 1, color: '#ee5600' },
+        { offset: 0, color: colors['superhero-yellow'] },
+        { offset: 1, color: colors['superhero-orange'] },
       ],
     });
   }
@@ -97,7 +99,7 @@ export default class FontHeloper {
 
   _3dEffect() {
     return new fabric.Shadow({
-      color: '#802600',
+      color: colors['superhero-shadow'],
       offsetX: 8,
       offsetY: 8,
       affectStroke: true,

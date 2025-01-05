@@ -3,7 +3,7 @@ import { fabric } from 'fabric';
 import {
   defineEmits, defineProps, onMounted, watch,
 } from 'vue';
-import { DOWNLOAD_BUTTON_TEXT } from '../../constants/texts';
+import { DOWNLOAD_BUTTON_TEXT, DOWNLOADED_FILE_NAME } from '../../constants/labels';
 import { loadImageToCanvas } from '../../helpers/canvas-helper';
 import FontsHelper from '../../helpers/fonts-helper';
 
@@ -52,14 +52,15 @@ watch(() => props.font, (newFont) => {
 });
 
 function downloadCanvas() {
+  const format = 'jpeg';
   const dataURL = canvas.toDataURL({
-    format: 'jpeg',
+    format,
     quality: 1,
   });
 
   const link = document.createElement('a');
   link.href = dataURL;
-  link.download = 'opawesome.png';
+  link.download = `${DOWNLOADED_FILE_NAME}.${format}`;
   link.click();
 }
 </script>

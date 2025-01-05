@@ -2,7 +2,7 @@
 import { defineProps, ref, watch } from 'vue';
 import { addTextFieldOnCanvas } from '../../helpers/canvas-helper';
 import fonts from '../../constants/fonts.json';
-import { LEFT_PART_TEXT } from '../../constants/texts';
+import { LEFT_PART_TEXT, ADD_BUTTON_TEXT } from '../../constants/labels';
 
 const props = defineProps(['canvas', 'font']);
 const emit = defineEmits(['update:font']);
@@ -35,7 +35,7 @@ function updateTextboxFont() {
       <select v-model="selectedFont" :style="{ fontFamily: selectedFont }"  @change="updateTextboxFont">
         <option v-for="font in fonts" :key="font.name" :value="font.name" :style="{ fontFamily: font.name }">{{ font.name }}</option>
       </select>
-      <button @click=addTextOnCanvas>Add</button>
+      <button @click=addTextOnCanvas>{{ADD_BUTTON_TEXT}}</button>
     </span>
   </div>
 </template>
