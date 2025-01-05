@@ -47,7 +47,6 @@ watch(() => props.selectedImageUrl, (newUrl) => {
 
 watch(() => props.font, (newFont) => {
   if (!selectedTextBox) return;
-  console.log('selected box', selectedTextBox);
   fontsHelper.setTextFont(selectedTextBox, newFont);
   canvas.renderAll();
 });
