@@ -29,8 +29,8 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-vue": "^9.32.0",
     "husky": "^9.1.7",
-    "sass": "^1.77.4",
-    "sass-loader": "^14.2.1",
+    "sass": "^1.83.1",
+    "sass-loader": "^16.0.4",
     "vitest": "^2.1.8"
   },
   "eslintConfig": {
