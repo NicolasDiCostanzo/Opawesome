@@ -17,7 +17,9 @@ watch(() => selectedFont, (newSelectedFont) => {
 });
 
 const addTextOnCanvas = () => {
-  if (!props.canvas) console.error('Canvas not found');
+  if (!props.canvas) {
+    throw new Error('Canvas is not defined');
+  }
   addTextFieldOnCanvas(props.canvas, selectedFont.value);
 };
 
@@ -33,7 +35,7 @@ function updateTextboxFont() {
       <select v-model="selectedFont" :style="{ fontFamily: selectedFont }"  @change="updateTextboxFont">
         <option v-for="font in fonts" :key="font.name" :value="font.name" :style="{ fontFamily: font.name }">{{ font.name }}</option>
       </select>
-      <button @click=addTextOnCanvas()>Add</button>
+      <button @click=addTextOnCanvas>Add</button>
     </span>
   </div>
 </template>
