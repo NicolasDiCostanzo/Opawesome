@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { addTextFieldOnCanvas } from '../../helpers/canvas-helper';
 import fonts from '../../constants/fonts.json';
 import { LEFT_PART_TEXT, ADD_BUTTON_TEXT } from '../../constants/labels';

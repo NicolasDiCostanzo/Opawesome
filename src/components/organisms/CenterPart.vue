@@ -1,9 +1,7 @@
 <script setup>
 import { fabric } from 'fabric';
-import {
-  defineEmits, defineProps, onMounted, watch,
-} from 'vue';
-import { DOWNLOAD_BUTTON_TEXT, DOWNLOADED_FILE_NAME } from '../../constants/labels';
+import { onMounted, watch } from 'vue';
+import { DOWNLOADED_FILE_NAME, DOWNLOAD_BUTTON_TEXT } from '../../constants/labels';
 import { loadImageToCanvas } from '../../helpers/canvas-helper';
 import FontsHelper from '../../helpers/fonts-helper';
 
@@ -77,7 +75,7 @@ function downloadCanvas() {
   </template>
 
 <style lang="scss">
-@import '../../constants/style/constants.scss';
+@use '../../constants/style/constants.scss' as *;
 
 main {
     display: flex;

@@ -1,5 +1,5 @@
 <script setup>
-import { defineEmits, ref } from 'vue';
+import { ref } from 'vue';
 import images from '../../constants/images.json';
 
 const selectedImageUrl = ref(images[0].id);
@@ -23,7 +23,7 @@ function selectImage(imageUrl) {
 </template>
 
 <style lang="scss">
-@import '../../constants/style/constants.scss';
+@use '../../constants/style/constants.scss' as *;
 
 $space-around-images: 15px;
 
@@ -42,14 +42,14 @@ li {
     overflow-y: auto;
     display: grid;
     justify-content: space-evenly;
-    grid-template-columns: repeat(2, #{$IMAGES_SIZE});
-    gap: #{$space-around-images};
-    padding: #{$space-around-images};
+    grid-template-columns: repeat(2, $IMAGES_SIZE);
+    gap:$space-around-images;
+    padding:$space-around-images;
 }
 
 img {
-    max-width: #{$IMAGES_SIZE};
-    max-height: #{$IMAGES_SIZE};
+    max-width: $IMAGES_SIZE;
+    max-height: $IMAGES_SIZE;
 }
 
 img:hover {
