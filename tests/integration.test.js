@@ -5,30 +5,54 @@ import {
 import { fabric } from 'fabric';
 import App from '../src/App.vue';
 
+async function mountAppWithMockedCanvas() {
+  const mockCanvas = new fabric.Canvas();
+  mockCanvas.add = vi.fn(function add(obj) {
+    this._objects.push(obj);
+  });
+  mockCanvas.setActiveObject = vi.fn((obj) => {
+    mockCanvas._activeObject = obj;
+  });
+
+  const wrapper = mount(App);
+  wrapper.vm.updateCanvas(mockCanvas);
+  await wrapper.vm.$nextTick();
+  return { wrapper, mockCanvas };
+}
+
+async function addTextboxToCanvas(wrapper) {
+  const leftPart = wrapper.findComponent({ name: 'LeftPart' });
+  const addButton = leftPart.find('button');
+  await addButton.trigger('click');
+}
+
 function getTypeOfObjectsFromCanvas(canvas, typeOfObject) {
   return canvas.getObjects().filter((obj) => obj instanceof typeOfObject);
 }
 
 describe('App.vue', () => {
-  it('spawns a textbox on the CentralPage component when the "Add" button of the LeftPart component is clicked', async () => {
-    const mockCanvas = new fabric.Canvas();
-    mockCanvas.add = vi.fn(function add(obj) {
-      this._objects.push(obj);
+  describe('adding text', () => {
+    it('spawns a textbox on the CentralPage component when the "Add" button of the LeftPart component is clicked', async () => {
+      const { wrapper, mockCanvas } = await mountAppWithMockedCanvas();
+      await addTextboxToCanvas(wrapper);
+
+      const textboxes = getTypeOfObjectsFromCanvas(mockCanvas, fabric.Textbox);
+      expect(textboxes.length).toBe(1);
+
+      const foundTextBox = textboxes[0];
+      expect(foundTextBox.fontFamily).toBe('Arial');
     });
 
-    const wrapper = mount(App);
-    wrapper.vm.updateCanvas(mockCanvas);
-    await wrapper.vm.$nextTick();
+    it('spawns a textbox with the selected font family from the <select> element on the LeftPart component', async () => {
+      const { wrapper, mockCanvas } = await mountAppWithMockedCanvas();
 
-    const leftPart = wrapper.findComponent({ name: 'LeftPart' });
+      const leftPart = wrapper.findComponent({ name: 'LeftPart' });
+      const select = leftPart.find('select');
+      await select.setValue('Impact');
 
-    const addButton = leftPart.find('button');
-    await addButton.trigger('click');
-
-    const textboxes = getTypeOfObjectsFromCanvas(mockCanvas, fabric.Textbox);
-    expect(textboxes.length).toBe(1);
-
-    const foundTextBox = textboxes[0];
-    expect(foundTextBox.fontFamily).toBe('Arial');
+      await addTextboxToCanvas(wrapper);
+      const textbox = getTypeOfObjectsFromCanvas(mockCanvas, fabric.Textbox)[0];
+      expect(textbox.fontFamily).toBe('Impact');
+    });
   });
 });
