@@ -13,6 +13,9 @@ async function mountAppWithMockedCanvas() {
   mockCanvas.setActiveObject = vi.fn((obj) => {
     mockCanvas._activeObject = obj;
   });
+  mockCanvas.on = vi.fn((event, handler) => {
+    mockCanvas[event] = handler;
+  });
 
   const wrapper = mount(App);
   wrapper.vm.updateCanvas(mockCanvas);
@@ -54,5 +57,19 @@ describe('App.vue', () => {
       const textbox = getTypeOfObjectsFromCanvas(mockCanvas, fabric.Textbox)[0];
       expect(textbox.fontFamily).toBe('Impact');
     });
+  });
+
+  describe('textbox selection and font modification', () => {
+    it("updates the select element's value when a textbox is selected", async () => {});
+
+    it('updates the font family of the selected textbox when the select value is modified', async () => {});
+  });
+
+  describe('image selection', () => {
+    it('updates the image displayed in the canvas when a new image is selected', async () => {});
+  });
+
+  describe('image downloading', () => {
+    it('downloads the canvas as an image', async () => {});
   });
 });
