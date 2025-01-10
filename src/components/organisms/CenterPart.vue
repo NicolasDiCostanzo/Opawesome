@@ -1,7 +1,7 @@
 <script setup>
 import { fabric } from 'fabric';
 import { onMounted, watch } from 'vue';
-import { DOWNLOADED_FILE_NAME, DOWNLOAD_BUTTON_TEXT } from '../../constants/labels';
+import { DOWNLOADED_FILE_NAME, DOWNLOAD_BUTTON_TEXT, UPLOAD_BUTTON_TEXT } from '../../constants/labels';
 import { loadImageToCanvas } from '../../helpers/canvas-helper';
 import FontsHelper from '../../helpers/fonts-helper';
 
@@ -61,36 +61,47 @@ function downloadCanvas() {
   link.download = `${DOWNLOADED_FILE_NAME}.${format}`;
   link.click();
 }
+
+function uploadImage() {
+  // TODO
+}
 </script>
 
 <template>
     <div class="center-part">
       <main>
-        <span id="wrapper">
+        <span id="center-part-wrapper">
+          <button @click="uploadImage">{{ UPLOAD_BUTTON_TEXT }}</button>
+          <div class="canvas-container">
             <canvas id="canvas"></canvas>
+          </div>
           <button @click="downloadCanvas">{{ DOWNLOAD_BUTTON_TEXT }}</button>
         </span>
       </main>
     </div>
   </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @use '../../constants/style/constants.scss' as *;
+
+.center-part {
+    display: flex;
+    justify-content: center;
+}
 
 main {
     display: flex;
     justify-content: center;
-    height: 100%;
+    align-content: center;
+    align-items: center;
 }
 
-#wrapper {
+#center-part-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     align-self: center;
     gap: 3rem;
-    width: 80%;
-    height: 80%;
 }
 
 .main-picture {
@@ -98,5 +109,18 @@ main {
     min-width: $CENTER_IMAGE_MIN_SIZE;
     max-height: $CENTER_IMAGE_MAX_SIZE;
     max-width: $CENTER_IMAGE_MAX_SIZE;
+}
+
+.canvas-container {
+    border-radius: 5px;
+    overflow: hidden;
+    height: $CENTER_IMAGE_MAX_SIZE;
+    align-items: center;
+
+    canvas {
+        width: 100%;
+        height: 100%;
+        box-shadow: black 0px 0px 10px;
+    }
 }
 </style>

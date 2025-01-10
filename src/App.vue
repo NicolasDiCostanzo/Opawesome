@@ -28,25 +28,50 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div>
-    <LeftPart :canvas="canvas" :font="font" @update:font="updateFont"/>
-    <CenterPart :selectedImageUrl="selectedImgUrl" @update:canvas="updateCanvas" @update:font="updateFont" :font="font"/>
-    <RightPart @update:selectNewImage="selectedImageUrl"/>
-  </div>
+    <LeftPart class="left-part" :canvas="canvas" :font="font" @update:font="updateFont"/>
+    <CenterPart class="center-part" :selectedImageUrl="selectedImgUrl" @update:canvas="updateCanvas" @update:font="updateFont" :font="font"/>
+    <RightPart class="right-part" @update:selectNewImage="selectedImageUrl"/>
 </template>
 
-<style>
+<style lang="scss">
+@import './constants/style/colors.scss';
+
+body, button {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+  body {
+    background-color: var(--bistre);
+    overflow: hidden;
+    margin: 0;
+  }
+
+  button {
+    background-color: antiquewhite;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: black;
+
+    &:hover {
+      background-color: var(--bistre);
+      background-color: var(--tea-rose-red);
+    }
+  }
+
   div {
     display: flex;
     flex-direction: row;
     height: 100vh;
   }
 
-  div > :first-child, div > :last-child {
-    flex: 1;
+  .center-part {
+    flex: 2;
   }
 
-  div > :nth-child(2) {
-    flex: 2;
+  .left-part, .right-part {
+    background-color: var(--coyote);
+    flex: 1;
   }
 </style>

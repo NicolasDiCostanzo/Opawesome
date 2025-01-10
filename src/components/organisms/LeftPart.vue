@@ -40,7 +40,7 @@ function updateTextboxFont() {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .left-part {
   display: flex;
   justify-content: center;
@@ -51,6 +51,17 @@ function updateTextboxFont() {
   flex-direction: column;
   align-items: start;
   justify-content: center;
+  width: 80%;
   gap: 2rem;
+}
+
+select {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 5px;
+    background-color: antiquewhite;
+    border: 1px solid var(--black);
+    font-size: 1rem;
+    height: 35px;
 }
 </style>

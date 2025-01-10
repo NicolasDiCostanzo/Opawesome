@@ -22,7 +22,7 @@ function selectImage(imageUrl) {
     </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @use '../../constants/style/constants.scss' as *;
 
 $space-around-images: 15px;
@@ -45,16 +45,20 @@ li {
     grid-template-columns: repeat(2, $IMAGES_SIZE);
     gap:$space-around-images;
     padding:$space-around-images;
+    align-content: start;
 }
 
 img {
     max-width: $IMAGES_SIZE;
     max-height: $IMAGES_SIZE;
+    transition: transform 0.3s ease;
+
 }
 
 img:hover {
     cursor: pointer;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    box-shadow: rgba(0, 0, 0, 0.356) 0px 0px 7.5px;
+    transform: rotate(3.5deg); // maybe random ?
 }
 
 #selected {
