@@ -28,38 +28,58 @@ onMounted(async () => {
 </script>
 
 <template>
+  <div class="container">
+  <header>Header</header>
+  <div class="app">
     <LeftPart class="left-part" :canvas="canvas" :font="font" @update:font="updateFont"/>
     <CenterPart class="center-part" :selectedImageUrl="selectedImgUrl" @update:canvas="updateCanvas" @update:font="updateFont" :font="font"/>
     <RightPart class="right-part" @update:selectNewImage="selectedImageUrl"/>
+  </div>
+  <footer>Footer</footer>
+  </div>
 </template>
 
 <style lang="scss">
 @import './constants/style/colors.scss';
 @import './constants/style/button.scss';
 
-  body {
-    background-color: var(--bistre);
-    overflow: hidden;
-    margin: 0;
-    user-select: none;
-  }
+.app {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  height: 85vh;
+}
 
-  body, button {
-    font-family: 'Courier New', Courier, monospace;
-  }
+header {
+  height: 10vh;
+}
 
-  div {
-    display: flex;
-    flex-direction: row;
-    height: 100vh;
-  }
+footer {
+  height: 5vh;
+}
 
-  .center-part {
-    flex: 2;
-  }
+header, footer {
+  color: var(--bistre);
+  text-align: center;
+  background: var(--smoky-black);
+}
 
-  .left-part, .right-part {
-    background-color: var(--coyote);
-    flex: 1;
-  }
+.center-part {
+  flex: 2;
+}
+
+.left-part, .right-part {
+  background-color: var(--coyote);
+  flex: 1;
+}
+
+body {
+  background-color: var(--bistre);
+  margin: 0;
+  user-select: none;
+}
+
+body, button {
+  font-family: 'Courier New', Courier, monospace;
+}
 </style>

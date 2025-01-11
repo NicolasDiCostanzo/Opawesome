@@ -68,40 +68,23 @@ function uploadImage() {
 </script>
 
 <template>
-    <div class="center-part">
       <main>
-        <span id="center-part-wrapper">
           <button @click="uploadImage">{{ UPLOAD_BUTTON_TEXT }}</button>
           <div class="canvas-container">
             <canvas id="canvas"></canvas>
           </div>
           <button @click="downloadCanvas">{{ DOWNLOAD_BUTTON_TEXT }}</button>
-        </span>
       </main>
-    </div>
   </template>
 
 <style lang="scss" scoped>
 @use '../../constants/style/constants.scss' as *;
 
-.center-part {
-    display: flex;
-    justify-content: center;
-}
-
 main {
     display: flex;
-    justify-content: center;
-    align-content: center;
     align-items: center;
-}
-
-#center-part-wrapper {
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    align-self: center;
-    gap: 3rem;
+    justify-content: space-evenly;
 }
 
 .main-picture {
@@ -112,6 +95,8 @@ main {
 }
 
 .canvas-container {
+    display: flex;
+    justify-content: center;
     border-radius: 5px;
     overflow: hidden;
     height: $CENTER_IMAGE_MAX_SIZE;
@@ -119,6 +104,7 @@ main {
     transition: width 0.5s ease, height 0.5s ease;
 
     canvas {
+    justify-self: center;
         width: 100%;
         height: 100%;
         box-shadow: black 0px 0px 10px;
