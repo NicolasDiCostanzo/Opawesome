@@ -5,6 +5,7 @@ import LeftPart from './components/organisms/LeftPart.vue';
 import RightPart from './components/organisms/RightPart.vue';
 import fonts from './constants/fonts.json';
 import images from './constants/images.json';
+import { APP_NAME } from './constants/labels';
 
 const selectedImgUrl = ref('');
 let canvas;
@@ -29,7 +30,9 @@ onMounted(async () => {
 
 <template>
   <div class="container">
-  <header>Header</header>
+  <header>
+    <h1>{{ APP_NAME }}</h1>
+  </header>
   <div class="app">
     <LeftPart class="left-part" :canvas="canvas" :font="font" @update:font="updateFont"/>
     <CenterPart class="center-part" :selectedImageUrl="selectedImgUrl" @update:canvas="updateCanvas" @update:font="updateFont" :font="font"/>
@@ -52,6 +55,15 @@ onMounted(async () => {
 
 header {
   height: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h1 {
+    all: unset;
+    color: antiquewhite;
+    font-size: 2em;
+  }
 }
 
 footer {
