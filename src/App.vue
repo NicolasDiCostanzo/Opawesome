@@ -35,29 +35,17 @@ onMounted(async () => {
 
 <style lang="scss">
 @import './constants/style/colors.scss';
-
-body, button {
-  font-family: 'Courier New', Courier, monospace;
-}
+@import './constants/style/button.scss';
 
   body {
     background-color: var(--bistre);
     overflow: hidden;
     margin: 0;
+    user-select: none;
   }
 
-  button {
-    background-color: antiquewhite;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    color: black;
-
-    &:hover {
-      background-color: var(--bistre);
-      background-color: var(--tea-rose-red);
-    }
+  body, button {
+    font-family: 'Courier New', Courier, monospace;
   }
 
   div {

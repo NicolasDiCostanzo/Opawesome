@@ -29,39 +29,32 @@ function updateTextboxFont() {
 </script>
 
 <template>
-  <div class="left-part">
+    <div class="left-part">
     <span id="wrapper">
-      <p>{{ LEFT_PART_TEXT }}</p>
-      <select v-model="selectedFont" :style="{ fontFamily: selectedFont }"  @change="updateTextboxFont">
+        <p>{{ LEFT_PART_TEXT }}</p>
+        <select v-model="selectedFont" :style="{ fontFamily: selectedFont }"  @change="updateTextboxFont">
         <option v-for="font in fonts" :key="font.name" :value="font.name" :style="{ fontFamily: font.name }">{{ font.name }}</option>
-      </select>
-      <button @click=addTextOnCanvas>{{ADD_BUTTON_TEXT}}</button>
+        </select>
+        <button @click=addTextOnCanvas>{{ADD_BUTTON_TEXT}}</button>
     </span>
-  </div>
+    </div>
 </template>
 
 <style lang="scss" scoped>
+@import '../../constants/style/select.scss';
+
 .left-part {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 #wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: center;
-  width: 80%;
-  gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    width: 80%;
+    gap: 2rem;
 }
 
-select {
-    width: 100%;
-    padding: 0.5rem;
-    border-radius: 5px;
-    background-color: antiquewhite;
-    border: 1px solid var(--black);
-    font-size: 1rem;
-    height: 35px;
-}
 </style>

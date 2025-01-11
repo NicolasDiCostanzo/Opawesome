@@ -1,0 +1,21 @@
+button {
+    background: rgba(255, 255, 255, 0.1);
+    color: antiquewhite;
+    border: 1px solid rgba(antiquewhite, 0.4);
+    border-radius: 15px;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    transition: background 0.1s ease;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.2);
+
+    }
+
+    &:active {
+        background: rgba(255, 255, 255, 0.25);
+    }
+}

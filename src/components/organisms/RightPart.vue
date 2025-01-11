@@ -15,9 +15,11 @@ function selectImage(imageUrl) {
 <template>
     <div class="right-part">
       <div id="imagesContainer">
-        <li v-for="image in images" :key="image.id">
-          <img :src=image.url @click="selectImage(image.url)">
-        </li>
+        <ul>
+          <li v-for="image in images" :key="image.id">
+            <img :class="selectedImageUrl === image.url ? 'selected' : ''" :src=image.url @click="selectImage(image.url)" alt='cute opossum option'/>
+          </li>
+        </ul>
       </div>
     </div>
 </template>
@@ -26,6 +28,16 @@ function selectImage(imageUrl) {
 @use '../../constants/style/constants.scss' as *;
 
 $space-around-images: 15px;
+
+ul {
+    overflow-y: auto;
+    display: grid;
+      justify-content: space-evenly;
+    grid-template-columns: repeat(2, $IMAGES_SIZE);
+    gap:$space-around-images;
+    padding:$space-around-images;
+    align-content: start;
+}
 
 li {
   all: unset;
@@ -38,34 +50,21 @@ li {
     justify-content: space-evenly;
 }
 
-#imagesContainer {
-    overflow-y: auto;
-    display: grid;
-    justify-content: space-evenly;
-    grid-template-columns: repeat(2, $IMAGES_SIZE);
-    gap:$space-around-images;
-    padding:$space-around-images;
-    align-content: start;
-}
-
 img {
     max-width: $IMAGES_SIZE;
     max-height: $IMAGES_SIZE;
-    transition: transform 0.3s ease;
-
+    transition: transform 0.25s ease, box-shadow 0.1s ease;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 15px;
 }
 
 img:hover {
     cursor: pointer;
-    box-shadow: rgba(0, 0, 0, 0.356) 0px 0px 7.5px;
+    box-shadow: rgba(0, 0, 0, 1) 0px 0px 15px;
     transform: rotate(3.5deg); // maybe random ?
 }
 
-#selected {
-    border: 1px solid var(--tea-rose-red);
-}
-
-.selected {
-    border: 1px solid var(--tea-rose-red);
+img.selected {
+    box-shadow: 0 0 0 2px var(--tea-rose-red);
+    box-sizing: border-box;
 }
 </style>

@@ -116,6 +116,7 @@ main {
     overflow: hidden;
     height: $CENTER_IMAGE_MAX_SIZE;
     align-items: center;
+    transition: width 0.5s ease, height 0.5s ease;
 
     canvas {
         width: 100%;
