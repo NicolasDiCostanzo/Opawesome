@@ -1,8 +1,6 @@
 import { fabric } from 'fabric';
 import { CENTER_IMAGE_MAX_SIZE, CENTER_IMAGE_MIN_SIZE } from '../constants/constants';
-import FontHelper from './fonts-helper';
-
-const fontHelper = new FontHelper();
+import { createTextBox } from './fonts-helper';
 
 /**
  * Calculate canvas dimensions according to the images aspect ratio and the min and max canvas size defined
@@ -54,7 +52,7 @@ export function loadImageToCanvas(url, canvas) {
 }
 
 export function addTextFieldOnCanvas(canvas, selectedFont) {
-  const textBox = fontHelper.createTextBox(selectedFont);
+  const textBox = createTextBox(selectedFont);
   canvas.add(textBox);
   canvas.setActiveObject(textBox);
   canvas.renderAll();

@@ -3,11 +3,10 @@ import { fabric } from 'fabric';
 import { onMounted, watch } from 'vue';
 import { DOWNLOADED_FILE_NAME, DOWNLOAD_BUTTON_TEXT, UPLOAD_BUTTON_TEXT } from '../../constants/labels';
 import { loadImageToCanvas } from '../../helpers/canvas-helper';
-import FontsHelper from '../../helpers/fonts-helper';
+import { setTextFont } from '../../helpers/fonts-helper';
 
 const props = defineProps(['selectedImageUrl', 'font']);
 const emit = defineEmits(['update:canvas', 'update:font']);
-const fontsHelper = new FontsHelper();
 let canvas;
 
 /**
@@ -45,7 +44,7 @@ watch(() => props.selectedImageUrl, (newUrl) => {
 
 watch(() => props.font, (newFont) => {
   if (!selectedTextBox) return;
-  fontsHelper.setTextFont(selectedTextBox, newFont);
+  setTextFont(selectedTextBox, newFont);
   canvas.renderAll();
 });
 
