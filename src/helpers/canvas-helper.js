@@ -54,6 +54,8 @@ export function loadImageToCanvas(url, canvas) {
 export function addTextFieldOnCanvas(canvas, selectedFont) {
   const textBox = createTextBox(selectedFont);
   canvas.add(textBox);
+  textBox.centerH();
+  textBox.centerV();
   canvas.setActiveObject(textBox);
   canvas.renderAll();
 }
