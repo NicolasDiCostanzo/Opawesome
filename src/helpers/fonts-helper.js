@@ -2,107 +2,74 @@ import { fabric } from 'fabric';
 import colors from '../constants/colors';
 import { DEFAULT_TEXTBOX_TEXT } from '../constants/labels';
 
-export default class FontHeloper {
-  setTextFont(textBox, selectedFont) {
-    textBox.set('fontFamily', selectedFont);
-    const gradient = this._getFontEffect(selectedFont);
-    if (gradient) {
-      textBox.set('fill', gradient);
-    } else {
-      textBox.set('fill', 'black');
-    }
+function createRainbowGradient() {
+  return new fabric.Gradient({
+    type: 'linear',
+    gradientUnits: 'percentage',
+    coords: {
+      x1: 0, y1: 0, x2: 1, y2: 0,
+    },
+    colorStops: [
+      { offset: 0, color: 'red' },
+      { offset: 0.2, color: 'orange' },
+      { offset: 0.4, color: 'yellow' },
+      { offset: 0.6, color: 'green' },
+      { offset: 0.8, color: 'blue' },
+      { offset: 1, color: 'purple' },
+    ],
+  });
+}
 
-    const shadow = this._getShadowEffect(selectedFont);
-    if (shadow) {
-      textBox.set('shadow', shadow);
-    } else {
-      textBox.set('shadow', null);
-    }
+function createImpactGradient() {
+  return new fabric.Gradient({
+    type: 'linear',
+    gradientUnits: 'percentage',
+    coords: {
+      x1: 0, y1: 0, x2: 0, y2: 1,
+    },
+    colorStops: [
+      { offset: 0, color: colors['superhero-yellow'] },
+      { offset: 1, color: colors['superhero-orange'] },
+    ],
+  });
+}
 
-    if (selectedFont === 'Impact') {
-      textBox.rotate(-15);
-    } else {
-      textBox.rotate(0);
-    }
-  }
+function create3DEffect() {
+  return new fabric.Shadow({
+    color: colors['superhero-shadow'],
+    offsetX: 8,
+    offsetY: 8,
+    affectStroke: true,
+  });
+}
 
-  createTextBox(selectedFont) {
-    const textBox = new fabric.Textbox(DEFAULT_TEXTBOX_TEXT, {
-      fontSize: 100,
-      left: 50,
-      top: 50,
-      fontFamily: selectedFont,
-    });
+const GRADIENTS = {
+  Arial: createRainbowGradient,
+  Impact: createImpactGradient,
+};
 
-    this.setTextFont(textBox, selectedFont);
+const SHADOWS = {
+  Impact: create3DEffect,
+};
 
-    return textBox;
-  }
+export function setTextFont(textBox, selectedFont) {
+  textBox.set('fontFamily', selectedFont);
+  const gradient = GRADIENTS[selectedFont] ? GRADIENTS[selectedFont]() : 'black';
+  textBox.set('fill', gradient);
 
-  _getFontEffect(fontName) {
-    switch (fontName) {
-      case 'Arial':
-        return this._rainbowGradient();
-      case 'Impact':
-        return this._impactGradient();
-      default:
-        return null;
-    }
-  }
+  const shadow = SHADOWS[selectedFont] ? SHADOWS[selectedFont]() : null;
+  textBox.set('shadow', shadow);
+}
 
-  _rainbowGradient() {
-    return new fabric.Gradient({
-      type: 'linear',
-      gradientUnits: 'percentage',
-      coords: {
-        x1: 0,
-        y1: 0,
-        x2: 1,
-        y2: 0,
-      },
-      colorStops: [
-        { offset: 0, color: 'red' },
-        { offset: 0.2, color: 'orange' },
-        { offset: 0.4, color: 'yellow' },
-        { offset: 0.6, color: 'green' },
-        { offset: 0.8, color: 'blue' },
-        { offset: 1, color: 'purple' },
-      ],
-    });
-  }
+export function createTextBox(selectedFont) {
+  const textBox = new fabric.Textbox(DEFAULT_TEXTBOX_TEXT, {
+    fontSize: 100,
+    left: 50,
+    top: 50,
+    fontFamily: selectedFont,
+  });
 
-  _impactGradient() {
-    return new fabric.Gradient({
-      type: 'linear',
-      gradientUnits: 'percentage',
-      coords: {
-        x1: 0,
-        y1: 0,
-        x2: 0,
-        y2: 1,
-      },
-      colorStops: [
-        { offset: 0, color: colors['superhero-yellow'] },
-        { offset: 1, color: colors['superhero-orange'] },
-      ],
-    });
-  }
+  setTextFont(textBox, selectedFont);
 
-  _getShadowEffect(fontName) {
-    switch (fontName) {
-      case 'Impact':
-        return this._3dEffect();
-      default:
-        return null;
-    }
-  }
-
-  _3dEffect() {
-    return new fabric.Shadow({
-      color: colors['superhero-shadow'],
-      offsetX: 8,
-      offsetY: 8,
-      affectStroke: true,
-    });
-  }
+  return textBox;
 }
