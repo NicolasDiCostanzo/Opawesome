@@ -59,3 +59,10 @@ export function addTextFieldOnCanvas(canvas, selectedFont) {
   canvas.setActiveObject(textBox);
   canvas.renderAll();
 }
+
+export function deleteSelectedTextBoxFromCanvas(canvas) {
+  const activeObject = canvas.getActiveObject();
+  if (activeObject && activeObject.type === 'textbox') {
+    canvas.remove(activeObject);
+  }
+}

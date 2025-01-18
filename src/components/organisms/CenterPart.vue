@@ -2,7 +2,7 @@
 import { fabric } from 'fabric';
 import { onMounted, watch } from 'vue';
 import { DOWNLOADED_FILE_NAME, DOWNLOAD_BUTTON_TEXT, UPLOAD_BUTTON_TEXT } from '../../constants/labels';
-import { loadImageToCanvas } from '../../helpers/canvas-helper';
+import { loadImageToCanvas, deleteSelectedTextBoxFromCanvas } from '../../helpers/canvas-helper';
 import { setTextFont } from '../../helpers/fonts-helper';
 
 const props = defineProps(['selectedImageUrl', 'font']);
@@ -18,7 +18,7 @@ const eventsToTriggerSelectedText = ['selection:created', 'selection:updated'];
 /**
  * 'selection:cleared': fabricjs custom event for when the selection is cleared
  */
-const selectionClearedEvent = 'selection:cleared';
+const selectionClearedEvent = 'before:selection:cleared';
 
 let selectedTextBox;
 onMounted(() => {
@@ -34,7 +34,19 @@ onMounted(() => {
   });
 
   canvas.on(selectionClearedEvent, () => {
+    if (selectedTextBox.text === null || selectedTextBox.text === '') {
+      deleteSelectedTextBoxFromCanvas(canvas);
+    }
     selectedTextBox = null;
+  });
+
+  window.addEventListener('keydown', (e) => {
+    const supprKeyPressed = e.key === 'Delete' && !e.ctrlKey;
+    const textIsBeingEdited = selectedTextBox?.isEditing;
+
+    if (supprKeyPressed && !textIsBeingEdited) {
+      deleteSelectedTextBoxFromCanvas(canvas);
+    }
   });
 });
 
@@ -67,7 +79,7 @@ function uploadImage() {
 </script>
 
 <template>
-      <main>
+      <main @keypress.ctrl="deleteSelectedTextBoxFromCanvas(canvas)">
           <button @click="uploadImage">{{ UPLOAD_BUTTON_TEXT }}</button>
           <div class="canvas-container">
             <canvas id="canvas"></canvas>
