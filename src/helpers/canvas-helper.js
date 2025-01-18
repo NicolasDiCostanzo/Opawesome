@@ -34,8 +34,6 @@ function computeCanvasSize(imgWidth, imgHeight) {
 }
 
 function applyImageOnCanvas(canvas, image) {
-  canvas.clear();
-
   const imgWidth = image.width;
   const imgHeight = image.height;
   const { canvasWidth, canvasHeight } = computeCanvasSize(imgWidth, imgHeight);
