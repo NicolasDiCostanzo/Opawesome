@@ -2,7 +2,7 @@
 import { fabric } from 'fabric';
 import { onMounted, watch } from 'vue';
 import { DOWNLOADED_FILE_NAME, DOWNLOAD_BUTTON_TEXT, UPLOAD_BUTTON_TEXT } from '../../constants/labels';
-import { loadImageToCanvas, deleteSelectedTextBoxFromCanvas } from '../../helpers/canvas-helper';
+import { loadImageToCanvas, deleteSelectedTextBoxFromCanvas, uploadCustomImage } from '../../helpers/canvas-helper';
 import { setTextFont } from '../../helpers/fonts-helper';
 
 const props = defineProps(['selectedImageUrl', 'font']);
@@ -73,14 +73,11 @@ function downloadCanvas() {
   link.click();
 }
 
-function uploadImage() {
-  // TODO
-}
 </script>
 
 <template>
       <main @keypress.ctrl="deleteSelectedTextBoxFromCanvas(canvas)">
-          <button @click="uploadImage">{{ UPLOAD_BUTTON_TEXT }}</button>
+          <button @click="uploadCustomImage(canvas)">{{ UPLOAD_BUTTON_TEXT }}</button>
           <div class="canvas-container">
             <canvas id="canvas"></canvas>
           </div>

@@ -8,7 +8,7 @@ import { createTextBox } from './fonts-helper';
  * @param {number} imgHeight
  * @returns Size of the canvas
  */
-export function resizeCanvas(imgWidth, imgHeight) {
+function computeCanvasSize(imgWidth, imgHeight) {
   let canvasWidth;
   let canvasHeight;
   const aspectRatio = imgWidth / imgHeight;
@@ -33,22 +33,49 @@ export function resizeCanvas(imgWidth, imgHeight) {
   return { canvasWidth, canvasHeight };
 }
 
-export function loadImageToCanvas(url, canvas) {
+function applyImageOnCanvas(canvas, image) {
   canvas.clear();
 
+  const imgWidth = image.width;
+  const imgHeight = image.height;
+  const { canvasWidth, canvasHeight } = computeCanvasSize(imgWidth, imgHeight);
+  canvas.setWidth(canvasWidth);
+  canvas.setHeight(canvasHeight);
+
+  const scaleX = canvasWidth / imgWidth;
+  const scaleY = canvasHeight / imgHeight;
+
+  canvas.setBackgroundImage(image, canvas.renderAll.bind(canvas), {
+    scaleX,
+    scaleY,
+  });
+}
+
+export function loadImageToCanvas(url, canvas) {
   fabric.Image.fromURL(url, (img) => {
-    const { canvasWidth, canvasHeight } = resizeCanvas(img.width, img.height);
-    canvas.setWidth(canvasWidth);
-    canvas.setHeight(canvasHeight);
-
-    const scaleX = canvasWidth / img.width;
-    const scaleY = canvasHeight / img.height;
-
-    canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
-      scaleX,
-      scaleY,
-    });
+    applyImageOnCanvas(canvas, img);
   }, { crossOrigin: 'anonymous' });
+}
+
+export function uploadCustomImage(canvas) {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+  input.click();
+
+  input.onchange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.src = event.target.result;
+      img.onload = () => {
+        const fabricImage = new fabric.Image(img);
+        applyImageOnCanvas(canvas, fabricImage);
+      };
+    };
+    reader.readAsDataURL(file);
+  };
 }
 
 export function addTextFieldOnCanvas(canvas, selectedFont) {
