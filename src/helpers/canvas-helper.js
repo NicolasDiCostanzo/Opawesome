@@ -33,7 +33,47 @@ function computeCanvasSize(imgWidth, imgHeight) {
   return { canvasWidth, canvasHeight };
 }
 
-function applyImageOnCanvas(canvas, image) {
+function computedTextboxDistanceFromCanvasTopLeft(lastCanvasDimensions, textbox) {
+  const lastCanvasWidth = lastCanvasDimensions.width;
+  const lastCanvasHeight = lastCanvasDimensions.height;
+  const newCanvasWidth = textbox.canvas.width;
+  const newCanvasHeight = textbox.canvas.height;
+
+  const leftRatio = textbox.left / lastCanvasWidth;
+  const topRatio = textbox.top / lastCanvasHeight;
+
+  let newLeft = leftRatio * newCanvasWidth;
+  let newTop = topRatio * newCanvasHeight;
+
+  newLeft = Math.max(0, Math.min(newLeft, newCanvasWidth - textbox.width));
+  newTop = Math.max(0, Math.min(newTop, newCanvasHeight - textbox.height));
+
+  return { left: newLeft, top: newTop };
+}
+
+/**
+ * Reposition textboxes on the canvas when the canvas size changes
+ * @param {*} lastCanvasDimensions - The canvas before the size change
+ * @param {*} newCanvas - The canvas after the size change
+ */
+function repositionTextBoxesOnCanvas(lastCanvasDimensions, newCanvas) {
+  newCanvas.getObjects().forEach((object) => {
+    if (object.type === 'textbox') {
+      const textBox = object;
+      const textBoxDistanceFromCanvasTopLeft = computedTextboxDistanceFromCanvasTopLeft(lastCanvasDimensions, textBox);
+      object.set({
+        left: textBoxDistanceFromCanvasTopLeft.left,
+        top: textBoxDistanceFromCanvasTopLeft.top,
+      });
+
+      object.setCoords();
+    }
+  });
+
+  newCanvas.renderAll();
+}
+
+function applyImageOnCanvas(lastCanvasDimensions, canvas, image) {
   const imgWidth = image.width;
   const imgHeight = image.height;
   const { canvasWidth, canvasHeight } = computeCanvasSize(imgWidth, imgHeight);
@@ -47,15 +87,19 @@ function applyImageOnCanvas(canvas, image) {
     scaleX,
     scaleY,
   });
+
+  if (lastCanvasDimensions) repositionTextBoxesOnCanvas(lastCanvasDimensions, canvas);
 }
 
-export function loadImageToCanvas(url, canvas) {
+export function loadImageToCanvas(url, lastCanvasDimensions, canvas) {
   fabric.Image.fromURL(url, (img) => {
-    applyImageOnCanvas(canvas, img);
+    applyImageOnCanvas(lastCanvasDimensions, canvas, img);
   }, { crossOrigin: 'anonymous' });
+
+  canvas.renderAll();
 }
 
-export function uploadCustomImage(canvas) {
+export function uploadCustomImage(lastCanvasDimensions, canvas) {
   const input = document.createElement('input');
   input.type = 'file';
   input.accept = 'image/*';
@@ -69,7 +113,7 @@ export function uploadCustomImage(canvas) {
       img.src = event.target.result;
       img.onload = () => {
         const fabricImage = new fabric.Image(img);
-        applyImageOnCanvas(canvas, fabricImage);
+        applyImageOnCanvas(lastCanvasDimensions, canvas, fabricImage);
       };
     };
     reader.readAsDataURL(file);
@@ -91,3 +135,6 @@ export function deleteSelectedTextBoxFromCanvas(canvas) {
     canvas.remove(activeObject);
   }
 }
+
+// eslint-disable-next-line camelcase
+export { computedTextboxDistanceFromCanvasTopLeft as _test_textboxDistanceFromCanvasTopLeft };
