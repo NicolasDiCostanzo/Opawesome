@@ -7,4 +7,7 @@ export default {
   'smoky-black': '#090702',
   'tea-rose-red': '#FDC7C8',
   'antique-white': '#FDF1DF',
+  'red-retro': '#311222',
+  'dark-blue-retro': '#0a58b2',
+  'light-blue-retro': '#7eafe0',
 };

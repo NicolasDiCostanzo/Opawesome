@@ -34,12 +34,29 @@ function createImpactGradient() {
   });
 }
 
+function createRetroText(textContent) {
+  return new fabric.Text(textContent, {
+    fontSize: 40,
+    fontFamily: 'Arial',
+    fill: colors['dark-blue-retro'],
+    stroke: colors['light-blue-retro'],
+    strokeWidth: 0.5,
+  });
+}
+
 function create3DEffect() {
   return new fabric.Shadow({
     color: colors['superhero-shadow'],
     offsetX: 8,
     offsetY: 8,
-    affectStroke: true,
+  });
+}
+
+function createRetroShadow() {
+  return new fabric.Shadow({
+    color: colors['red-retro'],
+    offsetX: 2,
+    offsetY: 2,
   });
 }
 
@@ -50,6 +67,11 @@ const GRADIENTS = {
 
 const SHADOWS = {
   Impact: create3DEffect,
+  Blues: createRetroShadow,
+};
+
+const RETRO = {
+  Blues: createRetroText,
 };
 
 export function setTextFont(textBox, selectedFont) {
@@ -59,6 +81,21 @@ export function setTextFont(textBox, selectedFont) {
 
   const shadow = SHADOWS[selectedFont] ? SHADOWS[selectedFont]() : null;
   textBox.set('shadow', shadow);
+
+  if (RETRO[selectedFont]) {
+    const retroText = RETRO[selectedFont](textBox.text, textBox.fontSize);
+    textBox.set({
+      stroke: retroText.stroke,
+      strokeWidth: retroText.strokeWidth,
+      fill: retroText.fill,
+    });
+  } else {
+    textBox.set({
+      stroke: null,
+      strokeWidth: 0,
+      fontWeight: 'normal',
+    });
+  }
 }
 
 export function createTextBox(selectedFont) {
