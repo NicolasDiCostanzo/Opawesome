@@ -4,6 +4,7 @@ import { onMounted, watch } from 'vue';
 import { DOWNLOADED_FILE_NAME, DOWNLOAD_BUTTON_TEXT, UPLOAD_BUTTON_TEXT } from '../../constants/labels';
 import { loadImageToCanvas, deleteSelectedTextBoxFromCanvas, uploadCustomImage } from '../../helpers/canvas-helper';
 import { setTextFont } from '../../helpers/fonts-helper';
+import fontParameters from '../../helpers/font-parameters';
 
 const props = defineProps(['selectedImageUrl', 'font']);
 const emit = defineEmits(['update:canvas', 'update:font']);
@@ -22,6 +23,10 @@ const eventsToTriggerSelectedText = ['selection:created', 'selection:updated'];
  */
 const selectionClearedEvent = 'before:selection:cleared';
 
+function getFontNameFromFontFamily(fontFamily) {
+  return Object.entries(fontParameters).find((font) => font.fontFamily === fontFamily).name;
+}
+
 onMounted(() => {
   canvas = new fabric.Canvas('canvas');
   lastCanvasDimensions = { width: canvas.width, height: canvas.height };
@@ -31,7 +36,9 @@ onMounted(() => {
   eventsToTriggerSelectedText.forEach((event) => {
     canvas.on(event, (e) => {
       [selectedTextBox] = e.selected;
-      emit('update:font', selectedTextBox.fontFamily);
+      console.log('selectedTextBox', selectedTextBox);
+      const fontFamily = getFontNameFromFontFamily(selectedTextBox.fontFamily);
+      emit('update:font', fontFamily);
     });
   });
 
@@ -59,6 +66,7 @@ watch(() => props.selectedImageUrl, (newUrl) => {
 
 watch(() => props.font, (newFont) => {
   if (!selectedTextBox) return;
+  console.log('font', newFont);
   setTextFont(selectedTextBox, newFont);
   canvas.renderAll();
 });

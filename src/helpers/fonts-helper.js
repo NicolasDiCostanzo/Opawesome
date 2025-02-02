@@ -16,6 +16,7 @@ export function setTextFont(textBox, selectedFont) {
   textBox.set('fontFamily', selectedFont);
 
   const params = fontParameters[selectedFont] || {};
+  textBox.set('fontFamily', params.fontFamily);
   textBox.set('fill', params.fill || 'black');
   textBox.set('shadow', params.shadow || null);
   textBox.set('stroke', params.stroke || null);

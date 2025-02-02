@@ -19,8 +19,8 @@ const rainbowGradient = new fabric.Gradient({
 });
 // #endregion
 
-// #region Impact
-const impactGradient = new fabric.Gradient({
+// #region superhero
+const superheroGradient = new fabric.Gradient({
   type: 'linear',
   gradientUnits: 'percentage',
   coords: {
@@ -32,7 +32,7 @@ const impactGradient = new fabric.Gradient({
   ],
 });
 
-const impactShadow = new fabric.Shadow({
+const superheroShadow = new fabric.Shadow({
   color: colors['superhero-shadow'],
   offsetX: 8,
   offsetY: 8,
@@ -86,27 +86,38 @@ const palePinkShadow = new fabric.Shadow({
   offsetY: -1.75,
 });
 // #endregion
-export default {
+const fontParameters = {
   Arial: {
+    fontFamily: 'Arial',
     fill: rainbowGradient,
+    weight: 'bold',
   },
-  Impact: {
-    fill: impactGradient,
-    shadow: impactShadow,
+  'Comic sans ms': {
+    fontFamily: 'Comic sans ms',
+  },
+  'Super Hero': {
+    fontFamily: 'Impact',
+    fill: superheroGradient,
+    shadow: superheroShadow,
   },
   Blues: {
+    fontFamily: 'Times New Roman',
     fill: colors['dark-blue-retro'],
     shadow: retroBlueShadow,
     stroke: colors['light-blue-retro'],
     strokeWidth: 0.5,
   },
   'Retro Purple': {
+    fontFamily: 'Times New Roman',
     fill: gradientRetroPurple,
     shadow: retroPurpleShadow,
     style: 'italic',
   },
   'Pale Pink': {
+    fontFamily: 'Times New Roman',
     fill: palePinkGradient,
     shadow: palePinkShadow,
   },
 };
+
+export default fontParameters;

@@ -48,11 +48,11 @@ describe('App.vue', () => {
 
       const leftPart = wrapper.findComponent({ name: 'LeftPart' });
       const select = leftPart.find('select');
-      await select.setValue('Impact');
+      await select.setValue('Super Hero');
 
       await addTextboxToCanvas(wrapper);
       const textbox = getTypeOfObjectsFromCanvas(mockCanvas, fabric.Textbox)[0];
-      expect(textbox.fontFamily).toBe('Impact');
+      expect(textbox.fontFamily).toBe('Super Hero');
     });
   });
 });

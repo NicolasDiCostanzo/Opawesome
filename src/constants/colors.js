@@ -7,7 +7,7 @@ export default {
   'antique-white': '#FDF1DF',
   // #endregion
 
-  // #region Impact colors
+  // #region Super hero colors
   'superhero-yellow': '#fdde00',
   'superhero-orange': '#ee5600',
   'superhero-shadow': '#802600',
