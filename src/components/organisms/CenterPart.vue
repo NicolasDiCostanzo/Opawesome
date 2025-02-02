@@ -8,6 +8,8 @@ import { setTextFont } from '../../helpers/fonts-helper';
 const props = defineProps(['selectedImageUrl', 'font']);
 const emit = defineEmits(['update:canvas', 'update:font']);
 let canvas;
+let selectedTextBox;
+let lastCanvasDimensions = null;
 
 /**
  * 'selection:created': fabricjs custom events for when a textbox is first selected
@@ -20,10 +22,10 @@ const eventsToTriggerSelectedText = ['selection:created', 'selection:updated'];
  */
 const selectionClearedEvent = 'before:selection:cleared';
 
-let selectedTextBox;
 onMounted(() => {
   canvas = new fabric.Canvas('canvas');
-  loadImageToCanvas(props.selectedImageUrl, canvas);
+  lastCanvasDimensions = { width: canvas.width, height: canvas.height };
+  loadImageToCanvas(props.selectedImageUrl, null, canvas);
   emit('update:canvas', canvas);
 
   eventsToTriggerSelectedText.forEach((event) => {
@@ -51,7 +53,8 @@ onMounted(() => {
 });
 
 watch(() => props.selectedImageUrl, (newUrl) => {
-  loadImageToCanvas(newUrl, canvas);
+  lastCanvasDimensions = { width: canvas.width, height: canvas.height };
+  loadImageToCanvas(newUrl, lastCanvasDimensions, canvas);
 });
 
 watch(() => props.font, (newFont) => {
@@ -77,7 +80,7 @@ function downloadCanvas() {
 
 <template>
       <main @keypress.ctrl="deleteSelectedTextBoxFromCanvas(canvas)">
-          <button @click="uploadCustomImage(canvas)">{{ UPLOAD_BUTTON_TEXT }}</button>
+          <button @click="uploadCustomImage(canvas, null)">{{ UPLOAD_BUTTON_TEXT }}</button>
           <div class="canvas-container">
             <canvas id="canvas"></canvas>
           </div>
