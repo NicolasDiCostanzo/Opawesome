@@ -66,6 +66,26 @@ const retroPurpleShadow = new fabric.Shadow({
   offsetY: 2,
 });
 // #endregion
+
+// #region Pale pink
+const palePinkGradient = new fabric.Gradient({
+  type: 'linear',
+  gradientUnits: 'percentage',
+  coords: {
+    x1: 0, y1: 0, x2: 0, y2: 1,
+  },
+  colorStops: [
+    { offset: 0, color: colors['pale-pink-light'] },
+    { offset: 1, color: colors['pale-pink-dark'] },
+  ],
+});
+
+const palePinkShadow = new fabric.Shadow({
+  color: colors['pale-pink-shadow'],
+  offsetX: -1.75,
+  offsetY: -1.75,
+});
+// #endregion
 export default {
   Arial: {
     fill: rainbowGradient,
@@ -84,5 +104,9 @@ export default {
     fill: gradientRetroPurple,
     shadow: retroPurpleShadow,
     style: 'italic',
+  },
+  'Pale Pink': {
+    fill: palePinkGradient,
+    shadow: palePinkShadow,
   },
 };
