@@ -47,6 +47,25 @@ const retroBlueShadow = new fabric.Shadow({
 });
 // #endregion
 
+// #region Retro purple
+const gradientRetroPurple = new fabric.Gradient({
+  type: 'linear',
+  gradientUnits: 'percentage',
+  coords: {
+    x1: 0, y1: 0, x2: 0, y2: 1,
+  },
+  colorStops: [
+    { offset: 0, color: colors['purple-retro-light'] },
+    { offset: 1, color: colors['purple-retro-dark'] },
+  ],
+});
+
+const retroPurpleShadow = new fabric.Shadow({
+  color: colors['purple-retro-shadow'],
+  offsetX: 2,
+  offsetY: 2,
+});
+// #endregion
 export default {
   Arial: {
     fill: rainbowGradient,
@@ -60,5 +79,10 @@ export default {
     shadow: retroBlueShadow,
     stroke: colors['light-blue-retro'],
     strokeWidth: 0.5,
+  },
+  'Retro Purple': {
+    fill: gradientRetroPurple,
+    shadow: retroPurpleShadow,
+    style: 'italic',
   },
 };

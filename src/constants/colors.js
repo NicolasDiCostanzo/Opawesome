@@ -10,4 +10,7 @@ export default {
   'red-retro': '#311222',
   'dark-blue-retro': '#0a58b2',
   'light-blue-retro': '#7eafe0',
+  'purple-retro-light': '#a82ebd',
+  'purple-retro-dark': '#782daf',
+  'purple-retro-shadow': '#7479c2',
 };

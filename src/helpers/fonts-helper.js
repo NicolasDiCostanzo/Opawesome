@@ -20,6 +20,7 @@ export function setTextFont(textBox, selectedFont) {
   textBox.set('shadow', params.shadow || null);
   textBox.set('stroke', params.stroke || null);
   textBox.set('strokeWidth', params.strokeWidth || 0);
+  textBox.set('fontStyle', params.style || 'normal');
 }
 
 export function createTextBox(selectedFont) {
