@@ -1,4 +1,4 @@
-# opossum-vue
+# Opawesome
 
 ## Project setup
 ```
