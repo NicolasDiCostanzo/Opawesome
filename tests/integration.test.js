@@ -42,17 +42,18 @@ describe('App.vue', () => {
       const foundTextBox = textboxes[0];
       expect(foundTextBox.fontFamily).toBe('Arial');
     });
+    const fonts = ['Arial', 'Comic sans ms', 'Super Hero', 'Blues', 'Retro Purple', 'Pale Pink', 'Impact'];
 
-    it('spawns a textbox with the selected font family from the <select> element on the LeftPart component', async () => {
-      const { wrapper, mockCanvas } = await mountAppWithMockedCanvas();
-
-      const leftPart = wrapper.findComponent({ name: 'LeftPart' });
-      const select = leftPart.find('select');
-      await select.setValue('Impact');
-
-      await addTextboxToCanvas(wrapper);
-      const textbox = getTypeOfObjectsFromCanvas(mockCanvas, fabric.Textbox)[0];
-      expect(textbox.fontFamily).toBe('Impact');
+    fonts.forEach((font) => {
+      it(`spawns a textbox with the selected font family "${font}" from the <select> element on the LeftPart component`, async () => {
+        const { wrapper, mockCanvas } = await mountAppWithMockedCanvas();
+        const leftPart = wrapper.findComponent({ name: 'LeftPart' });
+        const select = leftPart.find('select');
+        await select.setValue(font);
+        await addTextboxToCanvas(wrapper);
+        const textbox = getTypeOfObjectsFromCanvas(mockCanvas, fabric.Textbox)[0];
+        expect(textbox.fontName).toBe(font);
+      });
     });
   });
 });
