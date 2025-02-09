@@ -29,6 +29,8 @@ export function createTextBox(selectedFont) {
     fontFamily: selectedFont.fontFamily || selectedFont,
   });
 
+  textBox.fontName = selectedFont;
+
   setTextFont(textBox, selectedFont);
 
   return textBox;

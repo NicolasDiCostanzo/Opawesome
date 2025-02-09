@@ -90,7 +90,8 @@ export default {
   Arial: {
     fill: rainbowGradient,
   },
-  Impact: {
+  'Super Hero': {
+    fontFamily: 'Impact',
     fill: impactGradient,
     shadow: impactShadow,
   },
@@ -109,7 +110,7 @@ export default {
     fill: palePinkGradient,
     shadow: palePinkShadow,
   },
-  'Impact 2': {
+  Impact: {
     fontFamily: 'Impact',
     fill: 'white',
     stroke: 'black',
