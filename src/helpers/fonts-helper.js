@@ -13,9 +13,9 @@ function resetTextFont(textBox) {
 
 export function setTextFont(textBox, selectedFont) {
   resetTextFont(textBox);
-  textBox.set('fontFamily', selectedFont);
 
   const params = fontParameters[selectedFont] || {};
+  textBox.set('fontFamily', params.fontFamily || selectedFont);
   textBox.set('fill', params.fill || 'black');
   textBox.set('shadow', params.shadow || null);
   textBox.set('stroke', params.stroke || null);
@@ -26,7 +26,7 @@ export function setTextFont(textBox, selectedFont) {
 export function createTextBox(selectedFont) {
   const textBox = new fabric.Textbox(DEFAULT_TEXTBOX_TEXT, {
     fontSize: 40,
-    fontFamily: selectedFont,
+    fontFamily: selectedFont.fontFamily || selectedFont,
   });
 
   setTextFont(textBox, selectedFont);

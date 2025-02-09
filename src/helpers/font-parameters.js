@@ -109,4 +109,10 @@ export default {
     fill: palePinkGradient,
     shadow: palePinkShadow,
   },
+  'Impact 2': {
+    fontFamily: 'Impact',
+    fill: 'white',
+    stroke: 'black',
+    strokeWidth: 1,
+  },
 };
