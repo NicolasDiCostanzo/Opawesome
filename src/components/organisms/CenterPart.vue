@@ -31,7 +31,7 @@ onMounted(() => {
   eventsToTriggerSelectedText.forEach((event) => {
     canvas.on(event, (e) => {
       [selectedTextBox] = e.selected;
-      emit('update:font', selectedTextBox.fontFamily);
+      emit('update:font', selectedTextBox.fontName);
     });
   });
 
