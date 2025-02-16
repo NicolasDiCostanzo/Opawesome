@@ -30,15 +30,18 @@ onMounted(async () => {
 
 <template>
   <div class="container">
-  <header>
-    <h1>{{ APP_NAME }}</h1>
-  </header>
-  <div class="app">
-    <LeftPart class="left-part" :canvas="canvas" :font="font" @update:font="updateFont"/>
-    <CenterPart class="center-part" :selectedImageUrl="selectedImgUrl" @update:canvas="updateCanvas" @update:font="updateFont" :font="font"/>
-    <RightPart class="right-part" @update:selectNewImage="selectedImageUrl"/>
-  </div>
-  <footer>Footer</footer>
+    <header>
+      <img src="./assets//images/opossum.png" alt="Opossum logo" class="opossum-logo opossum-logo-left" />
+      <h1>{{ APP_NAME }}</h1>
+      <img src="./assets//images/opossum.png" alt="Opossum logo" class="opossum-logo opossum-logo-right" />
+    </header>
+    <div class="app">
+      <LeftPart class="left-part" :canvas="canvas" :font="font" @update:font="updateFont" />
+      <CenterPart class="center-part" :selectedImageUrl="selectedImgUrl" @update:canvas="updateCanvas"
+        @update:font="updateFont" :font="font" />
+      <RightPart class="right-part" @update:selectNewImage="selectedImageUrl" />
+    </div>
+    <footer>Footer</footer>
   </div>
 </template>
 
@@ -63,14 +66,24 @@ onMounted(async () => {
 header {
   height: 10vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
+  align-items: center;
   font-family: 'Opossum Regular', sans-serif;
+  gap: 3rem;
+
+  .opossum-logo {
+    width: 75px;
+  }
 
   h1 {
     all: unset;
     color: antiquewhite;
     font-size: 2em;
+  }
+
+  .opossum-logo-right {
+    transform: rotateY(180deg);
   }
 }
 
