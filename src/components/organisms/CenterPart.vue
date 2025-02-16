@@ -24,7 +24,8 @@ const eventsToTriggerSelectedText = ['selection:created', 'selection:updated'];
 const selectionClearedEvent = 'before:selection:cleared';
 
 function getFontNameFromFontFamily(fontFamily) {
-  return Object.entries(fontParameters).find((font) => font.fontFamily === fontFamily).name;
+  const font = Object.entries(fontParameters).find(([, value]) => value.fontFamily === fontFamily);
+  return font ? font[0] : null;
 }
 
 onMounted(() => {
