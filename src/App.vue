@@ -19,8 +19,8 @@ function updateCanvas(newCanvas) {
   canvas = newCanvas;
 }
 
-function updateFont(newFont) {
-  font.value = newFont;
+function updateFont(newFontName) {
+  font.value = newFontName;
 }
 
 onMounted(async () => {

@@ -14,22 +14,20 @@ function resetTextFont(textBox) {
 export function setTextFont(textBox, selectedFont) {
   resetTextFont(textBox);
 
-  const params = fontParameters[selectedFont] || {};
-  textBox.set('fontFamily', params.fontFamily || selectedFont);
+  const params = fontParameters[selectedFont];
+  textBox.set('fontFamily', params.fontFamily);
   textBox.set('fill', params.fill || 'black');
   textBox.set('shadow', params.shadow || null);
   textBox.set('stroke', params.stroke || null);
   textBox.set('strokeWidth', params.strokeWidth || 0);
   textBox.set('fontStyle', params.style || 'normal');
+  textBox.set('fontName', selectedFont);
 }
 
 export function createTextBox(selectedFont) {
   const textBox = new fabric.Textbox(DEFAULT_TEXTBOX_TEXT, {
     fontSize: 40,
-    fontFamily: selectedFont.fontFamily || selectedFont,
   });
-
-  textBox.fontName = selectedFont;
 
   setTextFont(textBox, selectedFont);
 
