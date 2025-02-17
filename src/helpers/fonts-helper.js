@@ -24,6 +24,10 @@ export function setTextFont(textBox, selectedFont) {
   textBox.set('fontName', selectedFont);
 }
 
+export function selectedFontColorIsEditable(selectedFontName) {
+  return fontParameters[selectedFontName].colorIsEditable;
+}
+
 export function createTextBox(selectedFont) {
   const textBox = new fabric.Textbox(DEFAULT_TEXTBOX_TEXT, {
     fontSize: 40,

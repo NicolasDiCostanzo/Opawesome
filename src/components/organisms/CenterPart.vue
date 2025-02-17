@@ -5,8 +5,8 @@ import { DOWNLOADED_FILE_NAME, DOWNLOAD_BUTTON_TEXT, UPLOAD_BUTTON_TEXT } from '
 import { loadImageToCanvas, deleteSelectedTextBoxFromCanvas, uploadCustomImage } from '../../helpers/canvas-helper';
 import { setTextFont } from '../../helpers/fonts-helper';
 
-const props = defineProps(['selectedImageUrl', 'font']);
-const emit = defineEmits(['update:canvas', 'update:font']);
+const props = defineProps(['selectedImageUrl', 'font', 'fontColor']);
+const emit = defineEmits(['update:canvas', 'update:font', 'update:color']);
 let canvas;
 let selectedTextBox;
 let lastCanvasDimensions = null;
@@ -32,6 +32,7 @@ onMounted(() => {
     canvas.on(event, (e) => {
       [selectedTextBox] = e.selected;
       emit('update:font', selectedTextBox.fontName);
+      emit('update:color', selectedTextBox.fill);
     });
   });
 
@@ -60,6 +61,12 @@ watch(() => props.selectedImageUrl, (newUrl) => {
 watch(() => props.font, (newFont) => {
   if (!selectedTextBox) return;
   setTextFont(selectedTextBox, newFont);
+  canvas.renderAll();
+});
+
+watch(() => props.fontColor, (newFontColor) => {
+  if (!selectedTextBox) return;
+  selectedTextBox.set('fill', newFontColor);
   canvas.renderAll();
 });
 

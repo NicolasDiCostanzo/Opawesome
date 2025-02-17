@@ -10,6 +10,7 @@ import { APP_NAME } from './constants/labels';
 const selectedImgUrl = ref('');
 let canvas;
 const font = ref(fonts[0].name);
+const color = ref(null);
 
 function selectedImageUrl(newSelectedImageUrl) {
   selectedImgUrl.value = newSelectedImageUrl.value;
@@ -21,6 +22,10 @@ function updateCanvas(newCanvas) {
 
 function updateFont(newFontName) {
   font.value = newFontName;
+}
+
+function updateFontColor(newFontColor) {
+  color.value = newFontColor;
 }
 
 onMounted(async () => {
@@ -36,9 +41,9 @@ onMounted(async () => {
       <img src="./assets//images/opossum.png" alt="Opossum logo" class="opossum-logo opossum-logo-right" />
     </header>
     <div class="app">
-      <LeftPart class="left-part" :canvas="canvas" :font="font" @update:font="updateFont" />
+      <LeftPart class="left-part" :canvas="canvas" :font="font" :font-color="color" @update:font="updateFont" @update:color="updateFontColor"/>
       <CenterPart class="center-part" :selectedImageUrl="selectedImgUrl" @update:canvas="updateCanvas"
-        @update:font="updateFont" :font="font" />
+        @update:font="updateFont" @update:color="updateFontColor" :font="font" :fontColor="color" />
       <RightPart class="right-part" @update:selectNewImage="selectedImageUrl" />
     </div>
     <footer>Footer</footer>

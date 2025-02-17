@@ -91,14 +91,17 @@ const fontParameters = {
     fontFamily: 'Arial',
     fill: rainbowGradient,
     weight: 'bold',
+    colorIsEditable: false,
   },
   'Comic sans ms': {
     fontFamily: 'Comic sans ms',
+    colorIsEditable: true,
   },
   'Super Hero': {
     fontFamily: 'Impact',
     fill: superheroGradient,
     shadow: superheroShadow,
+    colorIsEditable: false,
   },
   Blues: {
     fontFamily: 'Times New Roman',
@@ -106,23 +109,27 @@ const fontParameters = {
     shadow: retroBlueShadow,
     stroke: colors['light-blue-retro'],
     strokeWidth: 0.5,
+    colorIsEditable: true,
   },
   'Retro Purple': {
     fontFamily: 'Times New Roman',
     fill: gradientRetroPurple,
     shadow: retroPurpleShadow,
     style: 'italic',
+    colorIsEditable: false,
   },
   'Pale Pink': {
     fontFamily: 'Times New Roman',
     fill: palePinkGradient,
     shadow: palePinkShadow,
+    colorIsEditable: false,
   },
   Impact: {
     fontFamily: 'Impact',
     fill: 'white',
     stroke: 'black',
     strokeWidth: 1,
+    colorIsEditable: true,
   },
 };
 
