@@ -1,4 +1,5 @@
 import { fabric } from 'fabric';
+import { defaultFontSize } from '../constants/constants';
 import { DEFAULT_TEXTBOX_TEXT } from '../constants/labels';
 import fontParameters from './font-parameters';
 
@@ -26,7 +27,7 @@ export function setTextFont(textBox, selectedFont) {
 
 export function createTextBox(selectedFont) {
   const textBox = new fabric.Textbox(DEFAULT_TEXTBOX_TEXT, {
-    fontSize: 40,
+    fontSize: defaultFontSize(),
   });
 
   setTextFont(textBox, selectedFont);
