@@ -63,7 +63,7 @@ onMounted(async () => {
   margin: 0;
   height: 85vh;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     flex-direction: column;
     height: 100vh;
   }

@@ -91,19 +91,30 @@ function downloadCanvas() {
 <style lang="scss" scoped>
     @use '../../constants/style/constants.scss' as *;
 
-    main {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        justify-content: space-evenly;
-    }
+  main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
 
-    .main-picture {
-        min-height: $CENTER_IMAGE_MIN_SIZE;
-        min-width: $CENTER_IMAGE_MIN_SIZE;
-        max-height: $CENTER_IMAGE_MAX_SIZE;
-        max-width: $CENTER_IMAGE_MAX_SIZE;
+    @media (max-width: 800px) {
+      padding: 1rem;
     }
+  }
+
+  .main-picture {
+    min-height: $CENTER_IMAGE_MIN_SIZE;
+    min-width: $CENTER_IMAGE_MIN_SIZE;
+    max-height: $CENTER_IMAGE_MAX_SIZE;
+    max-width: $CENTER_IMAGE_MAX_SIZE;
+
+    @media (max-width: 800px) {
+      min-height: $CENTER_IMAGE_MIN_SIZE_MOBILE;
+      min-width: $CENTER_IMAGE_MIN_SIZE_MOBILE;
+      max-height: $CENTER_IMAGE_MAX_SIZE_MOBILE;
+      max-width: $CENTER_IMAGE_MAX_SIZE_MOBILE;
+    }
+  }
 
     .canvas-container {
         display: flex;

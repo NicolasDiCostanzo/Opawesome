@@ -45,7 +45,7 @@ const addTextOnCanvas = () => {
     display: flex;
     justify-content: center;
 
-    @media (max-width: 768px) {
+    @media (max-width: 800px) {
       padding: 1rem;
     }
   }
@@ -58,7 +58,7 @@ const addTextOnCanvas = () => {
     width: 80%;
     gap: 2rem;
 
-    @media (max-width: 768px) {
+    @media (max-width: 800px) {
       font-size: 0.9rem;
       gap: 1rem;
       select {

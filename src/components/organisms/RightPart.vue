@@ -39,7 +39,7 @@ function selectImage(imageUrl) {
     padding: $space-around-images;
     align-content: start;
 
-    @media (max-width: 768px) {
+    @media (max-width: 800px) {
       display: flex;
       flex-wrap: wrap;
       justify-content: start;
@@ -59,7 +59,7 @@ function selectImage(imageUrl) {
     flex-direction: column;
     justify-content: space-evenly;
 
-    @media (max-width: 768px) {
+    @media (max-width: 800px) {
       justify-content: start;
     }
   }

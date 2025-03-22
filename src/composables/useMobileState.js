@@ -1,7 +1,7 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 
 const isMobile = ref(false);
-const maxMobileWidth = 768; // 768px is considered as the mobile breakpoint
+const maxMobileWidth = 800; // 800px is considered as the mobile breakpoint
 
 export default function useMobileState() {
   const updateIsMobile = () => {
