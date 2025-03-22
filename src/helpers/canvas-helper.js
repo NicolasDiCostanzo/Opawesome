@@ -1,5 +1,5 @@
 import { fabric } from 'fabric';
-import { CENTER_IMAGE_MAX_SIZE, CENTER_IMAGE_MIN_SIZE } from '../constants/constants';
+import { canvasMinSize, canvasMaxSize } from '../constants/constants';
 import { createTextBox } from './fonts-helper';
 
 /**
@@ -13,21 +13,24 @@ function computeCanvasSize(imgWidth, imgHeight) {
   let canvasHeight;
   const aspectRatio = imgWidth / imgHeight;
 
-  if (imgWidth > CENTER_IMAGE_MAX_SIZE || imgHeight > CENTER_IMAGE_MAX_SIZE) {
+  const minSize = canvasMinSize();
+  const maxSize = canvasMaxSize();
+
+  if (imgWidth > maxSize || imgHeight > maxSize) {
     if (aspectRatio > 1) {
-      canvasWidth = CENTER_IMAGE_MAX_SIZE;
-      canvasHeight = CENTER_IMAGE_MAX_SIZE / aspectRatio;
+      canvasWidth = maxSize;
+      canvasHeight = maxSize / aspectRatio;
     } else {
-      canvasHeight = CENTER_IMAGE_MAX_SIZE;
-      canvasWidth = CENTER_IMAGE_MAX_SIZE * aspectRatio;
+      canvasHeight = maxSize;
+      canvasWidth = maxSize * aspectRatio;
     }
-  } else if (imgWidth < CENTER_IMAGE_MIN_SIZE || imgHeight < CENTER_IMAGE_MIN_SIZE) {
+  } else if (imgWidth < minSize || imgHeight < minSize) {
     if (aspectRatio > 1) {
-      canvasWidth = CENTER_IMAGE_MIN_SIZE;
-      canvasHeight = CENTER_IMAGE_MIN_SIZE / aspectRatio;
+      canvasWidth = minSize;
+      canvasHeight = minSize / aspectRatio;
     } else {
-      canvasHeight = CENTER_IMAGE_MIN_SIZE;
-      canvasWidth = CENTER_IMAGE_MIN_SIZE * aspectRatio;
+      canvasHeight = minSize;
+      canvasWidth = minSize * aspectRatio;
     }
   }
   return { canvasWidth, canvasHeight };
