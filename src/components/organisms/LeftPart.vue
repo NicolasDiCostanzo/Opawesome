@@ -39,19 +39,36 @@ const addTextOnCanvas = () => {
 </template>
 
 <style lang="scss" scoped>
-@import "../../constants/style/select.scss";
+  @import '../../constants/style/select.scss';
 
-.left-part {
-  display: flex;
-  justify-content: center;
-}
+  .left-part {
+    display: flex;
+    justify-content: center;
 
-#wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: center;
-  width: 80%;
-  gap: 2rem;
-}
+    @media (max-width: 768px) {
+      padding: 1rem;
+    }
+  }
+
+  #wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    width: 80%;
+    gap: 2rem;
+
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+      gap: 1rem;
+      select {
+        align-self: center;
+      }
+
+      button {
+        align-self: center;
+      }
+    }
+  }
+
 </style>
