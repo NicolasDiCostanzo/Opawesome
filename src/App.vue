@@ -5,10 +5,12 @@ import LeftPart from './components/organisms/LeftPart.vue';
 import RightPart from './components/organisms/RightPart.vue';
 import images from './constants/images.json';
 import { APP_NAME } from './constants/labels';
+import useMobileState from './composables/useMobileState';
 
 const selectedImgUrl = ref('');
 let canvas;
 const font = ref('Arial');
+const { isMobile } = useMobileState();
 
 function selectedImageUrl(newSelectedImageUrl) {
   selectedImgUrl.value = newSelectedImageUrl.value;
@@ -29,7 +31,7 @@ onMounted(async () => {
 
 <template>
   <div class="container">
-    <header>
+    <header v-if="!isMobile">
       <img src="./assets//images/opossum.png" alt="Opossum logo" class="opossum-logo opossum-logo-left" />
       <h1>{{ APP_NAME }}</h1>
       <img src="./assets//images/opossum.png" alt="Opossum logo" class="opossum-logo opossum-logo-right" />
@@ -40,7 +42,7 @@ onMounted(async () => {
         @update:font="updateFont" :font="font" />
       <RightPart class="right-part" @update:selectNewImage="selectedImageUrl" />
     </div>
-    <footer>Footer</footer>
+    <footer v-if="!isMobile">Footer</footer>
   </div>
 </template>
 
@@ -60,6 +62,11 @@ onMounted(async () => {
   flex-direction: row;
   margin: 0;
   height: 85vh;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    height: 100vh;
+  }
 }
 
 header {
