@@ -1,5 +1,5 @@
 import { fabric } from 'fabric';
-import { canvasMinSize, canvasMaxSize } from '../constants/constants';
+import { canvasMaxSize, canvasMinSize } from '../constants/constants';
 import { createTextBox } from './fonts-helper';
 
 /**
@@ -9,8 +9,8 @@ import { createTextBox } from './fonts-helper';
  * @returns Size of the canvas
  */
 function computeCanvasSize(imgWidth, imgHeight) {
-  let canvasWidth;
-  let canvasHeight;
+  let canvasWidth = imgWidth;
+  let canvasHeight = imgHeight;
   const aspectRatio = imgWidth / imgHeight;
 
   const minSize = canvasMinSize();
