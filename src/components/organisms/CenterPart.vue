@@ -2,7 +2,7 @@
 import { fabric } from 'fabric';
 import { onMounted, watch } from 'vue';
 import { DOWNLOADED_FILE_NAME, DOWNLOAD_BUTTON_TEXT, UPLOAD_BUTTON_TEXT } from '../../constants/labels';
-import { loadImageToCanvas, deleteSelectedTextBoxFromCanvas, uploadCustomImage } from '../../helpers/canvas-helper';
+import { deleteSelectedTextBoxFromCanvas, loadImageToCanvas, uploadCustomImage } from '../../helpers/canvas-helper';
 import { setTextFont } from '../../helpers/fonts-helper';
 
 const props = defineProps(['selectedImageUrl', 'font']);
@@ -12,14 +12,14 @@ let selectedTextBox;
 let lastCanvasDimensions = null;
 
 /**
- * 'selection:created': fabricjs custom events for when a textbox is first selected
- * 'selection:updated': fabricjs custom events for when the textbox selected changes
- */
+     * 'selection:created': fabricjs custom events for when a textbox is first selected
+     * 'selection:updated': fabricjs custom events for when the textbox selected changes
+     */
 const eventsToTriggerSelectedText = ['selection:created', 'selection:updated'];
 
 /**
- * 'selection:cleared': fabricjs custom event for when the selection is cleared
- */
+     * 'selection:cleared': fabricjs custom event for when the selection is cleared
+     */
 const selectionClearedEvent = 'before:selection:cleared';
 
 onMounted(() => {
@@ -79,46 +79,46 @@ function downloadCanvas() {
 </script>
 
 <template>
-      <main @keypress.ctrl="deleteSelectedTextBoxFromCanvas(canvas)">
-          <button @click="uploadCustomImage(canvas, null)">{{ UPLOAD_BUTTON_TEXT }}</button>
-          <div class="canvas-container">
+    <main @keypress.ctrl="deleteSelectedTextBoxFromCanvas(canvas)">
+        <button @click="uploadCustomImage(null, canvas)">{{ UPLOAD_BUTTON_TEXT }}</button>
+        <div class="canvas-container">
             <canvas id="canvas"></canvas>
-          </div>
-          <button @click="downloadCanvas">{{ DOWNLOAD_BUTTON_TEXT }}</button>
-      </main>
-  </template>
+        </div>
+        <button @click="downloadCanvas">{{ DOWNLOAD_BUTTON_TEXT }}</button>
+    </main>
+</template>
 
 <style lang="scss" scoped>
-@use '../../constants/style/constants.scss' as *;
+    @use '../../constants/style/constants.scss' as *;
 
-main {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-evenly;
-}
-
-.main-picture {
-    min-height: $CENTER_IMAGE_MIN_SIZE;
-    min-width: $CENTER_IMAGE_MIN_SIZE;
-    max-height: $CENTER_IMAGE_MAX_SIZE;
-    max-width: $CENTER_IMAGE_MAX_SIZE;
-}
-
-.canvas-container {
-    display: flex;
-    justify-content: center;
-    border-radius: 5px;
-    overflow: hidden;
-    height: $CENTER_IMAGE_MAX_SIZE;
-    align-items: center;
-    transition: width 0.5s ease, height 0.5s ease;
-
-    canvas {
-    justify-self: center;
-        width: 100%;
-        height: 100%;
-        box-shadow: black 0px 0px 10px;
+    main {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: space-evenly;
     }
-}
+
+    .main-picture {
+        min-height: $CENTER_IMAGE_MIN_SIZE;
+        min-width: $CENTER_IMAGE_MIN_SIZE;
+        max-height: $CENTER_IMAGE_MAX_SIZE;
+        max-width: $CENTER_IMAGE_MAX_SIZE;
+    }
+
+    .canvas-container {
+        display: flex;
+        justify-content: center;
+        border-radius: 5px;
+        overflow: hidden;
+        height: $CENTER_IMAGE_MAX_SIZE;
+        align-items: center;
+        transition: width 0.5s ease, height 0.5s ease;
+
+        canvas {
+            justify-self: center;
+            width: 100%;
+            height: 100%;
+            box-shadow: black 0px 0px 10px;
+        }
+    }
 </style>
