@@ -86,6 +86,15 @@ const palePinkShadow = new fabric.Shadow({
   offsetY: -1.75,
 });
 // #endregion
+
+// #region Tusker Grotesk
+const tuskerGrosteskShadow = new fabric.Shadow({
+  color: colors['tusker-dark-blue'],
+  offsetX: 3,
+  offsetY: -2,
+});
+// #endregion
+
 const fontParameters = {
   Arial: {
     fontFamily: 'Arial',
@@ -123,6 +132,11 @@ const fontParameters = {
     fill: 'white',
     stroke: 'black',
     strokeWidth: 1,
+  },
+  'Tusker Grotesk': {
+    fontFamily: 'Tusker Grotesk',
+    fill: colors['tusker-blue'],
+    shadow: tuskerGrosteskShadow,
   },
 };
 

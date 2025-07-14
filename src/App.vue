@@ -56,6 +56,14 @@ onMounted(async () => {
     src: url('./assets/fonts/opossum.woff') format('woff');
 }
 
+@font-face {
+    font-family: 'Tusker Grotesk';
+    font-style: normal;
+    font-weight: normal;
+    src: url('./assets/fonts/TuskerGrotesk.woff') format('woff2');
+    font-display: swap;
+}
+
 .app {
   display: flex;
   flex-direction: row;
