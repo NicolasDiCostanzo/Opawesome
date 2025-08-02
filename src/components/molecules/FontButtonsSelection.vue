@@ -19,9 +19,7 @@ function selectFont(font) {
       :class="{ active: selectedFont.name === font.name }"
       :style="{ backgroundImage: `url(${font.image})` }"
       @click="selectFont(font)"
-    >
-      {{ font.name }}
-    </button>
+    />
   </div>
 </template>
 
@@ -36,17 +34,11 @@ function selectFont(font) {
 button {
   margin: 0.25rem 0;
   padding: 0.5rem;
-  border: 2px solid transparent;
   background-size: cover;
   background-position: center;
-  color: white;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
   cursor: pointer;
-  transition: border-color 0.2s;
-}
-
-button:hover {
-  border-color: rgba(255, 255, 255, 0.5);
+  width: 200px;
+  height: 50px;
 }
 
 button.active {

@@ -1,23 +1,30 @@
 [
   {
-    "name": "Arial"
+    "name": "Arial",
+    "image": "font-previews/arial-preview.png"
   },
   {
-    "name": "Comic sans ms"
+    "name": "Comic sans ms",
+    "image": "font-previews/comic-sans-ms-preview.png"
   },
   {
-    "name": "Super Hero"
+    "name": "Super Hero",
+    "image": "font-previews/super-hero-preview.png"
   },
   {
-    "name": "Blues"
+    "name": "Blues",
+    "image": "font-previews/blues-preview.png"
   },
   {
-    "name": "Retro Purple"
+    "name": "Retro Purple",
+    "image": "font-previews/retro-purple-preview.png"
   },
   {
-    "name": "Pale Pink"
-  }, 
+    "name": "Pale Pink",
+    "image": "font-previews/pale-pink-preview.png"
+  },
   {
-    "name": "Impact"
+    "name": "Impact",
+    "image": "font-previews/impact-preview.png"
   }
 ]
