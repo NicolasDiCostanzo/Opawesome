@@ -58,7 +58,7 @@ watch(() => props.selectedImageUrl, (newUrl) => {
 });
 
 watch(() => props.font, (newFont) => {
-  if (!selectedTextBox) return;
+  if (!selectedTextBox || !newFont) return;
   setTextFont(selectedTextBox, newFont);
   canvas.renderAll();
 });

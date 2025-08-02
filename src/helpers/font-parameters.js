@@ -93,9 +93,35 @@ const tuskerGrosteskShadow = new fabric.Shadow({
   offsetX: 3,
   offsetY: -2,
 });
+
+export const createWavyText = (text, options) => {
+  const waveAmplitude = options.waveAmplitude || 10;
+  const waveFrequency = options.waveFrequency || 0.1;
+
+  const textObjects = text?.split('').map((char, index) => {
+    const textObj = new fabric.Text(char, {
+      left: index * (options.fontSize || 30) * 0.6, // Adjust spacing based on font size
+      top: 100,
+      fontFamily: options.fontFamily || 'Arial',
+      fontSize: options.fontSize || 30,
+      fill: options.fill || 'black',
+    });
+
+    // Apply wave transformation
+    textObj.set({
+      top: textObj.top + Math.sin(index * waveFrequency) * waveAmplitude,
+    });
+
+    return textObj;
+  });
+
+  return new fabric.Group(textObjects, {
+    selectable: true,
+  });
+};
 // #endregion
 
-const fontParameters = {
+export const fontParameters = {
   Arial: {
     fontFamily: 'Arial',
     fill: rainbowGradient,
@@ -137,7 +163,8 @@ const fontParameters = {
     fontFamily: 'Tusker Grotesk',
     fill: colors['tusker-blue'],
     shadow: tuskerGrosteskShadow,
+    hasWavyEffect: true,
   },
 };
 
-export default fontParameters;
+// export default fontParameters;
