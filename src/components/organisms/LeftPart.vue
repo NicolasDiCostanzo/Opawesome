@@ -2,6 +2,7 @@
 import { ref, watch } from 'vue';
 import { addTextFieldOnCanvas } from '../../helpers/canvas-helper';
 import FontButtonsSelection from '../molecules/FontButtonsSelection.vue';
+import { LEFT_PART_TEXT, ADD_BUTTON_TEXT } from '../../constants/labels';
 
 const props = defineProps(['canvas', 'font']);
 const emit = defineEmits(['update:font']);
