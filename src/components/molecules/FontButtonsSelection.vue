@@ -1,22 +1,27 @@
 <script setup>
-import { ref } from 'vue';
-import fonts from '../../constants/fonts.json';
+import { ref, computed } from 'vue';
+import fontParameters from '../../helpers/font-parameters';
 
-const selectedFont = ref(fonts[0]);
+const fontArray = computed(() => Object.entries(fontParameters).map(([key, value]) => ({
+  fontName: key,
+  ...value,
+})));
+
+const selectedFont = ref(fontArray.value[0]);
 const emit = defineEmits(['update:font']);
 
 function selectFont(font) {
   selectedFont.value = font;
-  emit('update:font', font.name);
+  emit('update:font', font.fontName);
 }
 </script>
 
 <template>
   <div class="buttons-selection">
     <button
-      v-for="font in fonts"
-      :key="font.name"
-      :class="{ active: selectedFont.name === font.name }"
+      v-for="font in fontArray"
+      :key="font.fontFamily"
+      :class="{ active: selectedFont.fontName === font.fontName }"
       :style="{ backgroundImage: `url(${font.image})` }"
       @click="selectFont(font)"
     />

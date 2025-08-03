@@ -3,13 +3,13 @@ import { onMounted, ref } from 'vue';
 import CenterPart from './components/organisms/CenterPart.vue';
 import LeftPart from './components/organisms/LeftPart.vue';
 import RightPart from './components/organisms/RightPart.vue';
-import fonts from './constants/fonts.json';
+import fontParameters from './helpers/font-parameters';
 import images from './constants/images.json';
 import { APP_NAME } from './constants/labels';
 
 const selectedImgUrl = ref('');
 let canvas;
-const font = ref(fonts[0].name);
+const font = ref(fontParameters.Arial); // Default font set to Arial
 
 function selectedImageUrl(newSelectedImageUrl) {
   selectedImgUrl.value = newSelectedImageUrl.value;
