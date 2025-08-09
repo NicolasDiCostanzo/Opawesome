@@ -1,22 +1,22 @@
 [
   {
     "id": 0,
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Opossum_1.jpg/800px-Opossum_1.jpg"
+    "url": "Opossum_1.jpg"
   },
   {
     "id": 1,
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Didelphis_virginiana_with_young.JPG/640px-Didelphis_virginiana_with_young.JPG"
+    "url": "Didelphis_virginiana_with_young.JPG"
   },
   {
     "id": 2,
-    "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz_6YQ4vJmh1HSmnDAmvnkzcebA0Jd2P_g-0PsyLv_2Xao1bDgvwFFup2qHZjoAR-6Ha0&usqp=CAU"
+    "url": "image-1.jpeg"
   },
   {
     "id": 3,
-    "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGdOGRxufRY45E1Iwo3NktNuSD2NOQZba1Qg&s"
+    "url": "image-2.jpeg"
   },
   {
     "id": 4,
-    "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRn4EZitNIrUrWXHL76jxOLzwv6FWlgfGF6Cw&s"
+    "url": "images.jpeg"
   }
 ]

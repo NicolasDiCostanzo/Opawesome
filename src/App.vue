@@ -24,7 +24,7 @@ function updateFont(newFontName) {
 }
 
 onMounted(async () => {
-  selectedImgUrl.value = images[0].url;
+  selectedImgUrl.value = `/images/${images[0].url}`;
 });
 </script>
 
