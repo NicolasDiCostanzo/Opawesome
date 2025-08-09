@@ -1,6 +1,6 @@
 import { fabric } from 'fabric';
-import fontParameters from './font-parameters';
 import { DEFAULT_TEXTBOX_TEXT } from '../constants/labels';
+import fontParameters from './font-parameters';
 
 function resetTextFont(textBox) {
   textBox.set({
@@ -21,7 +21,7 @@ export function setTextFont(textBox, selectedFont) {
   textBox.set('stroke', params.stroke || null);
   textBox.set('strokeWidth', params.strokeWidth || 0);
   textBox.set('fontStyle', params.style || 'normal');
-  textBox.set('fontName', selectedFont);
+  textBox.set('fontName', params.fontName);
 }
 
 export function createTextBox(selectedFont) {

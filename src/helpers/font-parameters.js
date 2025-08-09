@@ -89,40 +89,54 @@ const palePinkShadow = new fabric.Shadow({
 const fontParameters = {
   Arial: {
     fontFamily: 'Arial',
+    fontName: 'Arial',
     fill: rainbowGradient,
     weight: 'bold',
+    image: 'font-previews/arial-preview.png',
   },
   'Comic sans ms': {
     fontFamily: 'Comic sans ms',
+    fontName: 'Comic sans ms',
+    image: 'font-previews/comic-sans-ms-preview.png',
   },
   'Super Hero': {
     fontFamily: 'Impact',
+    fontName: 'Super Hero',
     fill: superheroGradient,
     shadow: superheroShadow,
+    image: 'font-previews/super-hero-preview.png',
   },
   Blues: {
     fontFamily: 'Times New Roman',
+    fontName: 'Blues',
     fill: colors['dark-blue-retro'],
     shadow: retroBlueShadow,
     stroke: colors['light-blue-retro'],
     strokeWidth: 0.5,
+    image: 'font-previews/blues-preview.png',
   },
   'Retro Purple': {
     fontFamily: 'Times New Roman',
+    fontName: 'Retro Purple',
     fill: gradientRetroPurple,
     shadow: retroPurpleShadow,
     style: 'italic',
+    image: 'font-previews/retro-purple-preview.png',
   },
   'Pale Pink': {
     fontFamily: 'Times New Roman',
+    fontName: 'Pale Pink',
     fill: palePinkGradient,
     shadow: palePinkShadow,
+    image: 'font-previews/pale-pink-preview.png',
   },
   Impact: {
     fontFamily: 'Impact',
+    fontName: 'Impact',
     fill: 'white',
     stroke: 'black',
     strokeWidth: 1,
+    image: 'font-previews/impact-preview.png',
   },
 };
 
