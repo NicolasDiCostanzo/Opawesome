@@ -1,7 +1,11 @@
 <script setup>
 import { ref } from 'vue';
-import images from '../../constants/images.json';
+import imagesData from '../../constants/images.json';
 
+const images = imagesData.map((image) => ({
+  id: image.id,
+  url: `/images/${image.url}`,
+}));
 const selectedImageUrl = ref(images[0].id);
 const emit = defineEmits(['update:selectNewImage']);
 
