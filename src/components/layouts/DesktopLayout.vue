@@ -1,6 +1,6 @@
 <script setup>
-import CenterPart from '../organisms/CenterPart.vue';
-import LeftPart from '../organisms/LeftPart.vue';
+import CenterPart from '../organisms/desktop/CenterPart.vue';
+import LeftPart from '../organisms/desktop/LeftPart.vue';
 import RightPart from '../organisms/RightPart.vue';
 import useLayoutHandlers from '../../composables/useLayoutHandlers';
 
