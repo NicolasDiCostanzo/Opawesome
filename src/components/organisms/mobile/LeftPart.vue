@@ -33,6 +33,7 @@ const { selectedFont, handleFontUpdate, addTextOnCanvas } = useLeftPartLogic(pro
   flex-direction: column;
   gap: 1rem;
   align-items: center;
+  height: 100%;
 }
 
 .mobile-add-btn {

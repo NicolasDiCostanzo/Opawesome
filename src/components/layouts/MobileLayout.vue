@@ -52,30 +52,16 @@ const { handleCanvasUpdate, handleFontUpdate, handleImageSelection } = useLayout
   background-color: var(--bistre);
 }
 
-.mobile-header {
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--smoky-black);
-  color: antiquewhite;
-  font-family: 'Opossum Regular', sans-serif;
-
-  h1 {
-    margin: 0;
-    font-size: 1.5em;
-  }
-}
-
 .mobile-center-part {
   flex: 1;
-  min-height: 0; // Important for flex children
+  min-height: 50%;
 }
 
 .mobile-left-part {
   background-color: var(--coyote);
   padding: 1rem;
   order: 2;
+  min-height: 15%;
 }
 
 .mobile-right-part {
@@ -84,5 +70,6 @@ const { handleCanvasUpdate, handleFontUpdate, handleImageSelection } = useLayout
   order: 3;
   max-height: 200px;
   overflow-y: auto;
+  min-height: 25%;
 }
 </style>

@@ -1,6 +1,9 @@
 <script setup>
 import { ref, computed } from 'vue';
 import fontParameters from '../../helpers/font-parameters';
+import useMobileState from '../../composables/useMobileState';
+
+const { isMobile } = useMobileState();
 
 const fontArray = computed(() => Object.entries(fontParameters).map(([key, value]) => ({
   fontName: key,
@@ -17,7 +20,7 @@ function selectFont(font) {
 </script>
 
 <template>
-  <div class="buttons-selection">
+  <div class="buttons-selection" :class="{ mobile: isMobile }">
     <button
       v-for="font in fontArray"
       :key="font.fontFamily"
@@ -31,20 +34,38 @@ function selectFont(font) {
 <style lang="scss" scoped>
 .buttons-selection {
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   margin: 1rem;
+
+  button {
+      width: 200px;
+  }
+  
+  &.mobile {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    overflow-x: auto;
+    justify-content: flex-start;
+    margin: 0;
+
+    button {
+      width: 75px;
+      flex-shrink: 0;
+    }
+  }
 }
 
-button {
-  margin: 0.25rem 0;
-  padding: 0.5rem;
-  background-size: cover;
-  background-position: center;
-  cursor: pointer;
-  width: 200px;
-  height: 50px;
-}
+  button {
+      margin: 0.25rem 0;
+      padding: 0.5rem;
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
+      height: 50px;
+  }
 
 button.active {
   border-color: #007bff;
