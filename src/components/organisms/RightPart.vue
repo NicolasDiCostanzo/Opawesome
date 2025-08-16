@@ -1,7 +1,9 @@
 <script setup>
 import { ref } from 'vue';
+import useMobileState from '../../composables/useMobileState';
 import images from '../../constants/images.json';
 
+const { isMobile } = useMobileState();
 const selectedImageUrl = ref(images[0].id);
 const emit = defineEmits(['update:selectNewImage']);
 
@@ -13,8 +15,8 @@ function selectImage(imageUrl) {
 </script>
 
 <template>
-  <div class="right-part">
-    <div id="imagesContainer">
+  <div class="right-part" :class="{ mobile: isMobile }">
+    <div class="images-container">
       <ul>
         <li v-for="image in images" :key="image.id">
           <img :class="selectedImageUrl === image.url ? 'selected' : ''" :src=image.url @click="selectImage(image.url)"
@@ -38,15 +40,6 @@ function selectImage(imageUrl) {
     gap: $space-around-images;
     padding: $space-around-images;
     align-content: start;
-
-    @media (max-width: 800px) {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: start;
-      align-self: center;
-      overflow-y: auto;
-      max-height: 250px;
-    }
   }
 
   li {
@@ -59,8 +52,29 @@ function selectImage(imageUrl) {
     flex-direction: column;
     justify-content: space-evenly;
 
-    @media (max-width: 800px) {
-      justify-content: start;
+    &.mobile {
+      .images-container {
+        width: 100%;
+        height: 100%;
+      }
+      
+      ul {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        gap: $space-around-images;
+        padding: $space-around-images;
+        align-items: flex-start;
+        max-height: none;
+        flex-shrink: 0;
+        scroll-snap-type: x mandatory;
+        
+        li {
+          flex-shrink: 0;
+          scroll-snap-align: start;
+        }
+      }
     }
   }
 
