@@ -30,4 +30,9 @@ export default {
   'pale-pink-dark': '#dba1a6',
   'pale-pink-shadow': '#1b1d2f',
   // #endregion
+
+  // # region Tusker Grotesk
+  'tusker-blue': '#3BC8FE',
+  'tusker-dark-blue': '#0100AE',
+  // #endretion
 };

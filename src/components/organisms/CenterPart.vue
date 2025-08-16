@@ -57,9 +57,9 @@ watch(() => props.selectedImageUrl, (newUrl) => {
   loadImageToCanvas(newUrl, lastCanvasDimensions, canvas);
 });
 
-watch(() => props.font, (newFont) => {
+watch(() => props.font, async (newFont) => {
   if (!selectedTextBox) return;
-  setTextFont(selectedTextBox, newFont);
+  await setTextFont(selectedTextBox, newFont);
   canvas.renderAll();
 });
 
