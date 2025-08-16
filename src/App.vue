@@ -1,11 +1,9 @@
 <script setup>
 import { onMounted, ref } from 'vue';
-import CenterPart from './components/organisms/CenterPart.vue';
-import LeftPart from './components/organisms/LeftPart.vue';
-import RightPart from './components/organisms/RightPart.vue';
 import images from './constants/images.json';
-import { APP_NAME } from './constants/labels';
 import useMobileState from './composables/useMobileState';
+import DesktopLayout from './components/layouts/DesktopLayout.vue';
+import MobileLayout from './components/layouts/MobileLayout.vue';
 
 const selectedImgUrl = ref('');
 let canvas;
@@ -31,18 +29,26 @@ onMounted(async () => {
 
 <template>
   <div class="container">
-    <header v-if="!isMobile">
-      <img src="./assets//images/opossum.png" alt="Opossum logo" class="opossum-logo opossum-logo-left" />
-      <h1>{{ APP_NAME }}</h1>
-      <img src="./assets//images/opossum.png" alt="Opossum logo" class="opossum-logo opossum-logo-right" />
-    </header>
     <div class="app">
-      <LeftPart class="left-part" :canvas="canvas" :font="font" @update:font="updateFont" />
-      <CenterPart class="center-part" :selectedImageUrl="selectedImgUrl" @update:canvas="updateCanvas"
-        @update:font="updateFont" :font="font" />
-      <RightPart class="right-part" @update:selectNewImage="selectedImageUrl" />
+      <DesktopLayout
+        v-if="!isMobile"
+        :selectedImgUrl="selectedImgUrl"
+        :canvas="canvas"
+        :font="font"
+        @update:canvas="updateCanvas"
+        @update:font="updateFont"
+        @update:selectNewImage="selectedImageUrl"
+      />
+      <MobileLayout
+        v-else
+        :selectedImgUrl="selectedImgUrl"
+        :canvas="canvas"
+        :font="font"
+        @update:canvas="updateCanvas"
+        @update:font="updateFont"
+        @update:selectNewImage="selectedImageUrl"
+      />
     </div>
-    <footer v-if="!isMobile">Footer</footer>
   </div>
 </template>
 
