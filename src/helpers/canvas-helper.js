@@ -120,8 +120,8 @@ export function uploadCustomImage(lastCanvasDimensions, canvas) {
   };
 }
 
-export function addTextFieldOnCanvas(canvas, selectedFont) {
-  const textBox = createTextBox(selectedFont);
+export async function addTextFieldOnCanvas(canvas, selectedFont) {
+  const textBox = await createTextBox(selectedFont);
   canvas.add(textBox);
   textBox.centerH();
   textBox.centerV();

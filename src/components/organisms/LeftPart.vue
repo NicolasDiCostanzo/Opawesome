@@ -20,11 +20,11 @@ function handleFontUpdate(fontName) {
   emit('update:font', fontName);
 }
 
-const addTextOnCanvas = () => {
+const addTextOnCanvas = async () => {
   if (!props.canvas) {
     throw new Error('Canvas is not defined');
   }
-  addTextFieldOnCanvas(props.canvas, selectedFont.value);
+  await addTextFieldOnCanvas(props.canvas, selectedFont.value);
 };
 </script>
 

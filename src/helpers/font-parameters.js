@@ -149,8 +149,10 @@ const fontParameters = {
   },
   'Tusker Grotesk': {
     fontFamily: 'Tusker Grotesk',
+    fontName: 'Tusker Grotesk',
     fill: colors['tusker-blue'],
     shadow: tuskerGrosteskShadow,
+    // image: 'font-previews/tusker-grotesk-preview.png',
   },
 };
 

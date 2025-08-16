@@ -2,6 +2,17 @@ import { fabric } from 'fabric';
 import { DEFAULT_TEXTBOX_TEXT } from '../constants/labels';
 import fontParameters from './font-parameters';
 
+async function ensureFontLoaded(fontFamily) {
+  if (fontFamily === 'Tusker Grotesk') {
+    try {
+      await document.fonts.load(`16px "${fontFamily}"`);
+    } catch (error) {
+      return Promise.resolve();
+    }
+  }
+  return Promise.resolve();
+}
+
 function resetTextFont(textBox) {
   textBox.set({
     fill: 'black',
@@ -11,10 +22,13 @@ function resetTextFont(textBox) {
   });
 }
 
-export function setTextFont(textBox, selectedFont) {
+export async function setTextFont(textBox, selectedFont) {
   resetTextFont(textBox);
 
   const params = fontParameters[selectedFont];
+
+  await ensureFontLoaded(params.fontFamily);
+
   textBox.set('fontFamily', params.fontFamily);
   textBox.set('fill', params.fill || 'black');
   textBox.set('shadow', params.shadow || null);
@@ -24,12 +38,12 @@ export function setTextFont(textBox, selectedFont) {
   textBox.set('fontName', params.fontName);
 }
 
-export function createTextBox(selectedFont) {
+export async function createTextBox(selectedFont) {
   const textBox = new fabric.Textbox(DEFAULT_TEXTBOX_TEXT, {
     fontSize: 40,
   });
 
-  setTextFont(textBox, selectedFont);
+  await setTextFont(textBox, selectedFont);
 
   return textBox;
 }
