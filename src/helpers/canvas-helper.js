@@ -94,15 +94,16 @@ function applyImageOnCanvas(lastCanvasDimensions, canvas, image) {
   if (lastCanvasDimensions) repositionTextBoxesOnCanvas(lastCanvasDimensions, canvas);
 }
 
-export function loadImageToCanvas(url, lastCanvasDimensions, canvas) {
+export function loadImageToCanvas(url, lastCanvasDimensions, canvas, callback) {
   fabric.Image.fromURL(url, (img) => {
     applyImageOnCanvas(lastCanvasDimensions, canvas, img);
+    if (callback) callback();
   }, { crossOrigin: 'anonymous' });
 
   canvas.renderAll();
 }
 
-export function uploadCustomImage(lastCanvasDimensions, canvas) {
+export function uploadCustomImage(lastCanvasDimensions, canvas, callback) {
   const input = document.createElement('input');
   input.type = 'file';
   input.accept = 'image/*';
@@ -117,6 +118,7 @@ export function uploadCustomImage(lastCanvasDimensions, canvas) {
       img.onload = () => {
         const fabricImage = new fabric.Image(img);
         applyImageOnCanvas(lastCanvasDimensions, canvas, fabricImage);
+        if (callback) callback();
       };
     };
     reader.readAsDataURL(file);

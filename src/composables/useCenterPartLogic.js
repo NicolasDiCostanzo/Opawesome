@@ -14,8 +14,9 @@ export default function useCenterPartLogic(props, emit) {
 
   const initCanvas = (canvasId = 'canvas') => {
     canvas = new fabric.Canvas(canvasId);
-    lastCanvasDimensions.value = { width: canvas.width, height: canvas.height };
-    loadImageToCanvas(props.selectedImageUrl, null, canvas);
+    loadImageToCanvas(props.selectedImageUrl, null, canvas, () => {
+      lastCanvasDimensions.value = { width: canvas.width, height: canvas.height };
+    });
     emit('update:canvas', canvas);
 
     eventsToTriggerSelectedText.forEach((event) => {
@@ -50,8 +51,9 @@ export default function useCenterPartLogic(props, emit) {
 
   watch(() => props.selectedImageUrl, (newUrl) => {
     if (!canvas) return;
-    lastCanvasDimensions.value = { width: canvas.width, height: canvas.height };
-    loadImageToCanvas(newUrl, lastCanvasDimensions.value, canvas);
+    loadImageToCanvas(newUrl, lastCanvasDimensions.value, canvas, () => {
+      lastCanvasDimensions.value = { width: canvas.width, height: canvas.height };
+    });
   });
 
   watch(() => props.font, (newFont) => {
@@ -77,7 +79,9 @@ export default function useCenterPartLogic(props, emit) {
 
   const uploadImage = () => {
     if (!canvas) return;
-    uploadCustomImage(lastCanvasDimensions.value, canvas);
+    uploadCustomImage(lastCanvasDimensions.value, canvas, () => {
+      lastCanvasDimensions.value = { width: canvas.width, height: canvas.height };
+    });
   };
 
   return {
