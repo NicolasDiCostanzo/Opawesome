@@ -46,13 +46,5 @@ const { selectedFont, handleFontUpdate, addTextOnCanvas } = useLeftPartLogic(pro
   border: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   
-  &:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  }
-  
-  &:active {
-    transform: translateY(0);
-  }
 }
 </style>

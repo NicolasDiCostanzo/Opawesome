@@ -61,7 +61,8 @@ function selectFont(font) {
   button {
       margin: 0.25rem 0;
       padding: 0.5rem;
-      background-size: cover;
+      background-size: contain;
+      background-repeat: no-repeat;      
       background-position: center;
       cursor: pointer;
       height: 50px;
