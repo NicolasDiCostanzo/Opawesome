@@ -4,6 +4,7 @@ import useMobileState from './composables/useMobileState';
 import CommonHeader from './components/organisms/CommonHeader.vue';
 import DesktopLayout from './components/layouts/DesktopLayout.vue';
 import MobileLayout from './components/layouts/MobileLayout.vue';
+import CommonFooter from './components/organisms/CommonFooter.vue';
 
 const selectedImgUrl = ref('');
 let canvas;
@@ -45,6 +46,7 @@ function updateFont(newFontName) {
         @update:font="updateFont"
         @update:selectNewImage="selectedImageUrl"
       />
+      <CommonFooter />
     </div>
   </div>
 </template>
@@ -58,16 +60,6 @@ function updateFont(newFontName) {
   flex-direction: column;
   margin: 0;
   height: 100vh;
-}
-
-footer {
-  height: 5vh;
-}
-
-header, footer {
-  color: var(--bistre);
-  text-align: center;
-  background: var(--smoky-black);
 }
 
 .center-part {
