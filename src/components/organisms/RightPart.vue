@@ -1,16 +1,27 @@
 <script setup>
 import { ref } from 'vue';
 import useMobileState from '../../composables/useMobileState';
-import images from '../../constants/images.json';
+import imagesData from '../../constants/images.json';
 import { SHUFFLE_IMAGE_BUTTON_TEXT } from '../../constants/labels';
 
 const { isMobile } = useMobileState();
-const selectedImageUrl = ref(images[0].id);
+const selectedImageUrl = ref(imagesData[0].id);
+const images = ref([...imagesData]);
 const emit = defineEmits(['update:selectNewImage']);
 
 function selectImage(imageUrl) {
   selectedImageUrl.value = imageUrl;
   emit('update:selectNewImage', selectedImageUrl);
+}
+
+function shuffleImages() {
+  const shuffled = [...images.value];
+
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  images.value = shuffled;
 }
 
 </script>
@@ -25,7 +36,7 @@ function selectImage(imageUrl) {
         </li>
       </ul>
     </div>
-    <button>{{ SHUFFLE_IMAGE_BUTTON_TEXT }}</button>
+    <button @click="shuffleImages">{{ SHUFFLE_IMAGE_BUTTON_TEXT }}</button>
   </div>
 </template>
 

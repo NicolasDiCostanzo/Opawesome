@@ -18,6 +18,7 @@ module.exports = {
     'max-len': 'off',
     'class-methods-use-this': 'off',
     'import/no-extraneous-dependencies': 'off',
+    'no-plusplus': 'off',
     'no-trailing-spaces': ['error', {
       skipBlankLines: true,
       ignoreComments: true,
