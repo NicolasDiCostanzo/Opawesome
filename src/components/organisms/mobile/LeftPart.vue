@@ -31,8 +31,9 @@ const { selectedFont, handleFontUpdate, addTextOnCanvas } = useLeftPartLogic(pro
 .mobile-controls {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
   align-items: center;
+  justify-content: center;
+  gap: 1rem;
   height: 100%;
 }
 

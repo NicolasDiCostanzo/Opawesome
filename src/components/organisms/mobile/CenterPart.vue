@@ -21,17 +21,15 @@ onUnmounted(() => {
 
 <template>
   <main class="mobile-center">
-    <!-- Mobile-specific layout: vertical stack -->
     <div class="mobile-canvas-container">
       <canvas id="mobile-canvas"></canvas>
     </div>
     
-    <!-- Mobile-specific button layout -->
     <div class="mobile-actions">
-      <button @click="uploadImage" class="mobile-btn">
+      <button @click="uploadImage" class="mobile-btn upload-btn">
           {{ UPLOAD_BUTTON_TEXT }}
       </button>
-      <button @click="downloadCanvas" class="mobile-btn">
+      <button @click="downloadCanvas" class="mobile-btn download-btn">
           {{ DOWNLOAD_BUTTON_TEXT }}
       </button>
     </div>
@@ -80,4 +78,16 @@ onUnmounted(() => {
   font-size: 0.9rem;
   border-radius: 8px;
 }
+
+.upload-btn {
+  background-color: var(--bistre);
+  color: var(--smoky-black);
+  color: white;
+}
+
+.download-btn {
+  background-color: var(--coyote);
+  color: var(--bistre);
+}
+
 </style>

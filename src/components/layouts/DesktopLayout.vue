@@ -22,12 +22,6 @@ const { handleCanvasUpdate, handleFontUpdate, handleImageSelection } = useLayout
 
 <template>
   <div class="desktop-layout">
-    <header class="desktop-header">
-      <img src="../../assets/images/opossum.png" alt="Opossum logo" class="opossum-logo opossum-logo-left" />
-      <h1>Opawesome</h1>
-      <img src="../../assets/images/opossum.png" alt="Opossum logo" class="opossum-logo opossum-logo-right" />
-    </header>
-
     <div class="desktop-content">
       <LeftPart
         class="desktop-left-part"
@@ -58,33 +52,6 @@ const { handleCanvasUpdate, handleFontUpdate, handleImageSelection } = useLayout
   height: 100vh;
   display: flex;
   flex-direction: column;
-}
-
-.desktop-header {
-  height: 10vh;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Opossum Regular', sans-serif;
-  gap: 3rem;
-  color: var(--bistre);
-  text-align: center;
-  background: var(--smoky-black);
-
-  .opossum-logo {
-    width: 75px;
-  }
-
-  h1 {
-    all: unset;
-    color: antiquewhite;
-    font-size: 2em;
-  }
-
-  .opossum-logo-right {
-    transform: rotateY(180deg);
-  }
 }
 
 .desktop-content {

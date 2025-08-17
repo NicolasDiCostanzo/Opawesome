@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue';
 import images from './constants/images.json';
 import useMobileState from './composables/useMobileState';
+import CommonHeader from './components/organisms/CommonHeader.vue';
 import DesktopLayout from './components/layouts/DesktopLayout.vue';
 import MobileLayout from './components/layouts/MobileLayout.vue';
 
@@ -30,6 +31,7 @@ onMounted(async () => {
 <template>
   <div class="container">
     <div class="app">
+      <CommonHeader />
       <DesktopLayout
         v-if="!isMobile"
         :selectedImgUrl="selectedImgUrl"
@@ -65,38 +67,9 @@ onMounted(async () => {
 
 .app {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   margin: 0;
-  height: 85vh;
-
-  @media (max-width: 800px) {
-    flex-direction: column;
-    height: 100vh;
-  }
-}
-
-header {
-  height: 10vh;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Opossum Regular', sans-serif;
-  gap: 3rem;
-
-  .opossum-logo {
-    width: 75px;
-  }
-
-  h1 {
-    all: unset;
-    color: antiquewhite;
-    font-size: 2em;
-  }
-
-  .opossum-logo-right {
-    transform: rotateY(180deg);
-  }
+  height: 100vh;
 }
 
 footer {

@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import useMobileState from '../../composables/useMobileState';
 import images from '../../constants/images.json';
+import { SHUFFLE_IMAGE_BUTTON_TEXT } from '../../constants/labels';
 
 const { isMobile } = useMobileState();
 const selectedImageUrl = ref(images[0].id);
@@ -24,6 +25,7 @@ function selectImage(imageUrl) {
         </li>
       </ul>
     </div>
+    <button>{{ SHUFFLE_IMAGE_BUTTON_TEXT }}</button>
   </div>
 </template>
 
@@ -53,18 +55,19 @@ function selectImage(imageUrl) {
     justify-content: space-evenly;
 
     &.mobile {
+      justify-content: start;
       .images-container {
         width: 100%;
-        height: 100%;
       }
       
       ul {
+        margin: 0;
+        padding: 0.5em;
         display: flex;
         flex-direction: row;
         overflow-x: auto;
         overflow-y: hidden;
         gap: $space-around-images;
-        padding: $space-around-images;
         align-items: flex-start;
         max-height: none;
         flex-shrink: 0;
@@ -83,16 +86,16 @@ function selectImage(imageUrl) {
     max-height: $IMAGES_SIZE;
     transition: transform 0.25s ease, box-shadow 0.1s ease;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 15px;
-  }
 
-  img:hover {
-    cursor: pointer;
-    box-shadow: rgba(0, 0, 0, 1) 0px 0px 15px;
-    transform: rotate(3.5deg); // maybe random ?
-  }
+    &:hover {
+      cursor: pointer;
+      box-shadow: rgba(0, 0, 0, 1) 0px 0px 15px;
+      transform: rotate(3.5deg); // maybe random ?
+    }
 
-  img.selected {
-    box-shadow: 0 0 0 2px var(--tea-rose-red);
-    box-sizing: border-box;
+    &.selected {
+      box-shadow: 0 0 0 2px var(--tea-rose-red);
+      box-sizing: border-box;
+    }
   }
 </style>
