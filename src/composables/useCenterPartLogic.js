@@ -5,7 +5,7 @@ import { deleteSelectedTextBoxFromCanvas, loadImageToCanvas, uploadCustomImage }
 import { setTextFont } from '../helpers/fonts-helper';
 
 export default function useCenterPartLogic(props, emit) {
-  const canvas = ref(null);
+  let canvas;
   const selectedTextBox = ref(null);
   const lastCanvasDimensions = ref(null);
 
@@ -13,62 +13,58 @@ export default function useCenterPartLogic(props, emit) {
   const selectionClearedEvent = 'before:selection:cleared';
 
   const initCanvas = (canvasId = 'canvas') => {
-    canvas.value = new fabric.Canvas(canvasId);
-    lastCanvasDimensions.value = { width: canvas.value.width, height: canvas.value.height };
-    loadImageToCanvas(props.selectedImageUrl, null, canvas.value);
-    emit('update:canvas', canvas.value);
+    canvas = new fabric.Canvas(canvasId);
+    lastCanvasDimensions.value = { width: canvas.width, height: canvas.height };
+    loadImageToCanvas(props.selectedImageUrl, null, canvas);
+    emit('update:canvas', canvas);
 
-    // Event handlers
     eventsToTriggerSelectedText.forEach((event) => {
-      canvas.value.on(event, (e) => {
+      canvas.on(event, (e) => {
         [selectedTextBox.value] = e.selected;
         emit('update:font', selectedTextBox.value.fontName);
       });
     });
 
-    canvas.value.on(selectionClearedEvent, () => {
+    canvas.on(selectionClearedEvent, () => {
       if (selectedTextBox.value?.text === null || selectedTextBox.value?.text === '') {
-        deleteSelectedTextBoxFromCanvas(canvas.value);
+        deleteSelectedTextBoxFromCanvas(canvas);
       }
       selectedTextBox.value = null;
     });
 
-    // Keyboard handler
     const handleKeydown = (e) => {
       const supprKeyPressed = e.key === 'Delete' && !e.ctrlKey;
       const textIsBeingEdited = selectedTextBox.value?.isEditing;
 
       if (supprKeyPressed && !textIsBeingEdited) {
-        deleteSelectedTextBoxFromCanvas(canvas.value);
+        deleteSelectedTextBoxFromCanvas(canvas);
       }
     };
 
     window.addEventListener('keydown', handleKeydown);
 
-    // Cleanup function
     return () => {
       window.removeEventListener('keydown', handleKeydown);
     };
   };
 
-  // Watchers
   watch(() => props.selectedImageUrl, (newUrl) => {
-    if (!canvas.value) return;
-    lastCanvasDimensions.value = { width: canvas.value.width, height: canvas.value.height };
-    loadImageToCanvas(newUrl, lastCanvasDimensions.value, canvas.value);
+    if (!canvas) return;
+    lastCanvasDimensions.value = { width: canvas.width, height: canvas.height };
+    loadImageToCanvas(newUrl, lastCanvasDimensions.value, canvas);
   });
 
   watch(() => props.font, (newFont) => {
-    if (!selectedTextBox.value || !canvas.value) return;
+    if (!selectedTextBox.value || !canvas) return;
     setTextFont(selectedTextBox.value, newFont);
-    canvas.value.renderAll();
+    canvas.renderAll();
   });
 
   const downloadCanvas = () => {
-    if (!canvas.value) return;
+    if (!canvas) return;
 
     const format = 'jpeg';
-    const dataURL = canvas.value.toDataURL({
+    const dataURL = canvas.toDataURL({
       format,
       quality: 1,
     });
@@ -80,8 +76,8 @@ export default function useCenterPartLogic(props, emit) {
   };
 
   const uploadImage = () => {
-    if (!canvas.value) return;
-    uploadCustomImage(lastCanvasDimensions.value, canvas.value);
+    if (!canvas) return;
+    uploadCustomImage(lastCanvasDimensions.value, canvas);
   };
 
   return {
