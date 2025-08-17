@@ -1,14 +1,18 @@
 <script setup>
+import { ref } from 'vue';
 import useMobileState from '../../composables/useMobileState';
 import { CONTACT_BUTTON_TEXT } from '../../constants/labels';
+import ContactDialog from './ContactDialog.vue';
 
 const { isMobile } = useMobileState();
+const isContactDialogOpen = ref(false);
 </script>
 
 <template>
     <footer class="common-footer" :class="{ 'mobile': isMobile }">
-        <button>{{ CONTACT_BUTTON_TEXT }}</button>
+        <button @click="isContactDialogOpen = true">{{ CONTACT_BUTTON_TEXT }}</button>
     </footer>
+    <ContactDialog v-if="isContactDialogOpen" @close="isContactDialogOpen = false"/>
 </template>
 
 <style scoped lang="scss">
