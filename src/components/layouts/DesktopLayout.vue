@@ -43,7 +43,6 @@ const { handleCanvasUpdate, handleFontUpdate, handleImageSelection } = useLayout
         @update:selectNewImage="handleImageSelection"
       />
     </div>
-    <footer class="desktop-footer">Footer</footer>
   </div>
 </template>
 
@@ -68,12 +67,5 @@ const { handleCanvasUpdate, handleFontUpdate, handleImageSelection } = useLayout
 
 .desktop-center-part {
   flex: 2;
-}
-
-.desktop-footer {
-  height: 5vh;
-  color: var(--bistre);
-  text-align: center;
-  background: var(--smoky-black);
 }
 </style>
