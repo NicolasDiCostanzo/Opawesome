@@ -56,9 +56,9 @@ export default function useCenterPartLogic(props, emit) {
     });
   });
 
-  watch(() => props.font, (newFont) => {
+  watch(() => props.font, async (newFont) => {
     if (!selectedTextBox.value || !canvas) return;
-    setTextFont(selectedTextBox.value, newFont);
+    await setTextFont(selectedTextBox.value, newFont);
     canvas.renderAll();
   });
 

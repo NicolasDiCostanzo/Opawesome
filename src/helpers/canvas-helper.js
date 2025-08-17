@@ -99,8 +99,6 @@ export function loadImageToCanvas(url, lastCanvasDimensions, canvas, callback) {
     applyImageOnCanvas(lastCanvasDimensions, canvas, img);
     if (callback) callback();
   }, { crossOrigin: 'anonymous' });
-
-  canvas.renderAll();
 }
 
 export function uploadCustomImage(lastCanvasDimensions, canvas, callback) {
@@ -125,8 +123,8 @@ export function uploadCustomImage(lastCanvasDimensions, canvas, callback) {
   };
 }
 
-export function addTextFieldOnCanvas(canvas, selectedFont) {
-  const textBox = createTextBox(selectedFont);
+export async function addTextFieldOnCanvas(canvas, selectedFont) {
+  const textBox = await createTextBox(selectedFont);
   canvas.add(textBox);
   textBox.centerH();
   textBox.centerV();
