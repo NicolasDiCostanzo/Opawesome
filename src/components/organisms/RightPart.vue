@@ -9,7 +9,7 @@ const images = ref(imagesData.map((image) => ({
   url: `/images/${image.url}`,
 })));
 const { isMobile } = useMobileState();
-const selectedImageUrl = ref(imagesData[0].url);
+const selectedImageUrl = ref(`/images/${imagesData[0].url}`);
 const emit = defineEmits(['update:selectNewImage']);
 
 function selectImage(imageUrl) {
@@ -19,14 +19,13 @@ function selectImage(imageUrl) {
 
 function shuffleImages() {
   const shuffled = [...images.value];
-
+  
   for (let i = 0; i < shuffled.length - 1; i++) {
     const j = Math.floor(Math.random() * (i + 1));
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
   images.value = shuffled;
 }
-
 </script>
 
 <template>
