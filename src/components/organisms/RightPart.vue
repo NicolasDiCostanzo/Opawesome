@@ -4,13 +4,12 @@ import useMobileState from '../../composables/useMobileState';
 import imagesData from '../../constants/images.json';
 import { SHUFFLE_IMAGE_BUTTON_TEXT } from '../../constants/labels';
 
-const images = imagesData.map((image) => ({
+const images = ref(imagesData.map((image) => ({
   id: image.id,
   url: `/images/${image.url}`,
-}));
+})));
 const { isMobile } = useMobileState();
 const selectedImageUrl = ref(imagesData[0].url);
-const images = ref([...imagesData]);
 const emit = defineEmits(['update:selectNewImage']);
 
 function selectImage(imageUrl) {
