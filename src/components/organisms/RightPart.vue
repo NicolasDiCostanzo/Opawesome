@@ -71,6 +71,7 @@ function shuffleImages() {
 
     &.mobile {
       justify-content: start;
+      
       .images-container {
         width: 100%;
       }
@@ -94,7 +95,11 @@ function shuffleImages() {
         }
       }
     }
-  }
+  
+    .images-container {
+      overflow-y: auto;
+    }
+}
 
   img {
     max-width: $IMAGES_SIZE;
