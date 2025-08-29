@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import useMobileState from '../../composables/useMobileState';
 import imagesData from '../../constants/images.json';
 import { SHUFFLE_IMAGE_BUTTON_TEXT } from '../../constants/labels';
@@ -9,7 +9,7 @@ const images = ref(imagesData.map((image) => ({
   url: `/images/${image.url}`,
 })));
 const { isMobile } = useMobileState();
-const selectedImageUrl = ref(`/images/${imagesData[0].url}`);
+const selectedImageUrl = ref('');
 const emit = defineEmits(['update:selectNewImage']);
 
 function selectImage(imageUrl) {
@@ -26,6 +26,12 @@ function shuffleImages() {
   }
   images.value = shuffled;
 }
+
+onMounted(() => {
+  shuffleImages();
+  selectedImageUrl.value = images.value[0].url;
+  emit('update:selectNewImage', selectedImageUrl);
+});
 </script>
 
 <template>

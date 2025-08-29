@@ -1,6 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue';
-import images from './constants/images.json';
+import { ref } from 'vue';
 import useMobileState from './composables/useMobileState';
 import CommonHeader from './components/organisms/CommonHeader.vue';
 import DesktopLayout from './components/layouts/DesktopLayout.vue';
@@ -22,10 +21,6 @@ function updateCanvas(newCanvas) {
 function updateFont(newFontName) {
   font.value = newFontName;
 }
-
-onMounted(async () => {
-  selectedImgUrl.value = `/images/${images[0].url}`;
-});
 </script>
 
 <template>
