@@ -58,13 +58,6 @@ onMounted(async () => {
 @import './constants/style/colors.scss';
 @import './constants/style/button.scss';
 
-@font-face {
-    font-family: 'Opossum Regular';
-    font-style: normal;
-    font-weight: normal;
-    src: url('./assets/fonts/opossum.woff') format('woff');
-}
-
 .app {
   display: flex;
   flex-direction: column;
