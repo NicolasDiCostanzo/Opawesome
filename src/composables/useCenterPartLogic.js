@@ -2,7 +2,7 @@ import { fabric } from 'fabric';
 import { ref, watch } from 'vue';
 import { DOWNLOADED_FILE_NAME } from '../constants/labels';
 import { deleteSelectedTextBoxFromCanvas, loadImageToCanvas, uploadCustomImage } from '../helpers/canvas-helper';
-import { setTextFont } from '../helpers/fonts-helper';
+import { setTextFont, loadCustomFonts } from '../helpers/fonts-helper';
 
 export default function useCenterPartLogic(props, emit) {
   let canvas;
@@ -13,6 +13,8 @@ export default function useCenterPartLogic(props, emit) {
   const selectionClearedEvent = 'before:selection:cleared';
 
   const initCanvas = (canvasId = 'canvas') => {
+    loadCustomFonts();
+    
     canvas = new fabric.Canvas(canvasId);
     loadImageToCanvas(props.selectedImageUrl, null, canvas, () => {
       lastCanvasDimensions.value = { width: canvas.width, height: canvas.height };

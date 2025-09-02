@@ -34,3 +34,37 @@ export function createTextBox(selectedFont) {
 
   return textBox;
 }
+
+export function loadCustomFonts() {
+  const fonts = [
+    {
+      name: 'Arial',
+      url: 'url(https://fonts.cdnfonts.com/s/29105/ARIAL.woff)',
+    },
+    {
+      name: 'Impact',
+      url: 'url(https://fonts.cdnfonts.com/s/87898/impact.woff)',
+    },
+    {
+      name: 'Comic sans ms',
+      url: 'url(https://db.onlinewebfonts.com/t/7cc6719bd5f0310be3150ba33418e72e.woff)',
+    },
+    {
+      name: 'Times New Roman',
+      url: 'url(https://fonts.cdnfonts.com/s/57197/times.woff)',
+    },
+  ];
+
+  fonts.forEach((font) => {
+    const fontFace = new FontFace(font.name, font.url, {
+      style: 'normal',
+      weight: 'normal',
+    });
+    fontFace.load().then(() => {
+      document.fonts.add(fontFace);
+    }).catch(() => {
+      // eslint-disable-next-line no-console
+      console.error(`Failed to load font: ${font.name} from ${font.url}`);
+    });
+  });
+}
