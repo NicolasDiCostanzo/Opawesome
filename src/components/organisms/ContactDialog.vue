@@ -19,6 +19,7 @@ const emit = defineEmits(['close']);
   width: 100%;
   height: 100%;
   background: var(--dialog-background);
+  color: var(--dialog-text);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
   h2 {
