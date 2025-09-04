@@ -56,7 +56,7 @@ const { handleCanvasUpdate, handleFontUpdate, handleImageSelection } = useLayout
 
 .mobile-center-part {
   flex: 1;
-  min-height: 40%;
+  min-height: 50%;
   padding: 0 1em 1em 1em;
 }
 
@@ -64,14 +64,13 @@ const { handleCanvasUpdate, handleFontUpdate, handleImageSelection } = useLayout
   background-color: var(--bistre);
   padding: 1rem;
   order: 2;
-  min-height: 25%;
+  min-height: 15%;
 }
 
 .mobile-right-part {
   background-color: var(--coyote);
   padding: 1rem;
   order: 3;
-  max-height: 200px;
   overflow-y: auto;
   min-height: 35%;
 }
