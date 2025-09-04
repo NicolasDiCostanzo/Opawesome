@@ -34,9 +34,7 @@ function selectFont(font) {
 <style lang="scss" scoped>
 .buttons-selection {
   display: flex;
-  width: 100%;
   flex-direction: column;
-  justify-content: center;
   margin: 1rem;
 
   button {
