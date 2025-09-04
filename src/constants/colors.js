@@ -1,12 +1,4 @@
 export default {
-  // #region general colors
-  coyote: '#867257',
-  bistre: '#362712',
-  'smoky-black': '#090702',
-  'tea-rose-red': '#FDC7C8',
-  'antique-white': '#FDF1DF',
-  // #endregion
-
   // #region Super hero colors
   'superhero-yellow': '#fdde00',
   'superhero-orange': '#ee5600',
