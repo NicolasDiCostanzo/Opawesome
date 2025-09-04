@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';
 import useMobileState from '../../composables/useMobileState';
 import imagesData from '../../constants/images.json';
 import { SHUFFLE_IMAGE_BUTTON_TEXT } from '../../constants/labels';
@@ -10,6 +10,8 @@ const images = ref(imagesData.map((image) => ({
 })));
 const { isMobile } = useMobileState();
 const selectedImageUrl = ref('');
+const imagesList = ref(null);
+const imagesContainer = ref(null);
 const emit = defineEmits(['update:selectNewImage']);
 
 function selectImage(imageUrl) {
@@ -25,6 +27,17 @@ function shuffleImages() {
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
   images.value = shuffled;
+  
+  selectedImageUrl.value = images.value[0].url;
+  emit('update:selectNewImage', selectedImageUrl);
+  
+  nextTick(() => {
+    if (isMobile.value && imagesList.value) {
+      imagesList.value.scrollTo({ left: 0, behavior: 'auto' });
+    } else if (!isMobile.value && imagesContainer.value) {
+      imagesContainer.value.scrollTo({ top: 0, behavior: 'auto' });
+    }
+  });
 }
 
 onMounted(() => {
@@ -36,8 +49,8 @@ onMounted(() => {
 
 <template>
   <div class="right-part" :class="{ mobile: isMobile }">
-    <div class="images-container">
-      <ul>
+    <div class="images-container" ref="imagesContainer">
+      <ul ref="imagesList">
         <li v-for="image in images" :key="image.id">
           <img :class="selectedImageUrl === image.url ? 'selected' : ''" :src=image.url @click="selectImage(image.url)"
             alt='cute opossum option' />
