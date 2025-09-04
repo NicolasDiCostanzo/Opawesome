@@ -25,7 +25,6 @@ const { selectedFont, handleFontUpdate, addTextOnCanvas } = useLeftPartLogic(pro
 .mobile-left {
   background-color: var(--coyote);
   padding: 1rem;
-  border-radius: 8px 8px 0 0;
 }
 
 .mobile-controls {

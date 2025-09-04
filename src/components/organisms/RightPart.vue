@@ -44,7 +44,7 @@ onMounted(() => {
         </li>
       </ul>
     </div>
-    <button @click="shuffleImages">{{ SHUFFLE_IMAGE_BUTTON_TEXT }}</button>
+    <button class="shuffle-button" @click="shuffleImages">{{ SHUFFLE_IMAGE_BUTTON_TEXT }}</button>
   </div>
 </template>
 
@@ -121,5 +121,9 @@ onMounted(() => {
       box-shadow: 0 0 0 2px var(--tea-rose-red);
       box-sizing: border-box;
     }
+  }
+
+  .shuffle-button {
+    margin: 10px;
   }
 </style>

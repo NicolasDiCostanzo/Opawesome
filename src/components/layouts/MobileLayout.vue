@@ -49,7 +49,7 @@ const { handleCanvasUpdate, handleFontUpdate, handleImageSelection } = useLayout
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-color: var(--bistre);
+  background-color: var(--coyote);
   width: 100%;
   overflow: hidden;
 }
@@ -61,7 +61,7 @@ const { handleCanvasUpdate, handleFontUpdate, handleImageSelection } = useLayout
 }
 
 .mobile-left-part {
-  background-color: var(--coyote);
+  background-color: var(--bistre);
   padding: 1rem;
   order: 2;
   min-height: 25%;
