@@ -47,10 +47,28 @@ const isContactDialogOpen = ref(false);
 button {
     all: unset;
     cursor: pointer;
+    position: relative;
+    transition: color 0.2s ease;
+    color: white;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: currentColor;
+        opacity: 0.3;
+        transition: opacity 0.2s ease;
+    }
 
     &:hover {
-        all: unset;
-        text-decoration: underline;
+        color: rgba(255, 255, 255, 0.9);
+        
+        &::after {
+            opacity: 0.8;
+        }
     }
 }
 
