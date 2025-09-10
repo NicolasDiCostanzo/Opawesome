@@ -11,7 +11,6 @@
 <style scoped lang="scss">
 header {
   height: 8vh;
-  
   font-family: 'Opossum Regular', sans-serif;
   gap: 3rem;
   color: var(--bistre);
@@ -37,6 +36,12 @@ header {
 
   .opossum-logo-right {
     transform: rotateY(180deg);
+  }
+}
+
+@media (max-height: 865px) {
+  header {
+    display: none;
   }
 }
 </style>

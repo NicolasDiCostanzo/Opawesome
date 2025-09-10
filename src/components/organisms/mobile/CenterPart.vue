@@ -75,7 +75,7 @@ onUnmounted(() => {
   flex: 1;
   min-width: 120px;
   padding: 0.75rem;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   border-radius: 8px;
 }
 
