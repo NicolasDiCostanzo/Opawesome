@@ -29,7 +29,7 @@ const isContactDialogOpen = ref(false);
 
 <style scoped lang="scss">
 .common-footer {
-  height: 10vh;
+  height: 7vh;
   color: var(--bistre);
   text-align: center;
   background: var(--smoky-black);
