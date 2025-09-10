@@ -13,20 +13,29 @@ const openEmail = (event) => {
       <div class="dialog-content">
         <div class="contact-text">
           <p>
+            <img src="../../assets/images/pixelfed.png" alt="Pixelfed logo" class="social-icon"> You can follow me on
+            Pixelfed (I don't follow back, sorry)
+            <a href="https://pixelfed.social/Majellan" target="_blank" rel="noopener noreferrer">@Majellan</a>.
+          </p>
+          <br />
+          <p>
+            <img src="../../assets/images/mail.png" alt="Email logo" class="social-icon">
             If you have any questions, suggestions or issues, or if you would like to make a declaration of love or
             hate, please feel free to reach out to me at <a href="#" @click="openEmail">opawesome@disroot.org</a>.
           </p>
           <br />
           <p>
-            Also, this project is open source, so if you would like to contribute, please do so by contributing to the
-            <a href="https://github.com/NicolasDiCostanzo/Opawesome" target="_blank" rel="noopener noreferrer">GitHub
-              repository</a>.
+            <img src="../../assets/images/github.png" alt="GitHub logo" class="social-icon"
+              style="vertical-align: middle;" />
+            If you'd like to get involved, feel free to contribute to the
+            <a href="https://github.com/NicolasDiCostanzo/Opawesome" target="_blank" rel="noopener noreferrer">GitHub repository</a>.
           </p>
+          <br />
         </div>
 
         <div class="action-buttons">
           <button class="primary-button" @click="emit('close')">
-            Cool story bro'
+            👍 Cool story bro 👍
           </button>
         </div>
       </div>
@@ -100,6 +109,15 @@ const openEmail = (event) => {
       color: antiquewhite;
       border-bottom-color: var(--tea-rose-red);
     }
+  }
+
+  .social-icon {
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: middle;
+    margin-right: 0.5em;
+    filter: brightness(0.9);
+    transition: filter 0.2s ease;
   }
 }
 
