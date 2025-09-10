@@ -125,7 +125,7 @@ const openEmail = (event) => {
   &:hover {
     background: linear-gradient(135deg, rgba(204, 111, 85, 0.9), var(--tea-rose-red));
     box-shadow: 0 6px 20px rgba(204, 111, 85, 0.4);
-    transform: translateY(-2px);
+    transform: translateY(-1.5px);
   }
 
   &:active {
