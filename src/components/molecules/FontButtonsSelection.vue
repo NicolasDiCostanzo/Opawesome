@@ -46,12 +46,32 @@ function selectFont(font) {
     flex-wrap: nowrap;
     gap: 0.5rem;
     overflow-x: auto;
+    overflow-y: hidden;
     justify-content: flex-start;
     margin: 0;
+    width: 100%;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    scrollbar-width: thin; /* Firefox */
+    
+    /* Webkit scrollbar styling */
+    &::-webkit-scrollbar {
+      height: 4px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 2px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 2px;
+    }
 
     button {
       width: 75px;
       flex-shrink: 0;
+      min-width: 75px; /* Ensure minimum width */
     }
   }
 }
