@@ -75,19 +75,16 @@ onUnmounted(() => {
   flex: 1;
   min-width: 120px;
   padding: 0.75rem;
-  font-size: 0.7rem;
+  font-size: .9rem;
   border-radius: 8px;
 }
 
 .upload-btn {
   background-color: var(--bistre);
-  color: var(--smoky-black);
-  color: white;
 }
 
 .download-btn {
   background-color: var(--coyote);
-  color: var(--bistre);
 }
 
 </style>

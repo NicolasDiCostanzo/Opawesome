@@ -39,12 +39,10 @@ const { selectedFont, handleFontUpdate, addTextOnCanvas } = useLeftPartLogic(pro
 .mobile-add-btn {
   width: 100%;
   padding: 0.75rem;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 600;
   border-radius: 8px;
-  color: #333;
   border: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  
 }
 </style>
