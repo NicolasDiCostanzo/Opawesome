@@ -41,6 +41,10 @@ header {
 
 @media (max-height: 865px) {
   header {
+    height: 6vh;
+  }
+
+  .opossum-logo {
     display: none;
   }
 }
