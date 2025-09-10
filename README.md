@@ -11,6 +11,8 @@ Opawesome is a tool for creating **opossum-based memes**. Frustrated by the lack
 
 You can help this project live beyond my room by contributing, making stuff with it, or sharing it with the world!
 
+You can follow me on Pixelfed (I, sometimes post memes (with opossums)): [@Majellan](https://pixelfed.social/Majellan)
+
 ### **Features**
 - Make memes with opossums on them. Duh!
 
