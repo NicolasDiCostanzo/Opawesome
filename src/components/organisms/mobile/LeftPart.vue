@@ -13,7 +13,7 @@ const { selectedFont, handleFontUpdate, addTextOnCanvas } = useLeftPartLogic(pro
 <template>
   <div class="mobile-left">
     <div class="mobile-controls">
-      <FontButtonsSelection @update:font="handleFontUpdate" />
+      <FontButtonsSelection :font="font" @update:font="handleFontUpdate" />
       <button @click="addTextOnCanvas" class="mobile-add-btn">
           {{ ADD_BUTTON_TEXT }}
       </button>

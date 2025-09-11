@@ -1,8 +1,9 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import fontParameters from '../../helpers/font-parameters';
 import useMobileState from '../../composables/useMobileState';
 
+const props = defineProps(['font']);
 const { isMobile } = useMobileState();
 
 const fontArray = computed(() => Object.entries(fontParameters).map(([key, value]) => ({
@@ -12,6 +13,20 @@ const fontArray = computed(() => Object.entries(fontParameters).map(([key, value
 
 const selectedFont = ref(fontArray.value[0]);
 const emit = defineEmits(['update:font']);
+
+// Watch for external font changes (when user selects a textbox)
+watch(
+  () => props.font,
+  (newFont) => {
+    if (newFont) {
+      const matchingFont = fontArray.value.find((font) => font.fontName === newFont);
+      if (matchingFont) {
+        selectedFont.value = matchingFont;
+      }
+    }
+  },
+  { immediate: true },
+);
 
 function selectFont(font) {
   selectedFont.value = font;
