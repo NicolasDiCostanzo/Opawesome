@@ -7,7 +7,7 @@ const props = defineProps(['canvas', 'font']);
 const emit = defineEmits(['update:font']);
 
 const {
-  handleFontUpdate, addTextOnCanvas, deleteSelectedText, hasSelectedTextBox,
+  handleFontUpdate, addTextOnCanvas, deleteSelectedText, hasSelectedTextBox, hasFontSelected,
 } = useLeftPartLogic(props, emit);
 </script>
 
@@ -16,7 +16,11 @@ const {
     <div class="mobile-controls">
       <FontButtonsSelection :font="font" @update:font="handleFontUpdate" />
       <div class="button-group">
-        <button @click="addTextOnCanvas" class="mobile-add-btn">
+        <button 
+          @click="addTextOnCanvas" 
+          class="mobile-add-btn"
+          :disabled="!hasFontSelected"
+        >
             {{ ADD_BUTTON_TEXT }}
         </button>
         <button 
@@ -67,6 +71,13 @@ const {
   background: rgba(255, 255, 255, 0.1);
   color: antiquewhite;
   border: 1px solid rgba(antiquewhite, 0.4);
+
+  &:disabled {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(antiquewhite, 0.2);
+    cursor: not-allowed;
+  }
 }
 
 .mobile-delete-btn {

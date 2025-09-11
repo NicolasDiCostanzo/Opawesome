@@ -6,17 +6,24 @@ import useLeftPartLogic from '../../../composables/useLeftPartLogic';
 const props = defineProps(['canvas', 'font']);
 const emit = defineEmits(['update:font']);
 
-// eslint-disable-next-line no-unused-vars
-const { selectedFont, handleFontUpdate, addTextOnCanvas } = useLeftPartLogic(props, emit);
+const {
+  handleFontUpdate, addTextOnCanvas, hasFontSelected,
+} = useLeftPartLogic(props, emit);
 </script>
 
 <template>
   <div class="desktop-left">
     <div class="desktop-wrapper">
       <FontButtonsSelection :font="font" @update:font="handleFontUpdate" />
-      <button @click="addTextOnCanvas" class="desktop-add-btn">
-        {{ ADD_BUTTON_TEXT }}
-      </button>
+      <div class="button-group">
+        <button 
+          @click="addTextOnCanvas" 
+          class="desktop-add-btn"
+          :disabled="!hasFontSelected"
+        >
+          {{ ADD_BUTTON_TEXT }}
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -39,7 +46,15 @@ const { selectedFont, handleFontUpdate, addTextOnCanvas } = useLeftPartLogic(pro
   gap: 2rem;
 }
 
-.desktop-add-btn {
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  align-items: center;
+}
+
+.desktop-add-btn, .desktop-delete-btn {
   min-width: 200px;
   padding: 12px 24px;
   font-size: 16px;
@@ -47,9 +62,25 @@ const { selectedFont, handleFontUpdate, addTextOnCanvas } = useLeftPartLogic(pro
   border-radius: 6px;
   transition: all 0.2s ease;
   
-  &:hover {
+  &:hover:not(:disabled) {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.desktop-delete-btn {
+  background: rgba(204, 111, 85, 0.8);
+  color: antiquewhite;
+  border: 1px solid rgba(204, 111, 85, 0.6);
+
+  &:hover:not(:disabled) {
+    background: rgba(204, 111, 85, 0.9);
   }
 }
 </style>

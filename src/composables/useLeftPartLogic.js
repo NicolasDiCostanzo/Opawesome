@@ -1,9 +1,10 @@
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 import { addTextFieldOnCanvas, deleteSelectedTextBoxFromCanvas } from '../helpers/canvas-helper';
 
 export default function useLeftPartLogic(props, emit) {
   const selectedFont = ref(props.font);
   const hasSelectedTextBox = ref(false);
+  const hasFontSelected = computed(() => selectedFont.value !== null);
 
   watch(
     () => props.font,
@@ -53,6 +54,9 @@ export default function useLeftPartLogic(props, emit) {
     if (!props.canvas) {
       throw new Error('Canvas is not defined');
     }
+    if (!selectedFont.value) {
+      throw new Error('No font selected');
+    }
     addTextFieldOnCanvas(props.canvas, selectedFont.value);
   };
 
@@ -66,6 +70,7 @@ export default function useLeftPartLogic(props, emit) {
   return {
     selectedFont,
     hasSelectedTextBox,
+    hasFontSelected,
     handleFontUpdate,
     addTextOnCanvas,
     deleteSelectedText,

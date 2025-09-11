@@ -8,7 +8,7 @@ import CommonFooter from './components/organisms/CommonFooter.vue';
 
 const selectedImgUrl = ref('');
 let canvas;
-const font = ref('Arial');
+const font = ref(null);
 const { isMobile } = useMobileState();
 
 function selectedImageUrl(newSelectedImageUrl) {

@@ -11,7 +11,7 @@ const fontArray = computed(() => Object.entries(fontParameters).map(([key, value
   ...value,
 })));
 
-const selectedFont = ref(fontArray.value[0]);
+const selectedFont = ref(null);
 const emit = defineEmits(['update:font']);
 
 // Watch for external font changes (when user selects a textbox)
@@ -23,6 +23,8 @@ watch(
       if (matchingFont) {
         selectedFont.value = matchingFont;
       }
+    } else {
+      selectedFont.value = null;
     }
   },
   { immediate: true },
@@ -39,7 +41,7 @@ function selectFont(font) {
     <button
       v-for="font in fontArray"
       :key="font.fontFamily"
-      :class="{ active: selectedFont.fontName === font.fontName }"
+      :class="{ active: selectedFont && selectedFont.fontName === font.fontName }"
       :style="{ backgroundImage: `url(${font.image})` }"
       @click="selectFont(font)"
     />
