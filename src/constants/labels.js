@@ -3,6 +3,7 @@ export const LEFT_PART_TEXT = "Click 'Add' to insert text. Choose font from the 
 export const DOWNLOAD_BUTTON_TEXT = 'Download image';
 export const DOWNLOADED_FILE_NAME = 'opawesome-meme';
 export const ADD_BUTTON_TEXT = 'Add text';
+export const DELETE_BUTTON_TEXT = 'Delete text';
 export const DEFAULT_TEXTBOX_TEXT = 'All panic, no disco';
 export const UPLOAD_BUTTON_TEXT = 'Upload your own image';
 export const SHUFFLE_IMAGE_BUTTON_TEXT = 'Shuffle';

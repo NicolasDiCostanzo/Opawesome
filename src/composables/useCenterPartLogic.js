@@ -86,11 +86,18 @@ export default function useCenterPartLogic(props, emit) {
     });
   };
 
+  const deleteSelectedText = () => {
+    if (!canvas || !selectedTextBox.value) return;
+    deleteSelectedTextBoxFromCanvas(canvas);
+    selectedTextBox.value = null;
+  };
+
   return {
     canvas,
     selectedTextBox,
     initCanvas,
     downloadCanvas,
     uploadImage,
+    deleteSelectedText,
   };
 }
