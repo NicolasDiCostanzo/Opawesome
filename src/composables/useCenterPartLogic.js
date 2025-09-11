@@ -16,9 +16,13 @@ export default function useCenterPartLogic(props, emit) {
     loadCustomFonts();
     
     canvas = new fabric.Canvas(canvasId);
-    loadImageToCanvas(props.selectedImageUrl, null, canvas, () => {
-      lastCanvasDimensions.value = { width: canvas.width, height: canvas.height };
-    });
+    
+    if (props.selectedImageUrl && props.selectedImageUrl.trim() !== '') {
+      loadImageToCanvas(props.selectedImageUrl, null, canvas, () => {
+        lastCanvasDimensions.value = { width: canvas.width, height: canvas.height };
+      });
+    }
+    
     emit('update:canvas', canvas);
 
     eventsToTriggerSelectedText.forEach((event) => {
@@ -52,7 +56,7 @@ export default function useCenterPartLogic(props, emit) {
   };
 
   watch(() => props.selectedImageUrl, (newUrl) => {
-    if (!canvas) return;
+    if (!canvas || !newUrl || newUrl.trim() === '') return;
     loadImageToCanvas(newUrl, lastCanvasDimensions.value, canvas, () => {
       lastCanvasDimensions.value = { width: canvas.width, height: canvas.height };
     });

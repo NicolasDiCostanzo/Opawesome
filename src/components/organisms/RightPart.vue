@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, nextTick } from 'vue';
+import { ref, nextTick } from 'vue';
 import useMobileState from '../../composables/useMobileState';
 import imagesData from '../../constants/images.json';
 import { SHUFFLE_IMAGE_BUTTON_TEXT } from '../../constants/labels';
@@ -8,11 +8,22 @@ const images = ref(imagesData.map((image) => ({
   id: image.id,
   url: `/images/${image.url}`,
 })));
+
+const initialShuffled = [...images.value];
+for (let i = 0; i < initialShuffled.length - 1; i++) {
+  const j = Math.floor(Math.random() * (i + 1));
+  [initialShuffled[i], initialShuffled[j]] = [initialShuffled[j], initialShuffled[i]];
+}
+images.value = initialShuffled;
+
 const { isMobile } = useMobileState();
-const selectedImageUrl = ref('');
+const selectedImageUrl = ref(images.value[0].url);
 const imagesList = ref(null);
 const imagesContainer = ref(null);
 const emit = defineEmits(['update:selectNewImage']);
+
+// Emit initial selection immediately
+emit('update:selectNewImage', selectedImageUrl);
 
 function selectImage(imageUrl) {
   selectedImageUrl.value = imageUrl;
@@ -20,13 +31,13 @@ function selectImage(imageUrl) {
 }
 
 function shuffleImages() {
-  const shuffled = [...images.value];
+  const newShuffled = [...images.value];
   
-  for (let i = 0; i < shuffled.length - 1; i++) {
+  for (let i = 0; i < newShuffled.length - 1; i++) {
     const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    [newShuffled[i], newShuffled[j]] = [newShuffled[j], newShuffled[i]];
   }
-  images.value = shuffled;
+  images.value = newShuffled;
   
   selectedImageUrl.value = images.value[0].url;
   emit('update:selectNewImage', selectedImageUrl);
@@ -39,12 +50,6 @@ function shuffleImages() {
     }
   });
 }
-
-onMounted(() => {
-  shuffleImages();
-  selectedImageUrl.value = images.value[0].url;
-  emit('update:selectNewImage', selectedImageUrl);
-});
 </script>
 
 <template>
