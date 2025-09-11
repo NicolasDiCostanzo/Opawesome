@@ -20,7 +20,17 @@ export default function useLeftPartLogic(props, emit) {
         // Set up event listeners for selection changes
         const updateSelection = () => {
           const activeObject = newCanvas.getActiveObject();
-          hasSelectedTextBox.value = activeObject && activeObject.type === 'textbox';
+          
+          if (!activeObject) {
+            hasSelectedTextBox.value = false;
+          } else if (activeObject.type === 'textbox') {
+            hasSelectedTextBox.value = true;
+          } else if (activeObject.type === 'activeSelection') {
+            const selectedObjects = activeObject.getObjects();
+            hasSelectedTextBox.value = selectedObjects.some((obj) => obj.type === 'textbox');
+          } else {
+            hasSelectedTextBox.value = false;
+          }
         };
 
         newCanvas.on('selection:created', updateSelection);

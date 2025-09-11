@@ -136,9 +136,23 @@ export function addTextFieldOnCanvas(canvas, selectedFont) {
 
 export function deleteSelectedTextBoxFromCanvas(canvas) {
   const activeObject = canvas.getActiveObject();
-  if (activeObject && activeObject.type === 'textbox') {
+  
+  if (!activeObject) return;
+  
+  if (activeObject.type === 'textbox') {
     canvas.remove(activeObject);
+  } else if (activeObject.type === 'activeSelection') {
+    const selectedObjects = activeObject.getObjects();
+    const textboxesToDelete = selectedObjects.filter((obj) => obj.type === 'textbox');
+    
+    textboxesToDelete.forEach((textbox) => {
+      canvas.remove(textbox);
+    });
+    
+    canvas.discardActiveObject();
   }
+  
+  canvas.renderAll();
 }
 
 // eslint-disable-next-line camelcase

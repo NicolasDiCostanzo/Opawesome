@@ -41,10 +41,24 @@ export default function useCenterPartLogic(props, emit) {
 
     const handleKeydown = (e) => {
       const supprKeyPressed = e.key === 'Delete' && !e.ctrlKey;
-      const textIsBeingEdited = selectedTextBox.value?.isEditing;
-
-      if (supprKeyPressed && !textIsBeingEdited) {
-        deleteSelectedTextBoxFromCanvas(canvas);
+      
+      if (supprKeyPressed) {
+        const activeObject = canvas.getActiveObject();
+        let textIsBeingEdited = false;
+        
+        if (activeObject) {
+          if (activeObject.type === 'textbox') {
+            textIsBeingEdited = activeObject.isEditing;
+          } else if (activeObject.type === 'activeSelection') {
+            // Check if any textbox in the selection is being edited
+            const selectedObjects = activeObject.getObjects();
+            textIsBeingEdited = selectedObjects.some((obj) => obj.type === 'textbox' && obj.isEditing);
+          }
+        }
+        
+        if (!textIsBeingEdited) {
+          deleteSelectedTextBoxFromCanvas(canvas);
+        }
       }
     };
 
@@ -91,7 +105,10 @@ export default function useCenterPartLogic(props, emit) {
   };
 
   const deleteSelectedText = () => {
-    if (!canvas || !selectedTextBox.value) return;
+    if (!canvas) return;
+    const activeObject = canvas.getActiveObject();
+    if (!activeObject) return;
+    
     deleteSelectedTextBoxFromCanvas(canvas);
     selectedTextBox.value = null;
   };
