@@ -7,7 +7,7 @@
 ---
 
 ## 📌 About
-Opawesome is a tool for creating **opossum-based memes**. Frustrated by the lack of easy ways to make opossum-style memes, I decided to build my own tool. It was crafted with love, passion, frustration, anger, and a subtle touch of nihilism.
+[_Opawesome_](https://opawesome.org/) is a tool for creating **opossum-based memes**. Frustrated by the lack of easy ways to make opossum-style memes, I decided to build my own tool. It was crafted with love, passion, frustration, anger, and a subtle touch of nihilism.
 
 You can help this project live beyond my room by contributing, making stuff with it, or sharing it with the world!
 
