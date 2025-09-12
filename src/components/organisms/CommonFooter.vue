@@ -16,7 +16,7 @@ const isContactDialogOpen = ref(false);
             <a href="https://pixelfed.social/Majellan" target="_blank" rel="noopener noreferrer" class="social-link">
                 <img src="../../assets/images/pixelfed.png" alt="Pixelfed" class="social-logo">
             </a>
-            <a href="mailto:opawesome@disroot.org" class="social-link">
+            <a href="mailto:majellan@disroot.org" class="social-link">
                 <img src="../../assets/images/mail.png" alt="Email" class="social-logo">
             </a>
             <a href="https://github.com/NicolasDiCostanzo/Opawesome" target="_blank" rel="noopener noreferrer" class="social-link">

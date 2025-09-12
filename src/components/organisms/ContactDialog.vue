@@ -3,7 +3,7 @@ const emit = defineEmits(['close']);
 
 const openEmail = (event) => {
   event.preventDefault();
-  window.open('mailto:opawesome@disroot.org', '_blank');
+  window.open('mailto:majellan@disroot.org', '_blank');
 };
 </script>
 
@@ -21,7 +21,7 @@ const openEmail = (event) => {
           <p>
             <img src="../../assets/images/mail.png" alt="Email logo" class="social-icon">
             If you have any questions, suggestions or issues, or if you would like to make a declaration of love or
-            hate, please feel free to reach out to me at <a href="#" @click="openEmail">opawesome@disroot.org</a>.
+            hate, please feel free to reach out to me at <a href="#" @click="openEmail">majellan@disroot.org</a>.
           </p>
           <br />
           <p>
