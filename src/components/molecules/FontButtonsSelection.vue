@@ -72,7 +72,7 @@ function selectFont(font) {
     
     /* Webkit scrollbar styling */
     &::-webkit-scrollbar {
-      height: 4px;
+      height: 3px;
     }
     
     &::-webkit-scrollbar-track {
@@ -95,12 +95,12 @@ function selectFont(font) {
 
   button {
       margin: 0.25rem 0;
-      padding: 0.5rem;
       background-size: contain;
       background-repeat: no-repeat;      
       background-position: center;
       cursor: pointer;
-      height: 50px;
+      height: 45px;
+      border-radius: 6px;
   }
 
 button.active {

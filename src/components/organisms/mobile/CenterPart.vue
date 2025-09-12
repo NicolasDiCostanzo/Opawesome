@@ -43,8 +43,8 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 0.5rem;
-  gap: 1rem;
+  padding: 0.25rem;
+  gap: 0.75rem;
 }
 
 .mobile-canvas-container {
@@ -52,9 +52,9 @@ onUnmounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
+  border-radius: 6px;
   overflow: hidden;
-  min-height: 200px;
+  min-height: 180px;
   
   canvas {
     max-width: 100%;
@@ -69,14 +69,16 @@ onUnmounted(() => {
   gap: 0.5rem;
   justify-content: center;
   flex-wrap: wrap;
+  margin-top: auto;
 }
 
 .mobile-btn {
   flex: 1;
-  min-width: 120px;
-  padding: 0.75rem;
-  font-size: .9rem;
-  border-radius: 8px;
+  min-width: 100px;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  font-weight: 600;
 }
 
 .upload-btn {
@@ -85,6 +87,23 @@ onUnmounted(() => {
 
 .download-btn {
   background-color: var(--coyote);
+}
+
+@media (max-height: 650px) {
+  .mobile-center {
+    padding: 0.125rem;
+    gap: 0.5rem;
+  }
+  
+  .mobile-canvas-container {
+    min-height: 150px;
+  }
+  
+  .mobile-btn {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.8rem;
+    min-width: 90px;
+  }
 }
 
 </style>

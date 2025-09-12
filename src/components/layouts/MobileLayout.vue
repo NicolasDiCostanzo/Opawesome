@@ -56,22 +56,57 @@ const { handleCanvasUpdate, handleFontUpdate, handleImageSelection } = useLayout
 
 .mobile-center-part {
   flex: 1;
-  min-height: 50%;
-  padding: 0 1em 1em 1em;
+  min-height: 45%;
+  padding: 0.75rem;
+  margin: 0.25rem;
+  background-color: var(--coyote);
+  border-radius: 8px;
 }
 
 .mobile-left-part {
   background-color: var(--bistre);
-  padding: 1rem;
+  padding: 0.75rem;
   order: 2;
-  min-height: 15%;
+  min-height: 18%;
+  max-height: 20%;
 }
 
 .mobile-right-part {
   background-color: var(--coyote);
-  padding: 1rem;
+  padding: 0.75rem;
+  margin: 0.25rem;
+  border-radius: 8px;
   order: 3;
   overflow-y: auto;
-  min-height: 35%;
+  min-height: 30%;
+  max-height: 35%;
+}
+
+/* Extra compact layout for very small screens */
+@media (max-height: 650px) {
+  .mobile-layout {
+    gap: 0.125rem;
+    padding: 0.125rem;
+  }
+  
+  .mobile-center-part {
+    padding: 0.5rem;
+    margin: 0.125rem;
+    min-height: 40%;
+  }
+  
+  .mobile-left-part {
+    padding: 0.5rem;
+    margin: 0 0.125rem;
+    min-height: 16%;
+    max-height: 18%;
+  }
+  
+  .mobile-right-part {
+    padding: 0.5rem;
+    margin: 0.125rem;
+    min-height: 32%;
+    max-height: 38%;
+  }
 }
 </style>
