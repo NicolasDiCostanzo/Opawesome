@@ -2,7 +2,12 @@
     <header>
       <div class="wrapper">
         <img src="../../assets/images/opossum.png" alt="Opossum logo" class="opossum-logo opossum-logo-left" />
-        <h1>Opawesome</h1>
+        <div class="header-center">
+          <h1>Opawesome</h1>
+          <div class="share-text">
+            Share creations on <a href="https://pixelfed.social/" target="_blank" rel="noopener noreferrer">Pixelfed</a> with <span class="hashtag">#opawesome</span>!
+          </div>
+        </div>
         <img src="../../assets/images/opossum.png" alt="Opossum logo" class="opossum-logo opossum-logo-right" />
       </div>
     </header>
@@ -22,6 +27,14 @@ header {
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    height: 100%;
+  }
+
+  .header-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
   }
 
   .opossum-logo {
@@ -32,6 +45,27 @@ header {
     all: unset;
     color: antiquewhite;
     font-size: 2em;
+    margin: 0;
+  }
+
+  .share-text {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.2;
+
+    a {
+      color: #90caf9;
+      text-decoration: none;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .hashtag {
+      font-weight: bold;
+      color: #ff9800;
+    }
   }
 
   .opossum-logo-right {
@@ -41,11 +75,21 @@ header {
 
 @media (max-height: 865px) {
   header {
-    height: 6vh;
+    height: 7vh;
   }
 
   .opossum-logo {
     display: none;
+  }
+
+  header {
+    .share-text {
+      padding: 0 1rem;
+    }
+    
+    h1 {
+      font-size: 1.5em;
+    }
   }
 }
 </style>
