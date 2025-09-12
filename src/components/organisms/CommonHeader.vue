@@ -1,16 +1,17 @@
 <template>
-    <header>
-      <div class="wrapper">
-        <img src="../../assets/images/opossum.png" alt="Opossum logo" class="opossum-logo opossum-logo-left" />
-        <div class="header-center">
-          <h1>Opawesome</h1>
-          <div class="share-text">
-            Share creations on <a href="https://pixelfed.social/" target="_blank" rel="noopener noreferrer">Pixelfed</a> with <span class="hashtag">#opawesome</span>!
-          </div>
+  <header>
+    <div class="wrapper">
+      <img src="../../assets/images/opossum.png" alt="Opossum logo" class="opossum-logo opossum-logo-left" />
+      <div class="header-center">
+        <h1>Opawesome</h1>
+        <div class="share-text">
+          Share creations on <a href="https://pixelfed.social/" target="_blank" rel="noopener noreferrer">Pixelfed</a>
+          with <a class="hashtag" href="https://pixelfed.social/discover/tags/opawesome?src=hash" target="_blank" rel="noopener noreferrer">#opawesome</a>!
         </div>
-        <img src="../../assets/images/opossum.png" alt="Opossum logo" class="opossum-logo opossum-logo-right" />
       </div>
-    </header>
+      <img src="../../assets/images/opossum.png" alt="Opossum logo" class="opossum-logo opossum-logo-right" />
+    </div>
+  </header>
 </template>
 
 <style scoped lang="scss">
