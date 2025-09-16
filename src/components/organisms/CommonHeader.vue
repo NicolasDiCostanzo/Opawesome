@@ -5,8 +5,7 @@
       <div class="header-center">
         <h1>Opawesome</h1>
         <div class="share-text">
-          Share creations on <a href="https://pixelfed.social/" target="_blank" rel="noopener noreferrer">Pixelfed</a>
-          with <a class="hashtag" href="https://pixelfed.social/discover/tags/opawesome?src=hash" target="_blank" rel="noopener noreferrer">#opawesome</a>!
+          Share creations on Pixelfed with <a class="hashtag" href="https://pixelfed.social/discover/tags/opawesome?src=hash" target="_blank" rel="noopener noreferrer">#opawesome</a>!
         </div>
       </div>
       <img src="../../assets/images/opossum.png" alt="Opossum logo" class="opossum-logo opossum-logo-right" />
@@ -65,7 +64,7 @@ header {
 
     .hashtag {
       font-weight: bold;
-      color: #ff9800;
+      text-decoration: underline;
     }
   }
 
