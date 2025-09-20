@@ -28,6 +28,7 @@ export function setTextFont(textBox, selectedFont) {
 export function createTextBox(selectedFont) {
   const textBox = new fabric.Textbox(DEFAULT_TEXTBOX_TEXT, {
     fontSize: defaultFontSize(),
+    width: 300,
   });
 
   setTextFont(textBox, selectedFont);
