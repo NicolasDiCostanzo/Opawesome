@@ -96,7 +96,6 @@ export default function useCenterPartLogic(props, emit) {
 
     const dataURL = canvas.toDataURL({
       format,
-      quality: 1,
     });
 
     canvas.setZoom(1);
