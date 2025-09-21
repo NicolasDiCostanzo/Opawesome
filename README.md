@@ -54,7 +54,7 @@ I welcome contributions! You can help by:
 **Note:** If you want to solve an issue, it might not be detailed enough—feel free for clarification!
 
 ### **📝 Rules for Contributing**
-#### **Semantic Commits**
+#### **Conventional Commits**
 Use clear, structured commit messages to keep the project history clean. Follow this format:
 ```
 <type>: <description>
