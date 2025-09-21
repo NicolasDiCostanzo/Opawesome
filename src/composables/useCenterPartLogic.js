@@ -14,15 +14,15 @@ export default function useCenterPartLogic(props, emit) {
 
   const initCanvas = (canvasId = 'canvas') => {
     loadCustomFonts();
-    
+
     canvas = new fabric.Canvas(canvasId);
-    
+
     if (props.selectedImageUrl && props.selectedImageUrl.trim() !== '') {
       loadImageToCanvas(props.selectedImageUrl, null, canvas, () => {
         lastCanvasDimensions.value = { width: canvas.width, height: canvas.height };
       });
     }
-    
+
     emit('update:canvas', canvas);
 
     eventsToTriggerSelectedText.forEach((event) => {
@@ -41,11 +41,11 @@ export default function useCenterPartLogic(props, emit) {
 
     const handleKeydown = (e) => {
       const supprKeyPressed = e.key === 'Delete' && !e.ctrlKey;
-      
+
       if (supprKeyPressed) {
         const activeObject = canvas.getActiveObject();
         let textIsBeingEdited = false;
-        
+
         if (activeObject) {
           if (activeObject.type === 'textbox') {
             textIsBeingEdited = activeObject.isEditing;
@@ -55,7 +55,7 @@ export default function useCenterPartLogic(props, emit) {
             textIsBeingEdited = selectedObjects.some((obj) => obj.type === 'textbox' && obj.isEditing);
           }
         }
-        
+
         if (!textIsBeingEdited) {
           deleteSelectedTextBoxFromCanvas(canvas);
         }
@@ -85,11 +85,21 @@ export default function useCenterPartLogic(props, emit) {
   const downloadCanvas = () => {
     if (!canvas) return;
 
-    const format = 'jpeg';
+    const format = 'png';
+    const scale = 2;
+    const originalWidth = canvas.width;
+    const originalHeight = canvas.height;
+
+    // Temporarily scale canvas
+    canvas.setDimensions({ width: originalWidth * scale, height: originalHeight * scale }, { backstoreOnly: true });
+    canvas.setZoom(scale);
+
     const dataURL = canvas.toDataURL({
       format,
-      quality: 1,
     });
+
+    canvas.setZoom(1);
+    canvas.setDimensions({ width: originalWidth, height: originalHeight }, { backstoreOnly: true });
 
     const link = document.createElement('a');
     link.href = dataURL;
@@ -108,7 +118,7 @@ export default function useCenterPartLogic(props, emit) {
     if (!canvas) return;
     const activeObject = canvas.getActiveObject();
     if (!activeObject) return;
-    
+
     deleteSelectedTextBoxFromCanvas(canvas);
     selectedTextBox.value = null;
   };
