@@ -14,21 +14,33 @@ export default function useCenterPartLogic(props, emit) {
 
   const initCanvas = (canvasId = 'canvas') => {
     loadCustomFonts();
-    
+
     canvas = new fabric.Canvas(canvasId);
-    
+
     if (props.selectedImageUrl && props.selectedImageUrl.trim() !== '') {
       loadImageToCanvas(props.selectedImageUrl, null, canvas, () => {
         lastCanvasDimensions.value = { width: canvas.width, height: canvas.height };
       });
     }
-    
+
     emit('update:canvas', canvas);
 
     eventsToTriggerSelectedText.forEach((event) => {
       canvas.on(event, (e) => {
-        [selectedTextBox.value] = e.selected;
-        emit('update:font', selectedTextBox.value.fontName);
+        selectedTextBox.value = e.selected;
+
+        const isSingleTextboxSelected = selectedTextBox.value?.length === 1 && selectedTextBox.value[0].type === 'textbox';
+
+        if (isSingleTextboxSelected) {
+          emit('update:font', selectedTextBox.value[0].fontName);
+        } else if (selectedTextBox.value?.length > 1) {
+          const allTextboxes = selectedTextBox.value.filter((obj) => obj.type === 'textbox');
+          const allHaveSameFont = allTextboxes.length > 0 && allTextboxes.every((textBox) => textBox.fontName === allTextboxes[0].fontName);
+
+          if (allHaveSameFont) {
+            emit('update:font', allTextboxes[0].fontName);
+          }
+        }
       });
     });
 
@@ -41,11 +53,11 @@ export default function useCenterPartLogic(props, emit) {
 
     const handleKeydown = (e) => {
       const supprKeyPressed = e.key === 'Delete' && !e.ctrlKey;
-      
+
       if (supprKeyPressed) {
         const activeObject = canvas.getActiveObject();
         let textIsBeingEdited = false;
-        
+
         if (activeObject) {
           if (activeObject.type === 'textbox') {
             textIsBeingEdited = activeObject.isEditing;
@@ -55,7 +67,7 @@ export default function useCenterPartLogic(props, emit) {
             textIsBeingEdited = selectedObjects.some((obj) => obj.type === 'textbox' && obj.isEditing);
           }
         }
-        
+
         if (!textIsBeingEdited) {
           deleteSelectedTextBoxFromCanvas(canvas);
         }
@@ -78,7 +90,9 @@ export default function useCenterPartLogic(props, emit) {
 
   watch(() => props.font, (newFont) => {
     if (!selectedTextBox.value || !canvas) return;
-    setTextFont(selectedTextBox.value, newFont);
+    selectedTextBox.value.forEach((textBox) => {
+      setTextFont(textBox, newFont);
+    });
     canvas.renderAll();
   });
 
@@ -108,7 +122,7 @@ export default function useCenterPartLogic(props, emit) {
     if (!canvas) return;
     const activeObject = canvas.getActiveObject();
     if (!activeObject) return;
-    
+
     deleteSelectedTextBoxFromCanvas(canvas);
     selectedTextBox.value = null;
   };
