@@ -6,7 +6,7 @@ import { setTextFont, loadCustomFonts } from '../helpers/fonts-helper';
 
 export default function useCenterPartLogic(props, emit) {
   let canvas;
-  const selectedTextBox = ref([]);
+  const selectedTextBox = ref(null);
   const lastCanvasDimensions = ref(null);
 
   const eventsToTriggerSelectedText = ['selection:created', 'selection:updated'];
@@ -29,8 +29,8 @@ export default function useCenterPartLogic(props, emit) {
       canvas.on(event, (e) => {
         selectedTextBox.value = e.selected;
 
-        const severalTextBoxesSelected = selectedTextBox.value?.length > 1;
-        if (severalTextBoxesSelected) {
+        const onlyOneTextBoxSelected = selectedTextBox.value?.length === 1 && selectedTextBox.value[0].type === 'textbox';
+        if (!onlyOneTextBoxSelected) {
           return;
         }
         emit('update:font', selectedTextBox.value[0].fontName);
