@@ -29,16 +29,18 @@ export default function useCenterPartLogic(props, emit) {
       canvas.on(event, (e) => {
         selectedTextBox.value = e.selected;
 
-        const onlyOneTextBoxSelected = selectedTextBox.value?.length === 1 && selectedTextBox.value[0].type === 'textbox';
-        if (!onlyOneTextBoxSelected) {
-          const allSelectedTextBoxesHaveSameFont = selectedTextBox.value?.every((textBox) => textBox.type === 'textbox' && textBox.fontName === selectedTextBox.value[0].fontName);
-          if (allSelectedTextBoxesHaveSameFont) {
-            emit('update:font', selectedTextBox.value[0].fontName);
-          } else {
-            return;
+        const isSingleTextboxSelected = selectedTextBox.value?.length === 1 && selectedTextBox.value[0].type === 'textbox';
+
+        if (isSingleTextboxSelected) {
+          emit('update:font', selectedTextBox.value[0].fontName);
+        } else if (selectedTextBox.value?.length > 1) {
+          const allTextboxes = selectedTextBox.value.filter((obj) => obj.type === 'textbox');
+          const allHaveSameFont = allTextboxes.length > 0 && allTextboxes.every((textBox) => textBox.fontName === allTextboxes[0].fontName);
+
+          if (allHaveSameFont) {
+            emit('update:font', allTextboxes[0].fontName);
           }
         }
-        emit('update:font', selectedTextBox.value[0].fontName);
       });
     });
 
