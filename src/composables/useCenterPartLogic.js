@@ -31,7 +31,12 @@ export default function useCenterPartLogic(props, emit) {
 
         const onlyOneTextBoxSelected = selectedTextBox.value?.length === 1 && selectedTextBox.value[0].type === 'textbox';
         if (!onlyOneTextBoxSelected) {
-          return;
+          const allSelectedTextBoxesHaveSameFont = selectedTextBox.value?.every((textBox) => textBox.type === 'textbox' && textBox.fontName === selectedTextBox.value[0].fontName);
+          if (allSelectedTextBoxesHaveSameFont) {
+            emit('update:font', selectedTextBox.value[0].fontName);
+          } else {
+            return;
+          }
         }
         emit('update:font', selectedTextBox.value[0].fontName);
       });
