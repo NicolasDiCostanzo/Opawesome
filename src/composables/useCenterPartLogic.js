@@ -27,8 +27,20 @@ export default function useCenterPartLogic(props, emit) {
 
     eventsToTriggerSelectedText.forEach((event) => {
       canvas.on(event, (e) => {
-        [selectedTextBox.value] = e.selected;
-        emit('update:font', selectedTextBox.value.fontName);
+        selectedTextBox.value = e.selected;
+
+        const isSingleTextboxSelected = selectedTextBox.value?.length === 1 && selectedTextBox.value[0].type === 'textbox';
+
+        if (isSingleTextboxSelected) {
+          emit('update:font', selectedTextBox.value[0].fontName);
+        } else if (selectedTextBox.value?.length > 1) {
+          const allTextboxes = selectedTextBox.value.filter((obj) => obj.type === 'textbox');
+          const allHaveSameFont = allTextboxes.length > 0 && allTextboxes.every((textBox) => textBox.fontName === allTextboxes[0].fontName);
+
+          if (allHaveSameFont) {
+            emit('update:font', allTextboxes[0].fontName);
+          }
+        }
       });
     });
 
@@ -78,7 +90,9 @@ export default function useCenterPartLogic(props, emit) {
 
   watch(() => props.font, (newFont) => {
     if (!selectedTextBox.value || !canvas) return;
-    setTextFont(selectedTextBox.value, newFont);
+    selectedTextBox.value.forEach((textBox) => {
+      setTextFont(textBox, newFont);
+    });
     canvas.renderAll();
   });
 
