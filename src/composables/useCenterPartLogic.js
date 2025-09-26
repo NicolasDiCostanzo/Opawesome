@@ -39,6 +39,8 @@ export default function useCenterPartLogic(props, emit) {
 
           if (allHaveSameFont) {
             emit('update:font', allTextboxes[0].fontName);
+          } else {
+            emit('update:font', null);
           }
         }
       });
@@ -89,7 +91,7 @@ export default function useCenterPartLogic(props, emit) {
   });
 
   watch(() => props.font, (newFont) => {
-    if (!selectedTextBox.value || !canvas) return;
+    if (!selectedTextBox.value || !canvas || !newFont) return;
     selectedTextBox.value.forEach((textBox) => {
       setTextFont(textBox, newFont);
     });
