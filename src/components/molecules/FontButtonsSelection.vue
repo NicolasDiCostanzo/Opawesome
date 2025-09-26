@@ -38,13 +38,9 @@ function selectFont(font) {
 
 <template>
   <div class="buttons-selection" :class="{ mobile: isMobile }">
-    <button
-      v-for="font in fontArray"
-      :key="font.fontFamily"
+    <button v-for="font in fontArray" :key="font.fontFamily"
       :class="{ active: selectedFont && selectedFont.fontName === font.fontName }"
-      :style="{ backgroundImage: `url(${font.image})` }"
-      @click="selectFont(font)"
-    />
+      :style="{ backgroundImage: `url(${font.image})` }" @click="selectFont(font)" />
   </div>
 </template>
 
@@ -55,9 +51,9 @@ function selectFont(font) {
   margin: 1rem;
 
   button {
-      width: 200px;
+    width: 200px;
   }
-  
+
   &.mobile {
     flex-direction: row;
     flex-wrap: nowrap;
@@ -67,19 +63,21 @@ function selectFont(font) {
     justify-content: flex-start;
     margin: 0;
     width: 100%;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    scrollbar-width: thin; /* Firefox */
-    
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scrolling on iOS */
+    scrollbar-width: thin;
+    /* Firefox */
+
     /* Webkit scrollbar styling */
     &::-webkit-scrollbar {
       height: 3px;
     }
-    
+
     &::-webkit-scrollbar-track {
       background: rgba(0, 0, 0, 0.1);
       border-radius: 2px;
     }
-    
+
     &::-webkit-scrollbar-thumb {
       background: rgba(0, 0, 0, 0.3);
       border-radius: 2px;
@@ -88,23 +86,24 @@ function selectFont(font) {
     button {
       width: 75px;
       flex-shrink: 0;
-      min-width: 75px; /* Ensure minimum width */
+      min-width: 75px;
+      /* Ensure minimum width */
     }
   }
 }
 
-  button {
-      margin: 0.25rem 0;
-      background-size: contain;
-      background-repeat: no-repeat;      
-      background-position: center;
-      cursor: pointer;
-      height: 45px;
-      border-radius: 6px;
-  }
+button {
+  margin: 0.25rem 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  height: 45px;
+  border-radius: 6px;
+}
 
 button.active {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  border-color: orange;
+  box-shadow: 0 0 3px orange;
 }
 </style>

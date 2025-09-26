@@ -32,16 +32,16 @@ function selectImage(imageUrl) {
 
 function shuffleImages() {
   const newShuffled = [...images.value];
-  
+
   for (let i = 0; i < newShuffled.length - 1; i++) {
     const j = Math.floor(Math.random() * (i + 1));
     [newShuffled[i], newShuffled[j]] = [newShuffled[j], newShuffled[i]];
   }
   images.value = newShuffled;
-  
+
   selectedImageUrl.value = images.value[0].url;
   emit('update:selectNewImage', selectedImageUrl);
-  
+
   nextTick(() => {
     if (isMobile.value && imagesList.value) {
       imagesList.value.scrollTo({ left: 0, behavior: 'auto' });
@@ -67,81 +67,82 @@ function shuffleImages() {
 </template>
 
 <style lang="scss" scoped>
-  @use '../../constants/style/constants.scss' as *;
+@use '../../constants/style/constants.scss' as *;
 
-  $space-around-images: 15px;
+$space-around-images: 15px;
 
-  ul {
-    overflow-y: auto;
-    display: grid;
-    justify-content: space-evenly;
-    grid-template-columns: repeat(2, $IMAGES_SIZE);
-    gap: $space-around-images;
-    padding: $space-around-images;
-    align-content: start;
-  }
-
-  li {
-    all: unset;
-  }
-
-  .right-part {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-evenly;
-
-    &.mobile {
-      justify-content: start;
-      
-      .images-container {
-        width: 100%;
-      }
-      
-      ul {
-        margin: 0;
-        padding: 0.5em;
-        display: flex;
-        flex-direction: row;
-        overflow-x: auto;
-        overflow-y: hidden;
-        gap: $space-around-images;
-        align-items: flex-start;
-        max-height: none;
-        flex-shrink: 0;
-        scroll-snap-type: x mandatory;
-        
-        li {
-          flex-shrink: 0;
-          scroll-snap-align: start;
-        }
-      }
-    }
-  
-    .images-container {
-      overflow-y: auto;
-    }
+ul {
+  overflow-y: auto;
+  display: grid;
+  justify-content: space-evenly;
+  grid-template-columns: repeat(2, $IMAGES_SIZE);
+  gap: $space-around-images;
+  padding: $space-around-images;
+  align-content: start;
 }
 
-  img {
-    max-width: $IMAGES_SIZE;
-    max-height: $IMAGES_SIZE;
-    transition: transform 0.25s ease, box-shadow 0.1s ease;
-    box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 15px;
+li {
+  all: unset;
+}
 
-    &:hover {
-      cursor: pointer;
-      box-shadow: rgba(0, 0, 0, 1) 0px 0px 15px;
-      transform: rotate(3.5deg); // maybe random ?
+.right-part {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  &.mobile {
+    justify-content: start;
+
+    .images-container {
+      width: 100%;
+      overflow-y: hidden;
     }
 
-    &.selected {
-      box-shadow: 0 0 0 2px var(--tea-rose-red);
-      box-sizing: border-box;
+    ul {
+      margin: 0;
+      padding: 0.5em;
+      display: flex;
+      flex-direction: row;
+      overflow-x: auto;
+      overflow-y: hidden;
+      gap: $space-around-images;
+      align-items: flex-start;
+      max-height: none;
+      flex-shrink: 0;
+      scroll-snap-type: x mandatory;
+
+      li {
+        flex-shrink: 0;
+        scroll-snap-align: start;
+      }
     }
   }
 
-  .shuffle-button {
-    margin: 10px;
+  .images-container {
+    overflow-y: auto;
   }
+}
+
+img {
+  max-width: $IMAGES_SIZE;
+  max-height: $IMAGES_SIZE;
+  transition: transform 0.25s ease, box-shadow 0.1s ease;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 15px;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 1) 0px 0px 15px;
+    transform: rotate(3.5deg); // maybe random ?
+  }
+
+  &.selected {
+    border: 1px solid orange;
+    box-shadow: 0 0 3px orange;
+  }
+}
+
+.shuffle-button {
+  margin: 10px;
+}
 </style>
