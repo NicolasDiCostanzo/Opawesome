@@ -58,7 +58,7 @@ function shuffleImages() {
       <ul ref="imagesList">
         <li v-for="image in images" :key="image.id">
           <img :class="selectedImageUrl === image.url ? 'selected' : ''" :src=image.url @click="selectImage(image.url)"
-            alt='cute opossum option' />
+            alt='cute opossum option' loading="lazy" />
         </li>
       </ul>
     </div>
