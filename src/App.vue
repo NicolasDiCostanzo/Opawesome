@@ -54,6 +54,7 @@ function updateFont(newFontName) {
 <style lang="scss">
 @import './constants/style/colors.scss';
 @import './constants/style/button.scss';
+@import './constants/style/fonts.scss';
 
 .app {
   display: flex;
