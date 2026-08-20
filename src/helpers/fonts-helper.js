@@ -3,12 +3,52 @@ import { defaultFontSize } from '../constants/constants';
 import { DEFAULT_TEXTBOX_TEXT } from '../constants/labels';
 import fontParameters from './font-parameters';
 
+const WORD_GAP_WIDTH_FACTOR = 0.2;
+
+function widenSpaceGraphemes(textBox) {
+  const original = fabric.Text.prototype._getGraphemeBox;
+  const extraWidth = textBox.fontSize * WORD_GAP_WIDTH_FACTOR;
+  textBox.set('_getGraphemeBox', function widenedGetGraphemeBox(grapheme, lineIndex, charIndex, prevGrapheme, skipLeft) {
+    const box = original.call(this, grapheme, lineIndex, charIndex, prevGrapheme, skipLeft);
+    if (grapheme === ' ') {
+      box.width += extraWidth;
+      box.kernedWidth += extraWidth;
+    }
+    return box;
+  });
+}
+
+function measureSingleLineWidth(text, fontFamily, fontSize) {
+  const ctx = document.createElement('canvas').getContext('2d');
+  ctx.font = `${fontSize}px ${fontFamily}`;
+  return ctx.measureText(text.replace(/\n/g, ' ')).width;
+}
+
+function refreshWavyLayout(textBox, params) {
+  const singleLineText = textBox.text.replace(/\n/g, ' ');
+  const measuredWidth = measureSingleLineWidth(singleLineText, textBox.fontFamily, textBox.fontSize);
+  const spaceCount = (singleLineText.match(/ /g) || []).length;
+  const extraWidth = spaceCount * textBox.fontSize * WORD_GAP_WIDTH_FACTOR;
+  const width = measuredWidth + extraWidth + textBox.fontSize;
+  textBox.set({
+    path: params.buildPath(textBox.fontSize, width),
+    width,
+  });
+}
+
 function resetTextFont(textBox) {
+  if (textBox.wavyResizeHandler) {
+    textBox.off('changed', textBox.wavyResizeHandler);
+    textBox.set('wavyResizeHandler', null);
+  }
+  textBox.set('_getGraphemeBox', fabric.Text.prototype._getGraphemeBox);
   textBox.set({
     fill: 'black',
     shadow: null,
     stroke: null,
     strokeWidth: 0,
+    path: null,
+    textAlign: 'left',
   });
 }
 
@@ -23,6 +63,15 @@ export function setTextFont(textBox, selectedFont) {
   textBox.set('strokeWidth', params.strokeWidth || 0);
   textBox.set('fontStyle', params.style || 'normal');
   textBox.set('fontName', params.fontName);
+
+  if (params.buildPath) {
+    widenSpaceGraphemes(textBox);
+    textBox.set('textAlign', 'center');
+    refreshWavyLayout(textBox, params);
+    const resizeHandler = () => refreshWavyLayout(textBox, params);
+    textBox.set('wavyResizeHandler', resizeHandler);
+    textBox.on('changed', resizeHandler);
+  }
 }
 
 export function createTextBox(selectedFont) {

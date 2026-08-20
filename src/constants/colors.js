@@ -22,4 +22,9 @@ export default {
   'pale-pink-dark': '#dba1a6',
   'pale-pink-shadow': '#1b1d2f',
   // #endregion
+
+  // #region Wavy blue colors
+  'wavy-blue-fill': '#29abe2',
+  'wavy-blue-shadow': '#0a1f6b',
+  // #endregion
 };

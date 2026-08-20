@@ -86,6 +86,25 @@ const palePinkShadow = new fabric.Shadow({
   offsetY: -1.75,
 });
 // #endregion
+
+// #region Wavy blue
+const wavyBlueShadow = new fabric.Shadow({
+  color: colors['wavy-blue-shadow'],
+  offsetX: 4,
+  offsetY: 4,
+});
+
+function buildWavyBluePath(fontSize, minWidth) {
+  const amplitude = fontSize * 0.4;
+  const wavelength = fontSize * 1.6;
+  const periods = Math.max(3, Math.ceil(minWidth / wavelength) + 1);
+  let path = `M 0 0 Q ${wavelength / 2} ${-amplitude} ${wavelength} 0`;
+  for (let i = 1; i < periods; i += 1) {
+    path += ` T ${wavelength * (i + 1)} 0`;
+  }
+  return new fabric.Path(path, { visible: false });
+}
+// #endregion
 const fontParameters = {
   Arial: {
     fontFamily: 'Arial',
@@ -137,6 +156,16 @@ const fontParameters = {
     stroke: 'black',
     strokeWidth: 1,
     image: 'font-previews/impact-preview.png',
+  },
+  'Wavy Blue': {
+    fontFamily: 'Impact',
+    fontName: 'Wavy Blue',
+    fill: colors['wavy-blue-fill'],
+    shadow: wavyBlueShadow,
+    stroke: colors['wavy-blue-shadow'],
+    strokeWidth: 1,
+    buildPath: buildWavyBluePath,
+    image: 'font-previews/wavy-blue.png',
   },
 };
 
